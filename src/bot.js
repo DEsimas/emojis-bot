@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import nhentai from "nhentai";
 
 //modules
-// import messageHandler from "./service.js";
+import messageHandler from "./messageHandler.js";
 import dao from "./dao.js";
 
 //config
@@ -18,6 +18,8 @@ export default class bot {
         this.dao = new dao(this.config.db_settings);
 
         this.setLibs();
+        this.setFunctions();
+
         this.setClient();
         this.setEndpoints();
     };
@@ -26,6 +28,12 @@ export default class bot {
     setLibs() {
         this.nhentai = nhentai;
         this.Discord = Discord;
+    };
+
+    //set common functions in this
+    setFunctions() {
+        this.sendError = this.sendError;
+        this.sendSuccess = this.sendSuccess;
     };
 
     //login bot using token from config
@@ -48,7 +56,7 @@ export default class bot {
     };
 
     onMessage(message) {
-        // new messageHandler( { ...this, message: message } );
+        new messageHandler( { ...this, message: message } );
     };
 
     onGuildCreate(guild) {
@@ -57,5 +65,20 @@ export default class bot {
 
     onGuildDelete(guild) {
         this.dao.delServer(guild.id);
+    };
+
+    //common functions//
+    sendError(context, error) {
+        const embed = new context.Discord.MessageEmbed()
+            .setColor(context.config.error_color)
+            .setTitle(error);
+        context.message.channel.send(embed);
+    };
+
+    sendSuccess(context, success) {
+        const embed = new context.Discord.MessageEmbed()
+            .setColor(context.config.success_color)
+            .setTitle(success);
+        context.message.channel.send(embed);
     };
 };

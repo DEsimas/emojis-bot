@@ -1,7 +1,32 @@
 export default {
     "token": "ODgzMDIwMTg2MzM5Mzk3Njkz.YTD2og.tHVNAvNyGYC_WrwrTdAJgoOhHek",
+    "error_color": "#ff0000",
+    "success_color": "#00ff00",
+    "default_prefix": "|",
+    "default_doEmojis": false,
+    "default_emoji": null,
+    "default_language": "eng",
+    "commands": {
+        "setLanguage": ["setlang", "lang"],
+        "setEmoji": ["setemoji"],
+        "deleteEmoji": ["delemoji"],
+        "doEmojis": ["doemojis"],
+        "setPrefix": ["setprefix"],
+        "getHentai": ["gethentai", "nhentai"],
+        // "imgToAscII": ["imgtoascii", "ita"],
+        "clear": ["clear", "cls"],
+        "help": ["help"]
+    },
+    "events": {
+        "ready": "ready",
+        "message": "message",
+        "guildCreate": "guildCreate",
+        "guildDelete": "guildDelete"
+    },
     "log": {
-        "ready": "bot started"
+        "ready": "bot started",
+        "db": "database connected",
+        "db_error": "database error: "
     },
     "db_settings": {
         "url": "mongodb+srv://administrator:E0yV1T8lCJ62QXMc@cluster0.hmvjj.mongodb.net/discord_bot?retryWrites=true&w=majority",
@@ -35,48 +60,6 @@ export default {
             "db": "database connected",
             "db_error": "database error: "
         }
-    },
-
-    "commands": {
-        "setLanguage": ["setlang", "lang"],
-        "setEmoji": ["setemoji"],
-        "deleteEmoji": ["delemoji"],
-        "doEmojis": ["doemojis"],
-        "setPrefix": ["setprefix"],
-        "getHentai": ["gethentai", "nhentai"],
-        "imgToAscII": ["imgtoascii", "ita"],
-        "clear": ["clear", "cls"],
-        "help": ["help"]
-    },
-    "emoji_discord_link": "https://cdn.discordapp.com/emojis/",
-    "about_prefix": "abt_",
-    "describtion_prefix": "dsc_",
-    "administrator_permission": "ADMINISTRATOR",
-    "error_color": "#ff0000",
-    "success_color": "#00ff00",
-    "space_code": "{space}",
-    "default_prefix": "|",
-    "default_doEmojis": false,
-    "default_emoji": null,
-    "default_language": "eng",
-    "default_scan_limit": 100,
-    "img_to_ascii_defaults": {
-        "colored": false,
-        "pixels": ["⣿", "⡇", "⠄"],
-        "size": {
-            "width": 80
-        }
-    },
-    "img_to_ascii_settings": {
-        "pixels": "pixels:",
-        "width": "width:",
-        "height": "height:"
-    },
-    "events": {
-        "ready": "ready",
-        "message": "message",
-        "guildCreate": "guildCreate",
-        "guildDelete": "guildDelete"
     },
     "localization": {
         "eng": {
@@ -233,5 +216,30 @@ export default {
             "dsc_clear": "Можно указать количество сообщений, которое нужно удалить",
 			"dsc_help": "Показывает это сообщение"
         }
-    }
+    },
+
+
+    ////this is unused part////
+    
+    "emoji_discord_link": "https://cdn.discordapp.com/emojis/",
+    "about_prefix": "abt_",
+    "describtion_prefix": "dsc_",
+    
+    "administrator_permission": "ADMINISTRATOR",
+    "default_scan_limit": 100,
+    
+    "space_code": "{space}",
+    "img_to_ascii_defaults": {
+        "colored": false,
+        "pixels": ["⣿", "⡇", "⠄"],
+        "size": {
+            "width": 80
+        }
+    },
+    "img_to_ascii_settings": {
+        "pixels": "pixels:",
+        "width": "width:",
+        "height": "height:"
+    },
+    
 }
