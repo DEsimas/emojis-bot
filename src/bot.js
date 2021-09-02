@@ -1,0 +1,58 @@
+//libs
+import Discord from "discord.js";
+import nhentai from "nhentai";
+
+//modules
+// import messageHandler from "./service.js";
+// import dao from "./dao.js";
+
+//config
+import config from "./config.js";
+
+export default class bot {
+    constructor() {
+        this.config = config;
+        // this.dao = new dao(this.config.db_settings);
+
+        this.setLibs();
+        this.setClient();
+        this.setEndpoints();
+    };
+
+    //set imported packages in this
+    setLibs() {
+        this.nhentai = nhentai;
+        this.Discord = Discord;
+    };
+
+    //login bot using token from config
+    setClient() {
+        this.client = new this.Discord.Client();
+        this.client.login(this.config.token);
+    };
+
+    //set handlers for events
+    setEndpoints() {
+        this.client.on(this.config.events.ready, () => this.onReady());
+        this.client.on(this.config.events.message, message => this.onMessage(message));
+        this.client.on(this.config.events.guildCreate, guild => this.onGuildCreate(guild));
+        this.client.on(this.config.events.guildDelete, guild => this.onGuildDelete(guild));
+    };
+
+    //handlers//
+    onReady() {
+        console.log(this.config.log.ready);
+    };
+
+    onMessage(message) {
+        // new messageHandler( { ...this, message: message } );
+    };
+
+    onGuildCreate(guild) {
+        // this.dao.delServer(guild.id);
+    };
+
+    onGuildDelete(guild) {
+        // this.dao.delServer(guild.id);
+    };
+};

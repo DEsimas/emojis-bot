@@ -1,3 +1,2 @@
-import Discord from "discord.js";
-const client = new Discord.Client();
-client.login("ODgzMDIwMTg2MzM5Mzk3Njkz.YTD2og.wiUxcbVfzeJSwFqeRUMrcpzLNAU");
+import bot from "./bot.js"
+new bot();
