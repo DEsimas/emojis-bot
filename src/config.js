@@ -1,4 +1,42 @@
 export default {
+    "token": "ODgzMDIwMTg2MzM5Mzk3Njkz.YTD2og.tHVNAvNyGYC_WrwrTdAJgoOhHek",
+    "log": {
+        "ready": "bot started"
+    },
+    "db_settings": {
+        "url": "mongodb+srv://administrator:E0yV1T8lCJ62QXMc@cluster0.hmvjj.mongodb.net/discord_bot?retryWrites=true&w=majority",
+        "db_collections": {
+            "users": "users",
+            "servers": "servers"
+        },
+        "default_values": [
+            {
+                "userID": "872099701762170932",
+                "emojiID": "822395665660379186",
+                "language": "eng"
+            },
+            {
+                "userID": "252128902418268161",
+                "emojiID": "822845799738245130",
+                "language": "eng"
+            },
+            {
+                "userID": "159985870458322944",
+                "emojiID": "872923821701726230",
+                "language": "eng"
+            },
+            {
+                "userID": "883020186339397693",
+                "emojiID": "872904187921440788",
+                "language": "eng"
+            }
+        ],
+        "log": {
+            "db": "database connected",
+            "db_error": "database error: "
+        }
+    },
+
     "commands": {
         "setLanguage": ["setlang", "lang"],
         "setEmoji": ["setemoji"],
@@ -10,7 +48,6 @@ export default {
         "clear": ["clear", "cls"],
         "help": ["help"]
     },
-    "token": "ODgzMDIwMTg2MzM5Mzk3Njkz.YTD2og.tHVNAvNyGYC_WrwrTdAJgoOhHek",
     "emoji_discord_link": "https://cdn.discordapp.com/emojis/",
     "about_prefix": "abt_",
     "describtion_prefix": "dsc_",
@@ -40,42 +77,6 @@ export default {
         "message": "message",
         "guildCreate": "guildCreate",
         "guildDelete": "guildDelete"
-    },
-    "log": {
-        "ready": "bot started",
-        "person": "Im "
-    },
-    "db_settings": {
-        "db_collections": {
-            "users": "users",
-            "servers": "servers"
-        },
-        "default_values": [
-            {
-                "userID": "872099701762170932",
-                "emojiID": "822395665660379186",
-                "language": "eng"
-            },
-            {
-                "userID": "252128902418268161",
-                "emojiID": "822845799738245130",
-                "language": "eng"
-            },
-            {
-                "userID": "159985870458322944",
-                "emojiID": "872923821701726230",
-                "language": "eng"
-            },
-            {
-                "userID": "871787505874268220",
-                "emojiID": null,
-                "language": "eng"
-            }
-        ],
-        "log": {
-            "db": "database connected",
-            "db_error": "database error: "
-        }
     },
     "localization": {
         "eng": {

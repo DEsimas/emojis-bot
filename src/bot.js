@@ -1,10 +1,11 @@
 //libs
 import Discord from "discord.js";
+import mongoose from "mongoose";
 import nhentai from "nhentai";
 
 //modules
 // import messageHandler from "./service.js";
-// import dao from "./dao.js";
+import dao from "./dao.js";
 
 //config
 import config from "./config.js";
@@ -12,7 +13,9 @@ import config from "./config.js";
 export default class bot {
     constructor() {
         this.config = config;
-        // this.dao = new dao(this.config.db_settings);
+
+        this.config.db_settings.mongoose = mongoose;
+        this.dao = new dao(this.config.db_settings);
 
         this.setLibs();
         this.setClient();
@@ -49,10 +52,10 @@ export default class bot {
     };
 
     onGuildCreate(guild) {
-        // this.dao.delServer(guild.id);
+        this.dao.delServer(guild.id);
     };
 
     onGuildDelete(guild) {
-        // this.dao.delServer(guild.id);
+        this.dao.delServer(guild.id);
     };
 };
