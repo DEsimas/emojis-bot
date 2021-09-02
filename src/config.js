@@ -1,21 +1,23 @@
 export default {
-    "token": "ODgzMDIwMTg2MzM5Mzk3Njkz.YTD2og.tHVNAvNyGYC_WrwrTdAJgoOhHek",
+    "token": "ODgzMDIwMTg2MzM5Mzk3Njkz.YTD2og.tHVNAvNyGYC_WrwrTdAJgoOhHek", //for production
+    // "token": "ODgzMDUxNTkwOTU5ODk0NTM4.YTET4Q.y8VCuDJfdeyCXz9obxO_CuQNd8s", //for development
     "error_color": "#ff0000",
     "success_color": "#00ff00",
+    "embed_color": "#ffffff",
     "default_prefix": "|",
     "default_doEmojis": false,
     "default_emoji": null,
     "default_language": "eng",
     "commands": {
-        "setLanguage": ["setlang", "lang"],
-        "setEmoji": ["setemoji"],
-        "deleteEmoji": ["delemoji"],
-        "doEmojis": ["doemojis"],
-        "setPrefix": ["setprefix"],
+        // "setLanguage": ["setlang", "lang"],
+        // "setEmoji": ["setemoji"],
+        // "deleteEmoji": ["delemoji"],
+        // "doEmojis": ["doemojis"],
+        // "setPrefix": ["setprefix"],
         "getHentai": ["gethentai", "nhentai"],
         // "imgToAscII": ["imgtoascii", "ita"],
-        "clear": ["clear", "cls"],
-        "help": ["help"]
+        // "clear": ["clear", "cls"],
+        // "help": ["help"]
     },
     "events": {
         "ready": "ready",
@@ -216,30 +218,5 @@ export default {
             "dsc_clear": "Можно указать количество сообщений, которое нужно удалить",
 			"dsc_help": "Показывает это сообщение"
         }
-    },
-
-
-    ////this is unused part////
-    
-    "emoji_discord_link": "https://cdn.discordapp.com/emojis/",
-    "about_prefix": "abt_",
-    "describtion_prefix": "dsc_",
-    
-    "administrator_permission": "ADMINISTRATOR",
-    "default_scan_limit": 100,
-    
-    "space_code": "{space}",
-    "img_to_ascii_defaults": {
-        "colored": false,
-        "pixels": ["⣿", "⡇", "⠄"],
-        "size": {
-            "width": 80
-        }
-    },
-    "img_to_ascii_settings": {
-        "pixels": "pixels:",
-        "width": "width:",
-        "height": "height:"
-    },
-    
+    }
 }
