@@ -2,6 +2,7 @@
 import Discord from "discord.js";
 import mongoose from "mongoose";
 import nhentai from "nhentai";
+import dotenv from "dotenv";
 
 //modules
 import messageHandler from "./messageHandler.js";
@@ -13,6 +14,7 @@ import config from "./config.js";
 export default class bot {
     constructor() {
         this.config = config;
+        dotenv.config();
 
         this.config.db_settings.mongoose = mongoose;
         this.dao = new dao(this.config.db_settings);
@@ -39,7 +41,7 @@ export default class bot {
     //login bot using token from config
     setClient() {
         this.client = new this.Discord.Client();
-        this.client.login(this.config.token);
+        this.client.login(process.env.TOKEN);
     };
 
     //set handlers for events

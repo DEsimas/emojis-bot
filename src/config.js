@@ -1,6 +1,4 @@
 export default {
-    "token": "ODgzMDIwMTg2MzM5Mzk3Njkz.YTD2og.tHVNAvNyGYC_WrwrTdAJgoOhHek", //for production
-    // "token": "ODgzMDUxNTkwOTU5ODk0NTM4.YTET4Q.y8VCuDJfdeyCXz9obxO_CuQNd8s", //for development
     "error_color": "#ff0000",
     "success_color": "#00ff00",
     "embed_color": "#ffffff",
@@ -31,7 +29,6 @@ export default {
         "db_error": "database error: "
     },
     "db_settings": {
-        "url": "mongodb+srv://administrator:E0yV1T8lCJ62QXMc@cluster0.hmvjj.mongodb.net/discord_bot?retryWrites=true&w=majority",
         "db_collections": {
             "users": "users",
             "servers": "servers"

@@ -9,7 +9,7 @@ export default class dao {
     };
 
     connectDB() {
-        this.mongoose.connect(this.settings.url, { useNewUrlParser: true, useUnifiedTopology: true })
+        this.mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => {
                 console.log(this.settings.log.db)
                 this.setDefaults();
