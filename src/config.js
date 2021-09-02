@@ -10,7 +10,7 @@ export default {
         "clear": ["clear", "cls"],
         "help": ["help"]
     },
-    "token": "ODgzMDIwMTg2MzM5Mzk3Njkz.YTD2og.wiUxcbVfzeJSwFqeRUMrcpzLNAU",
+    "token": "ODgzMDIwMTg2MzM5Mzk3Njkz.YTD2og.tHVNAvNyGYC_WrwrTdAJgoOhHek",
     "emoji_discord_link": "https://cdn.discordapp.com/emojis/",
     "about_prefix": "abt_",
     "describtion_prefix": "dsc_",
