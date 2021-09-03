@@ -41,7 +41,6 @@ export default {
         "color": false
     },
     "img_to_ascii_settings": {
-        "pixels": "pixels:",
         "width": "width:",
         "height": "height:"
     },

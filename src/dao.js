@@ -58,8 +58,8 @@ export default class dao {
         return await this.emojis.updateOne({ userID: userID }, options);
     };
 
-    async addServer(serverID, doEmojis, prefix, memeChannel) {
-        return await new this.servers({ serverID: serverID, doEmojis: doEmojis, prefix: prefix, memeChannel: memeChannel }).save();
+    async addServer(serverID, doEmojis, prefix) {
+        return await new this.servers({ serverID: serverID, doEmojis: doEmojis, prefix: prefix }).save();
     };
 
     async getServer(serverID) {

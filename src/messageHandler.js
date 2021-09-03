@@ -37,7 +37,7 @@ export default class messageHandler {
         const serverID = this.context.message.guild.id;
         let server = await this.context.dao.getServer(serverID);
         if (server == null) {
-            server = await this.context.dao.addServer(serverID, this.context.config.default_doEmojis, this.context.config.default_prefix, this.context.config.default_meme_channel)
+            server = await this.context.dao.addServer(serverID, this.context.config.default_doEmojis, this.context.config.default_prefix)
                 .catch(error => console.log(this.config.log.db_error + error));
         };
         this.context.server = server;
