@@ -5,7 +5,6 @@ import setLanguage from "./components/user-interaction/setLanguage.js";
 import setPrefix from "./components/server-interaction/setPrefix.js";
 import doEmojis from "./components/server-interaction/doEmojis.js";
 import setEmoji from "./components/user-interaction/setEmoji.js";
-// import imgToAscII from "./components/imgToAscII/imgToAscII.js";
 import clear from "./components/interaction/clear.js";
 import help from "./components/interaction/help.js";
 
@@ -71,10 +70,6 @@ export default class messageHandler {
     setCommandList() {
         const name = this.context.config.commands;
         this.context.commands = [
-            // {
-            //     name: name.imgToAscII,
-            //     out: imgToAscII
-            // },
             {
                 name: name.getHentai,
                 out: getHentai

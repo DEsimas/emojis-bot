@@ -1,5 +1,4 @@
 //libs
-// import ImgToAscII from "image-to-ascii";
 import Discord from "discord.js";
 import mongoose from "mongoose";
 import nhentai from "nhentai";
@@ -29,7 +28,6 @@ export default class bot {
 
     //set imported packages in this
     setLibs() {
-        // this.ImgToAscII = ImgToAscII;
         this.nhentai = nhentai;
         this.Discord = Discord;
     };

@@ -12,10 +12,8 @@ export default {
     "administrator_permission": "ADMINISTRATOR",
     "about_prefix": "abt_",
     "describtion_prefix": "dsc_",
-    "space_code": "{space}",
     "commands": {
         "getHentai": ["gethentai", "nhentai"],
-        "imgToAscII": ["imgtoascii", "ita"],
         "setEmoji": ["setemoji"],
         "deleteEmoji": ["delemoji"],
         "setLanguage": ["setlang", "lang"],
@@ -34,18 +32,6 @@ export default {
         "ready": "bot started",
         "db": "database connected",
         "db_error": "database error: "
-    },
-    "img_to_ascii_defaults": {
-        "colored": false,
-        "pixels": ["⣿", "⡇", "⠄"],
-        "size": {
-            "width": 80
-        }
-    },
-    "img_to_ascii_settings": {
-        "pixels": "pixels:",
-        "width": "width:",
-        "height": "height:"
     },
     "db_settings": {
         "db_collections": {
@@ -92,8 +78,6 @@ export default {
             "msg_getHentai_id_warn": "Wrong ID",
 			"msg_getHentai_nsfw_warn": "Hentai is avaliable only at nsfw channels :sob:",
             "msg_getHentai_fetch_error": "An error was occurred. May be its a sign?",
-            "msg_imgToAscII_error": "Error while processing an image UwU",
-            "msg_imgToAscII_no_files": "There are no files in your message ¯\\_(ツ)_/¯",
             "msg_clear_error": "What error could possibly happen while deleting messages???",
             "emd_help_author": "Some help:",
 			"msg_doEmojis_on": "Emojis enabled!:white_check_mark:",
@@ -140,8 +124,6 @@ export default {
             "msg_getHentai_id_warn": "Неверный код",
 			"msg_getHentai_nsfw_warn": "Хентай доступен только в nsfw каналах :sob:",
             "msg_getHentai_fetch_error": "Произошла ошибка. Может это знак?",
-            "msg_imgToAscII_error": "Не удалось сохранить файл UwU",
-            "msg_imgToAscII_no_files": "В сообщении нет вложений ¯\\_(ツ)_/¯",
             "msg_clear_error": "Какая ошибка могла случится во время удаления сообщений?",
             "emd_help_author": "Список команд:",
 			"msg_doEmojis_on": "Эмодзи включены!:white_check_mark:",
