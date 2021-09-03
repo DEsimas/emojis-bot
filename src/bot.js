@@ -1,8 +1,10 @@
 //libs
+import asciify from "asciify-image";
 import Discord from "discord.js";
 import mongoose from "mongoose";
 import nhentai from "nhentai";
 import dotenv from "dotenv";
+import fs from "fs";
 
 //modules
 import messageHandler from "./messageHandler.js";
@@ -28,8 +30,10 @@ export default class bot {
 
     //set imported packages in this
     setLibs() {
+        this.asciify = asciify;
         this.nhentai = nhentai;
         this.Discord = Discord;
+        this.fs = fs;
     };
 
     //set common functions in this
