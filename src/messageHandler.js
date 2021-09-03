@@ -2,7 +2,7 @@
 import getHentai from "./components/hentai/getHentai.js";
 import deleteEmoji from "./components/user-interaction/deleteEmoji.js";
 import setLanguage from "./components/user-interaction/setLanguage.js";
-// import setPrefix from "./components/server-interaction/setPrefix.js";
+import setPrefix from "./components/server-interaction/setPrefix.js";
 import doEmojis from "./components/server-interaction/doEmojis.js";
 import setEmoji from "./components/user-interaction/setEmoji.js";
 // import imgToAscII from "./components/imgToAscII/imgToAscII.js";
@@ -87,10 +87,10 @@ export default class messageHandler {
             //     name: name.help,
             //     out: help
             // },
-            // {
-            //     name: name.setPrefix,
-            //     out: setPrefix
-            // },
+            {
+                name: name.setPrefix,
+                out: setPrefix
+            },
             {
                 name: name.doEmojis,
                 out: doEmojis
