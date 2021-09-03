@@ -7,7 +7,7 @@ import doEmojis from "./components/server-interaction/doEmojis.js";
 import setEmoji from "./components/user-interaction/setEmoji.js";
 // import imgToAscII from "./components/imgToAscII/imgToAscII.js";
 import clear from "./components/interaction/clear.js";
-// import help from "./components/interaction/help.js";
+import help from "./components/interaction/help.js";
 
 export default class messageHandler {
     constructor(context) {
@@ -83,10 +83,10 @@ export default class messageHandler {
                 name: name.clear,
                 out: clear
             },
-            // {
-            //     name: name.help,
-            //     out: help
-            // },
+            {
+                name: name.help,
+                out: help
+            },
             {
                 name: name.setPrefix,
                 out: setPrefix
