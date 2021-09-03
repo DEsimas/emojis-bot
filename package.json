@@ -1,6 +1,6 @@
 {
   "name": "fucking-slave",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "bot for discord with random functions",
   "main": "./src/index.js",
   "type": "module",
