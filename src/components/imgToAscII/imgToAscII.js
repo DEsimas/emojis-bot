@@ -1,5 +1,3 @@
-import fs, { writeFileSync } from "fs";
-
 export default class imgToAscII {
     constructor(context) {
         this.ImgToAscII = context.ImgToAscII;
@@ -30,8 +28,7 @@ export default class imgToAscII {
                     return;
                 };
 
-                fs.writeFileSync("./temp.txt", converted);
-                this.message.channel.send("", { files: ["./temp.txt"] })
+                console.log(converted);
             });
         });
     };
