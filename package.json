@@ -10,6 +10,7 @@
   "author": "DEsimas<simasuh@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "asciify-image": "^0.1.8",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
     "mongoose": "^6.0.4",
