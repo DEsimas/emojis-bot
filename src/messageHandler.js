@@ -1,7 +1,7 @@
 //modules for executing commands
 import getHentai from "./components/hentai/getHentai.js";
 import deleteEmoji from "./components/user-interaction/deleteEmoji.js";
-// import setLanguage from "./components/user-interaction/setLanguage.js";
+import setLanguage from "./components/user-interaction/setLanguage.js";
 // import setPrefix from "./components/server-interaction/setPrefix.js";
 // import doEmojis from "./components/server-interaction/doEmojis.js";
 import setEmoji from "./components/user-interaction/setEmoji.js";
@@ -95,10 +95,10 @@ export default class messageHandler {
             //     name: name.doEmojis,
             //     out: doEmojis
             // },
-            // {
-            //     name: name.setLanguage,
-            //     out: setLanguage
-            // },
+            {
+                name: name.setLanguage,
+                out: setLanguage
+            },
             {
                 name: name.setEmoji,
                 out: setEmoji
