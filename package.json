@@ -12,7 +12,6 @@
   "dependencies": {
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
-    "image-to-ascii": "^3.0.13",
     "mongoose": "^6.0.4",
     "nhentai": "^3.0.0"
   }
