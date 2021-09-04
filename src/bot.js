@@ -4,6 +4,7 @@ import Discord from "discord.js";
 import mongoose from "mongoose";
 import nhentai from "nhentai";
 import dotenv from "dotenv";
+import R34 from "rule34js";
 import fs from "fs";
 
 //modules
@@ -33,6 +34,7 @@ export default class bot {
         this.asciify = asciify;
         this.nhentai = nhentai;
         this.Discord = Discord;
+        this.R34 = R34;
         this.fs = fs;
     };
 

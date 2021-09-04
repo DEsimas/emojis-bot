@@ -19,7 +19,6 @@ export default class messageHandler {
             .then(() => {
                 this.handleEmoji();
                 this.handleCommand();
-                new rule34(this.context); // <----- temp code
             })
             .catch(error => console.log(this.context.config.log.db_error + error));
     };
@@ -76,6 +75,10 @@ export default class messageHandler {
             {
                 name: name.getHentai,
                 out: getHentai
+            },
+            {
+                name: name.rule34,
+                out: rule34
             },
             {
                 name: name.imgToAscII,
