@@ -1,6 +1,4 @@
 export default class imgToAscII {
-    TEMP_FILE = "./temp.txt";
-
     constructor(context) {
         this.fs = context.fs;
         this.args = context.args;
@@ -28,8 +26,8 @@ export default class imgToAscII {
             this.asciify(el, options)
                 .then((asciified) => {
                     // Print asciified image to console
-                    this.fs.writeFileSync(this.TEMP_FILE, asciified);
-                    this.message.channel.send("", { files: [this.TEMP_FILE] });
+                    this.fs.writeFileSync(this.config.ascII_file_name, asciified);
+                    this.message.channel.send("", { files: [this.config.ascII_file_name] });
                 })
                 .catch((err) => {
                     // Print error to console

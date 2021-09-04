@@ -10,6 +10,7 @@ export default {
     "embed_color": "#ffffff",
     "emoji_discord_link": "https://cdn.discordapp.com/emojis/",
     "emoji_extension": ".png",
+    "ascII_file_name": "./ascII.txt",
     "administrator_permission": "ADMINISTRATOR",
     "about_prefix": "abt_",
     "describtion_prefix": "dsc_",

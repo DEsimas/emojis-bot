@@ -111,7 +111,7 @@ export default class messageHandler {
             {
                 name: name.help,
                 out: help
-            },
+            }
         ];
     };
 };
