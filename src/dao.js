@@ -93,11 +93,11 @@ export default class dao {
     };
 
     async getAvatar() {
-        return await this.avatars.find();
-    };
-
-    async getAvatars() {
         return await this.avatars.findOne({ id: _id });
+    };
+    
+    async getAvatars() {
+        return await this.avatars.find();
     };
     
     async updAvatar(_id, options) {

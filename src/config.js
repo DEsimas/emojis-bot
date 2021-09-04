@@ -4,6 +4,7 @@ export default {
     "default_language": "eng",
     "default_doEmojis": false,
     "default_scan_limit": 100,
+    "avatar_cooldown": 300000,
     "error_color": "#ff0000",
     "success_color": "#00ff00",
     "embed_color": "#ffffff",
@@ -34,6 +35,7 @@ export default {
     },
     "log": {
         "ready": "bot started",
+        "avatar_error": "Can't change avatar: "
     },
     "img_to_ascii_defaults": {
         "fit": "box",
@@ -68,13 +70,13 @@ export default {
                 "language": "eng"
             },
             {
-                "userID": "883020186339397693", //fucking-slave
+                "userID": "883020186339397693", //ME
                 "emojiID": null,
                 "language": "eng"
             },
             {
-                "userID": "883051590959894538", //test-fucking-slave
-                "emojiID": "872904187921440788",
+                "userID": "883051590959894538", //TEST
+                "emojiID": null,
                 "language": "eng"
             }
         ],
