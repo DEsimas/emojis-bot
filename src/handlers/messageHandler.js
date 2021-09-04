@@ -1,14 +1,14 @@
 //modules for executing commands
-import deleteEmoji from "./components/user-interaction/deleteEmoji.js";
-import setLanguage from "./components/user-interaction/setLanguage.js";
-import setPrefix from "./components/server-interaction/setPrefix.js";
-import doEmojis from "./components/server-interaction/doEmojis.js";
-import setEmoji from "./components/user-interaction/setEmoji.js";
-import imgToAscII from "./components/imgToAscII/imgToAscII.js";
-import getHentai from "./components/hentai/getHentai.js";
-import clear from "./components/interaction/clear.js";
-import help from "./components/interaction/help.js";
-import rule34 from "./components/hentai/rule34.js";
+import deleteEmoji from "../components/user-interaction/deleteEmoji.js";
+import setLanguage from "../components/user-interaction/setLanguage.js";
+import setPrefix from "../components/server-interaction/setPrefix.js";
+import doEmojis from "../components/server-interaction/doEmojis.js";
+import setEmoji from "../components/user-interaction/setEmoji.js";
+import imgToAscII from "../components/imgToAscII/imgToAscII.js";
+import getHentai from "../components/hentai/getHentai.js";
+import clear from "../components/interaction/clear.js";
+import help from "../components/interaction/help.js";
+import rule34 from "../components/hentai/rule34.js";
 
 export default class messageHandler {
     constructor(context) {
@@ -85,12 +85,16 @@ export default class messageHandler {
                 out: imgToAscII
             },
             {
-                name: name.clear,
-                out: clear
+                name: name.setEmoji,
+                out: setEmoji
             },
             {
-                name: name.help,
-                out: help
+                name: name.deleteEmoji,
+                out: deleteEmoji
+            },
+            {
+                name: name.setLanguage,
+                out: setLanguage
             },
             {
                 name: name.setPrefix,
@@ -101,17 +105,13 @@ export default class messageHandler {
                 out: doEmojis
             },
             {
-                name: name.setLanguage,
-                out: setLanguage
+                name: name.clear,
+                out: clear
             },
             {
-                name: name.setEmoji,
-                out: setEmoji
+                name: name.help,
+                out: help
             },
-            {
-                name: name.deleteEmoji,
-                out: deleteEmoji
-            }
         ];
     };
 };

@@ -8,7 +8,10 @@ import R34 from "rule34js";
 import fs from "fs";
 
 //modules
-import messageHandler from "./messageHandler.js";
+import guildCreateHandler from "./handlers/guildCreateHandler.js";
+import guildDeleteHandler from "./handlers/guildDeleteHandler.js";
+import messageHandler from "./handlers/messageHandler.js";
+import readyHandler from "./handlers/readyHandler.js";
 import dao from "./dao.js";
 
 //config
@@ -52,29 +55,12 @@ export default class bot {
 
     //set handlers for events
     setEndpoints() {
-        this.client.on(this.config.events.ready, () => this.onReady());
-        this.client.on(this.config.events.message, message => this.onMessage(message));
-        this.client.on(this.config.events.guildCreate, guild => this.onGuildCreate(guild));
-        this.client.on(this.config.events.guildDelete, guild => this.onGuildDelete(guild));
+        this.client.on(this.config.events.ready, () => new readyHandler({ ...this }));
+        this.client.on(this.config.events.message, message => new messageHandler({ ...this, message: message }));
+        this.client.on(this.config.events.guildCreate, guild => new guildCreateHandler({ ...this, guild: guild }));
+        this.client.on(this.config.events.guildDelete, guild => new guildDeleteHandler({ ...this, guild: guild }));
     };
-
-    //handlers//
-    onReady() {
-        console.log(this.config.log.ready);
-    };
-
-    onMessage(message) {
-        new messageHandler( { ...this, message: message } );
-    };
-
-    onGuildCreate(guild) {
-        this.dao.delServer(guild.id);
-    };
-
-    onGuildDelete(guild) {
-        this.dao.delServer(guild.id);
-    };
-
+    
     //common functions//
     sendError(context, error) {
         const embed = new context.Discord.MessageEmbed()
