@@ -6,6 +6,7 @@ export default class dao {
         this.connectDB();
         this.emojis = this.mongoose.model(this.settings.db_collections.users, this.getUserSchema());
         this.servers = this.mongoose.model(this.settings.db_collections.servers, this.getServerSchema());
+        this.avatars = this.mongoose.model(this.settings.db_collections.avatars, this.getAvatarSchema());
     };
 
     connectDB() {
@@ -36,6 +37,14 @@ export default class dao {
         return serverSchema;
     };
 
+    getAvatarSchema() {
+        const avatarSchema = new this.mongoose.Schema({
+            name: String,
+            imageURL: String,
+            emojiID: String
+        });
+        return avatarSchema;
+    };
 
     setDefaults() {
         this.settings.default_values.forEach(async el => {
@@ -72,5 +81,21 @@ export default class dao {
 
     async delServer(serverID) {
         return await this.servers.deleteOne({ serverID: serverID });
+    };
+
+    async addAvatar(name, imageURL, emojiID) {
+        return await this.avatars({ name: name, imageURL, emojiID }).save();
+    };
+
+    async getAvatar() {
+        return await this.avatars.find({});
+    };
+    
+    async updAvatar(_id, options) {
+        return await this.avatars.updateOne({ _id: _id }, options);
+    };
+
+    async delAvatar(_id) {
+        return await this.avatars.deleteOne({ _id: _id });
     };
 };

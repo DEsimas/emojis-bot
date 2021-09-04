@@ -48,7 +48,8 @@ export default {
     "db_settings": {
         "db_collections": {
             "users": "users",
-            "servers": "servers"
+            "servers": "servers",
+            "avatars": "avatars"
         },
         "default_values": [
             {
