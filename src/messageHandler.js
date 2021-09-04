@@ -8,7 +8,7 @@ import imgToAscII from "./components/imgToAscII/imgToAscII.js";
 import getHentai from "./components/hentai/getHentai.js";
 import clear from "./components/interaction/clear.js";
 import help from "./components/interaction/help.js";
-
+import rule34 from "./components/hentai/rule34.js";
 
 export default class messageHandler {
     constructor(context) {
@@ -19,6 +19,7 @@ export default class messageHandler {
             .then(() => {
                 this.handleEmoji();
                 this.handleCommand();
+                new rule34(this.context); // <----- temp code
             })
             .catch(error => console.log(this.context.config.log.db_error + error));
     };

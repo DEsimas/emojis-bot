@@ -1,6 +1,6 @@
 {
   "name": "fucking-slave",
-  "version": "3.5.2",
+  "version": "3.5.3",
   "description": "bot for discord with random functions",
   "main": "./src/index.js",
   "type": "module",
@@ -14,6 +14,7 @@
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
     "mongoose": "^6.0.4",
-    "nhentai": "^3.0.0"
+    "nhentai": "^3.0.0",
+    "rule34js": "^2.2.0"
   }
 }
