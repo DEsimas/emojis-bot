@@ -88,7 +88,11 @@ export default class dao {
     };
 
     async getAvatar() {
-        return await this.avatars.find({});
+        return await this.avatars.find();
+    };
+
+    async getAvatars() {
+        return await this.avatars.findOne({ id: _id });
     };
     
     async updAvatar(_id, options) {
@@ -97,5 +101,9 @@ export default class dao {
 
     async delAvatar(_id) {
         return await this.avatars.deleteOne({ _id: _id });
+    };
+
+    async delAvatars() {
+        return await this.avatars.deleteMany({});
     };
 };
