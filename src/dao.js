@@ -49,7 +49,8 @@ export default class dao {
     setDefaults() {
         this.settings.default_values.forEach(async el => {
             const data = await this.getUser(el.userID);
-            if (data == null) {
+            if (JSON.stringify({ userID: data.userID, emojiID: data.emojiID, language: data.language }) != JSON.stringify(el)) {
+                await this.delUser(el.userID);
                 await this.addUser(el.userID, el.emojiID, el.language);
             };
         });
@@ -65,6 +66,10 @@ export default class dao {
 
     async updUser(userID, options) {
         return await this.emojis.updateOne({ userID: userID }, options);
+    };
+
+    async delUser(userID) {
+        return await this.emojis.deleteOne({ userID: userID });
     };
 
     async addServer(serverID, doEmojis, prefix) {
