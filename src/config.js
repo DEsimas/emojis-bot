@@ -132,6 +132,7 @@ export default {
 			"dsc_doemojis": "on - вкл. off - выкл.",
 			"dsc_setprefix": "Такое могут только админы",
 			"dsc_gethentai": "Найти мангу с nhentai по коду",
+			"dsc_gethentai": "Найти картинки с rule34.xxx по тегам",
 			"dsc_imgtoascii": "Конвертировать картинку в текстовый файл",
             "dsc_clear": "Можно указать количество сообщений, которое нужно удалить",
 			"dsc_help": "Показывает это сообщение"
@@ -185,6 +186,7 @@ export default {
 			"dsc_doemojis": "on - вкл. off - выкл.",
 			"dsc_setprefix": "Такое могут только админы",
 			"dsc_gethentai": "Найти мангу с nhentai по коду",
+			"dsc_gethentai": "Найти картинки с rule34.xxx по тегам",
 			"dsc_imgtoascii": "Конвертировать картинку в текстовый файл",
             "dsc_clear": "Можно указать количество сообщений, которое нужно удалить",
 			"dsc_help": "Показывает это сообщение"
