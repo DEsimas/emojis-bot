@@ -5,6 +5,7 @@ export default {
     "default_doEmojis": false,
     "default_scan_limit": 100,
     "avatar_cooldown": 300000,
+    "push_cooldown": 450000,
     "error_color": "#ff0000",
     "success_color": "#00ff00",
     "embed_color": "#ffffff",

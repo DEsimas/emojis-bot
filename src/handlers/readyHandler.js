@@ -11,17 +11,22 @@ export default class readyHandler {
     readyHandler() {
         console.log(this.log.ready);
         this.UI();
-        this.loadAvatars().then(async avatars => {
-            await this.dao.delAvatars();
+        this.pushAvatars(this.client, this.config, this.dao, this.loadAvatars);
+        setInterval(this.pushAvatars, this.config.push_cooldown, this.client, this.config, this.dao, this.loadAvatars);
+    };
+    
+    async pushAvatars(client, config, dao, loadAvatars) {
+        loadAvatars(client, config).then(async avatars => {
+            await dao.delAvatars();
             avatars.forEach(el => {
-                this.dao.addAvatar(el.name, el.imageURL, el.emojiID);
+                dao.addAvatar(el.name, el.imageURL, el.emojiID);
             });
         });
-    };
+    }
 
-    async loadAvatars() {
+    async loadAvatars(client, config) {
 
-        const channel = this.client.channels.cache.get(this.config.avatar_channel_id);
+        const channel = client.channels.cache.get(config.avatar_channel_id);
         const messages = await channel.messages.fetch();
 
         let avatars = [];
@@ -35,7 +40,7 @@ export default class readyHandler {
                 const reaction = element.reactions.cache.get(keys.next().value);
 
                 if (await reaction.users.fetch().then(user => {
-                    if (user.entries().next().value[1].id == this.config.owner_id) return true;
+                    if (user.entries().next().value[1].id == config.owner_id) return true;
                     else return false;
                 })) emojiID = reaction._emoji.id;
             };
