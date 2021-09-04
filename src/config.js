@@ -15,6 +15,7 @@ export default {
     "describtion_prefix": "dsc_",
     "avatar_channel_id": "883729587673120818",
     "owner_id": "473817390887600129",
+    "support_server_id": "822097415783055431",
     "commands": {
         "getHentai": ["gethentai", "nhentai"],
         "rule34": ["rule34", "r34"],
