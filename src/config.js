@@ -12,6 +12,8 @@ export default {
     "administrator_permission": "ADMINISTRATOR",
     "about_prefix": "abt_",
     "describtion_prefix": "dsc_",
+    "avatar_channel_id": "883729587673120818",
+    "owner_id": "473817390887600129",
     "commands": {
         "getHentai": ["gethentai", "nhentai"],
         "rule34": ["rule34", "r34"],
@@ -32,8 +34,6 @@ export default {
     },
     "log": {
         "ready": "bot started",
-        "db": "database connected",
-        "db_error": "database error: "
     },
     "img_to_ascii_defaults": {
         "fit": "box",
@@ -69,7 +69,7 @@ export default {
             },
             {
                 "userID": "883020186339397693", //fucking-slave
-                "emojiID": "872904187921440788",
+                "emojiID": null,
                 "language": "eng"
             },
             {
