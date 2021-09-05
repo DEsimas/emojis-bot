@@ -24,8 +24,9 @@ export default class messageHandler {
     };
 
 
-    //find server and user in db and save into context
+    //find server and user in db and save into context if not found create with default params
     async setInfo() {
+        //users
         const userID = this.context.message.author.id;
         let user = await this.context.dao.getUser(userID);
         if (user == null) {
@@ -34,6 +35,7 @@ export default class messageHandler {
         };
         this.context.user = user;
 
+        //servers
         const serverID = this.context.message.guild.id;
         let server = await this.context.dao.getServer(serverID);
         if (server == null) {
@@ -46,6 +48,7 @@ export default class messageHandler {
     //add emoji from db to message (if allowed on server)
     handleEmoji() {
         if (!this.context.server.doEmojis) return;
+
         const emoji = this.context.user.emojiID;
         if (emoji != null) {
             this.context.message.react(emoji);
@@ -68,7 +71,7 @@ export default class messageHandler {
         };
     };
 
-    //list with all bots commands
+    //list with all bots commands <----------------------rework this
     setCommandList() {
         const name = this.context.config.commands;
         this.context.commands = [

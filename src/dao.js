@@ -9,6 +9,7 @@ export default class dao {
         this.avatars = this.mongoose.model(this.settings.db_collections.avatars, this.getAvatarSchema());
     };
 
+    //connecting db with uri from .env
     connectDB() {
         this.mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => {
@@ -17,7 +18,19 @@ export default class dao {
             })
             .catch(error => console.log(this.settings.log.db_error + error));
     };
+    
+    //setting default values for other bots
+    setDefaults() {
+        this.settings.default_values.forEach(async el => {
+            const data = await this.getUser(el.userID);
+            if (JSON.stringify({ userID: data.userID, emojiID: data.emojiID, language: data.language }) != JSON.stringify(el)) {
+                await this.delUser(el.userID);
+                await this.addUser(el.userID, el.emojiID, el.language);
+            };
+        });
+    };
 
+    //schemas for collections//
     getUserSchema() {
         const userSchema = new this.mongoose.Schema({
             userID: String,
@@ -46,16 +59,7 @@ export default class dao {
         return avatarSchema;
     };
 
-    setDefaults() {
-        this.settings.default_values.forEach(async el => {
-            const data = await this.getUser(el.userID);
-            if (JSON.stringify({ userID: data.userID, emojiID: data.emojiID, language: data.language }) != JSON.stringify(el)) {
-                await this.delUser(el.userID);
-                await this.addUser(el.userID, el.emojiID, el.language);
-            };
-        });
-    };
-
+    //interaction methods//
     async addUser(userID, emojiID, language) {
         return await new this.emojis({ userID: userID, emojiID: emojiID, language: language }).save();
     };

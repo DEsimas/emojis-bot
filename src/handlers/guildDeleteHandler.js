@@ -7,6 +7,7 @@ export default class guildDeleteHandler {
     };
 
     guildDeleteHandler() {
+        //remove server from db
         this.dao.delServer(this.guild.id);
     };
 };

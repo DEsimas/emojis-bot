@@ -9,8 +9,10 @@ export default class guildCreateHandler {
     };
 
     guildCreateHandler() {
+        //remove server from db so it can be recreated with default params
         this.dao.delServer(this.guild.id);
 
+        //set current nickname on new server
         let nickname;
         this.client.guilds.cache.forEach(el => {
             if(el.id == this.config.support_server_id)nickname = el.me.nickname;

@@ -47,7 +47,7 @@ export default class bot {
         this.sendSuccess = this.sendSuccess;
     };
 
-    //login bot using token from config
+    //login bot using token from .env
     setClient() {
         this.client = new this.Discord.Client();
         this.client.login(process.env.TOKEN);
