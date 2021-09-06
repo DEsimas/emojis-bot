@@ -1,5 +1,6 @@
 export default class readyHandler {
     constructor(context) {
+        this.getAverageColor = context.getAverageColor;
         this.client = context.client;
         this.config = context.config;
         this.log = this.config.log;
@@ -82,12 +83,12 @@ export default class readyHandler {
 
     //set new UI on initialization and setInterval for regular changes
     UI() {
-        this.setUI(this.dao, this.client, this.config.avatar_error);
-        setInterval(this.setUI, this.config.avatar_cooldown, this.dao, this.client, this.config.avatar_error);
+        this.setUI(this.dao, this.client, this.config.avatar_error, image => this.setEmbedColor(image));
+        setInterval(this.setUI, this.config.avatar_cooldown, this.dao, this.client, this.config.avatar_error, image => this.setEmbedColor(image));
     };
 
     //pick random UI from db and set it
-    async setUI(dao, client, error_msg) {
+    async setUI(dao, client, error_msg, setEmbedColor) {
         const avatars = await dao.getAvatars();
         const UI = avatars[Math.floor(Math.random() * avatars.length)];
 
@@ -96,9 +97,14 @@ export default class readyHandler {
                 el.member(client.user).setNickname(UI.name);
             });
             dao.updUser(client.user.id, { $set: { emojiID: UI.emojiID } });
-        })
-            .catch(err => {
-                console.log(error_msg + err);
-            });
+            setEmbedColor(UI.imageURL);
+        }).catch(err => {
+            console.log(error_msg + err);
+        });
+    };
+
+    async setEmbedColor(image) {
+        const color = await this.getAverageColor(image);
+        this.config.embed_color = color.hex;
     };
 };

@@ -1,4 +1,5 @@
 //libs
+import { getAverageColor } from 'fast-average-color-node';
 import asciify from "asciify-image";
 import Discord from "discord.js";
 import mongoose from "mongoose";
@@ -34,6 +35,7 @@ export default class bot {
 
     //set imported packages in this
     setLibs() {
+        this.getAverageColor = getAverageColor;
         this.asciify = asciify;
         this.nhentai = nhentai;
         this.Discord = Discord;

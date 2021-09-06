@@ -2,6 +2,7 @@ export default class rule34 {
     constructor(context) {
         this.R34 = context.R34;
         this.args = context.args;
+        this.config = context.config;
         this.message = context.message;
         this.links_per_message = context.config.links_per_message;
         this.localization = context.config.localization[context.user.language];
@@ -43,6 +44,9 @@ export default class rule34 {
 
             tags.push(element);
         });
+
+        if(limit > this.config.rule34_publication_limit) limit = this.config.rule34_publication_limit;
+
         return {
             tags: tags,
             limit: limit
