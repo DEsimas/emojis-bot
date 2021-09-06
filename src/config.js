@@ -4,8 +4,10 @@ export default {
     "default_language": "eng",
     "default_doEmojis": false,
     "default_scan_limit": 100,
+    "links_per_message": 5,
     "avatar_cooldown": 300000,
     "push_cooldown": 450000,
+    "status_cooldown": 600000,
     "error_color": "#ff0000",
     "success_color": "#00ff00",
     "embed_color": "#ffffff",
@@ -24,11 +26,11 @@ export default {
         "imgToAscII": ["imgtoascii", "ita"],
         "setEmoji": ["setemoji"],
         "deleteEmoji": ["delemoji"],
-        "setLanguage": ["setlang", "lang"],
+        "setLanguage": ["setlang", "lang", "setlanguage"],
         "setPrefix": ["setprefix"],
         "doEmojis": ["doemojis"],
         "clear": ["clear", "cls"],
-        "help": ["help"]
+        "help": ["help", "h"]
     },
     "events": {
         "ready": "ready",
@@ -40,6 +42,7 @@ export default {
         "ready": "bot started",
         "avatar_error": "Can't change avatar: "
     },
+    "status": ["on ", " servers with ", " users"],
     "img_to_ascii_defaults": {
         "fit": "box",
         "width": 150,
@@ -138,7 +141,7 @@ export default {
 			"dsc_delemoji": "Delete reaction under your message",
 			"dsc_doemojis": "on - switch on, off - switch off",
 			"dsc_setprefix": "p.s. only for admins",
-			"dsc_getHentai": "Find doujin from nhentai using 6 digit code",
+			"dsc_gethentai": "Find doujin from nhentai using 6 digit code",
 			"dsc_rule34": "Find images from rule34.xxx using tags",
 			"dsc_imgtoascii": "Convert image to ascII text",
             "dsc_clear": "You can state amount of messages to delete",

@@ -64,6 +64,10 @@ export default class dao {
         return await new this.emojis({ userID: userID, emojiID: emojiID, language: language }).save();
     };
 
+    async getUsers() {
+        return await this.emojis.find();
+    };
+
     async getUser(userID) {
         return await this.emojis.findOne({ userID: userID });
     };
@@ -78,6 +82,10 @@ export default class dao {
 
     async addServer(serverID, doEmojis, prefix) {
         return await new this.servers({ serverID: serverID, doEmojis: doEmojis, prefix: prefix }).save();
+    };
+
+    async getServers() {
+        return await this.servers.find();
     };
 
     async getServer(serverID) {

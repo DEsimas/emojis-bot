@@ -4,6 +4,7 @@ export default class getHentai {
         this.Discord = context.Discord;
         this.nhentai = context.nhentai;
         this.message = context.message;
+        this.links_per_message = context.config.links_per_message;
         this.args = context.args;
         this.localization = context.config.localization[context.user.language];
         this.embed_color = context.config.embed_color;
@@ -61,7 +62,7 @@ export default class getHentai {
         doujin.pages.forEach((el, index) => {
             msg = msg + el.url + '\n';
 
-            if ((index+1) % 5 == 0) {
+            if ((index+1) % this.links_per_message == 0) {
                 this.message.channel.send(msg);
                 msg = "";
             }

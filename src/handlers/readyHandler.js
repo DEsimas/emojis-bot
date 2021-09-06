@@ -11,12 +11,24 @@ export default class readyHandler {
     readyHandler() {
         console.log(this.log.ready);
 
-        //set regular checking for new avatars & regular UI changing
         this.UI();
+        //set regular checking for new avatars & regular UI changing
         this.pushAvatars(this.client, this.config, this.dao, this.loadAvatars);
         setInterval(this.pushAvatars, this.config.push_cooldown, this.client, this.config, this.dao, this.loadAvatars);
+
+        //set regular status updating
+        this.setActivity(this.client, this.dao, this.config.status);
+        setInterval(this.setActivity, this.config.status_cooldown, this.client, this.dao, this.config.status);
     };
-    
+
+    //set bot statistics as activity
+    async setActivity(client, dao, status) {
+        const servers = await dao.getServers();
+        const users = await dao.getUsers();
+
+        client.user.setActivity(status[0] + servers.length + status[1] + users.length + status[2]);
+    };
+
     //get avatars from avatars channel and push em in db
     async pushAvatars(client, config, dao, loadAvatars) {
         loadAvatars(client, config).then(async avatars => {
@@ -38,7 +50,7 @@ export default class readyHandler {
         //iterater through messages in channel
         for (let i = 0; i < messages.size; i++) {
             const element = messages.get(msgs.next().value);
-            
+
             let emojiID = null;
             const keys = element.reactions.cache.keys();
 
@@ -78,15 +90,15 @@ export default class readyHandler {
     async setUI(dao, client, error_msg) {
         const avatars = await dao.getAvatars();
         const UI = avatars[Math.floor(Math.random() * avatars.length)];
-        
+
         client.user.setAvatar(UI.imageURL).then(() => {
             client.guilds.cache.forEach(el => {
                 el.member(client.user).setNickname(UI.name);
             });
             dao.updUser(client.user.id, { $set: { emojiID: UI.emojiID } });
         })
-        .catch(err => {
-            console.log(error_msg + err);
-        });
+            .catch(err => {
+                console.log(error_msg + err);
+            });
     };
 };

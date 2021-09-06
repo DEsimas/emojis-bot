@@ -3,6 +3,7 @@ export default class rule34 {
         this.R34 = context.R34;
         this.args = context.args;
         this.message = context.message;
+        this.links_per_message = context.config.links_per_message;
         this.localization = context.config.localization[context.user.language];
         this.sendError = error => context.sendError(context, error);
 
@@ -22,12 +23,14 @@ export default class rule34 {
             return;
         }
 
+        //request to rule34.xxx
         this.R34.posts({ tags: options.tags })
             .then(response => this.responseHandler(response, options))
             .catch(err => this.sendError(this.localization.msg_rule34_fetch_error));
 
     };
 
+    //get tags and amount of images from arguments
     parseArgs() {
         let limit = 1;
         let tags = [];
@@ -46,6 +49,7 @@ export default class rule34 {
         };
     };
 
+    //handle responser from r34
     responseHandler(response, options) {
         if (!response.count) {
             this.sendError(this.localization.msg_rule34_hentai_not_found);
@@ -57,13 +61,14 @@ export default class rule34 {
         this.sendImages(this.shuffle(posts), response.count <= options.limit ? response.posts.length : options.limit);
     };
 
+    //sending images several in each message for optimization
     sendImages(posts, limit) {
         let msg = "";
         posts.forEach((el, index) => {
             if (index >= limit) return;
 
             msg += (el.file_url + '\n');
-            if ((index + 1) % 5 == 0) {
+            if ((index + 1) % this.links_per_message == 0) {
                 this.message.channel.send(msg);
                 msg = "";
             };
@@ -74,6 +79,7 @@ export default class rule34 {
         if (limit >= 10) this.message.channel.send(this.message.url);
     };
 
+    //array shuffler for random output (not mine)
     shuffle(array) {
         let counter = array.length;
 
