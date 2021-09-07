@@ -11,8 +11,8 @@ export default class setPrefix {
         this.setPrefix();
     };
 
-    setPrefix() {
-        if(this.validate()) return;
+    async setPrefix() {
+        if (await this.validate()) return;
 
         this.dao.updServer(this.message.guild.id, { $set: { prefix: this.args[1] } })
             .then(res => {
@@ -23,18 +23,20 @@ export default class setPrefix {
             });
     };
 
-    validate() {
+    async validate() {
         //check if admin
-        if (!this.message.guild.member(this.message.author.id).permissions.has(this.config.administrator_permission)) {
-            this.sendError(this.localization.msg_setPrefix_access_warn);
-            return 1;
+        const guildMember = await this.message.guild.members.fetch(this.message.author.id)
+        const isAdmin = guildMember.permissions.has(this.config.administrator_permission);
+        if (!isAdmin) {
+            this.sendError(this.localization.msg_doEmojis_access_warn);
+            return true;
         };
 
         //prevent empty prefix
         if (this.args[1] == undefined) {
             this.sendError(this.localization.msg_setPrefix_empty_warn);
-            return 1;
+            return true;
         };
-        return 0;
+        return false;
     };
 };

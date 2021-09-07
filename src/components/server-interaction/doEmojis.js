@@ -11,10 +11,9 @@ export default class doEmojis {
         this.doEmojis();
     };
 
-    doEmojis() {
+    async doEmojis() {
         //switching emojis on server
-        if(this.validate()) return;
-
+        if(await this.validate()) return;
 
         //on -> true off -> false
         switch (this.args[1]) {
@@ -42,12 +41,14 @@ export default class doEmojis {
         };
     };
 
-    validate() {
+    async validate() {
         //check if user is administrator
-        if (!this.message.guild.member(this.message.author.id).permissions.has(this.config.administrator_permission)) {
+        const guildMember = await this.message.guild.members.fetch(this.message.author.id)
+        const isAdmin = guildMember.permissions.has(this.config.administrator_permission);
+        if(isAdmin) return false;
+        else {
             this.sendError(this.localization.msg_doEmojis_access_warn);
-            return 1;
+            return true;
         };
-        return 0;
     };
 };

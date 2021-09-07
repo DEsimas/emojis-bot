@@ -53,7 +53,7 @@ export default class getHentai {
             .addField(this.localization.msg_getHentai_tags, tags)
             .setThumbnail(doujin.thumbnail.url)
             .setColor(this.embed_color);
-        this.message.channel.send(embed);
+        this.message.channel.send({ embeds: [embed] });
     };
 
     //send doujin pages 5 per message for optimization

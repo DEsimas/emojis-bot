@@ -23,7 +23,7 @@ export default class setEmoji {
                         .setTitle(this.localization.msg_setEmoji_updated)
                         .setColor(this.config.success_color)
                         .setImage(this.config.emoji_discord_link + this.args[1].split(":")[2].slice(0, -1) + this.config.emoji_extension);
-                    this.message.channel.send(embed);
+                    this.message.channel.send({ embeds: [ embed ] });
                 }
                 else
                     this.sendSuccess(this.localization.msg_setEmoji_updated + '\n' + this.args[1]);

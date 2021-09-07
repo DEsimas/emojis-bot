@@ -18,6 +18,6 @@ export default class help {
             const value = this.localization[this.config.describtion_prefix + this.config.commands[key][0]];
             embed.addField(name, value);
         });
-        this.message.channel.send(embed);
+        this.message.channel.send({ embeds: [embed] });
     };
 };

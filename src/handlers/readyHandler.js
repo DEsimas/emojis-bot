@@ -43,7 +43,8 @@ export default class readyHandler {
     //returns array with UIs from avatars channel on support server (very cursed)
     async loadAvatars(client, config) {
 
-        const channel = client.channels.cache.get(config.avatar_channel_id);
+        
+        const channel = await client.channels.fetch(config.avatar_channel_id);
         const messages = await channel.messages.fetch();
 
         let avatars = [];
@@ -93,8 +94,9 @@ export default class readyHandler {
         const UI = avatars[Math.floor(Math.random() * avatars.length)];
 
         client.user.setAvatar(UI.imageURL).then(() => {
-            client.guilds.cache.forEach(el => {
-                el.member(client.user).setNickname(UI.name);
+            client.guilds.cache.forEach(async el => {
+                const user = await el.members.fetch(client.user.id)
+                user.setNickname(UI.name);
             });
             dao.updUser(client.user.id, { $set: { emojiID: UI.emojiID } });
             setEmbedColor(UI.imageURL);

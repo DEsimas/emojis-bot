@@ -29,6 +29,11 @@ export default class bot {
         this.setLibs();
         this.setFunctions();
 
+        const Intents = this.Discord.Intents.FLAGS;
+        this.intents = {
+            intents: [Intents.GUILD_EMOJIS_AND_STICKERS, Intents.GUILD_MESSAGES, Intents.GUILD_MESSAGE_REACTIONS, Intents.GUILDS]
+        };
+
         this.setClient();
         this.setEndpoints();
     };
@@ -51,7 +56,7 @@ export default class bot {
 
     //login bot using token from .env
     setClient() {
-        this.client = new this.Discord.Client();
+        this.client = new this.Discord.Client(this.intents);
         this.client.login(process.env.TOKEN);
     };
 
@@ -62,19 +67,19 @@ export default class bot {
         this.client.on(this.config.events.guildCreate, guild => new guildCreateHandler({ ...this, guild: guild }));
         this.client.on(this.config.events.guildDelete, guild => new guildDeleteHandler({ ...this, guild: guild }));
     };
-    
+
     //common functions//
     sendError(context, error) {
         const embed = new context.Discord.MessageEmbed()
             .setColor(context.config.error_color)
             .setTitle(error);
-        context.message.channel.send(embed);
+        context.message.channel.send({ embeds: [embed] });
     };
 
     sendSuccess(context, success) {
         const embed = new context.Discord.MessageEmbed()
             .setColor(context.config.success_color)
             .setTitle(success);
-        context.message.channel.send(embed);
+        context.message.channel.send({ embeds: [embed] });
     };
 };

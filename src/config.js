@@ -35,7 +35,7 @@ export default {
     },
     "events": {
         "ready": "ready",
-        "message": "message",
+        "message": "messageCreate",
         "guildCreate": "guildCreate",
         "guildDelete": "guildDelete"
     },
