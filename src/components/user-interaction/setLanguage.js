@@ -21,7 +21,7 @@ export default class setLanguage {
         //update language
         this.dao.updUser(userID, { $set: { language: language } })
             .then(res => {
-                this.sendSuccess(this.localization.msg_setLanguage_success + language);
+                this.sendSuccess(this.config.localization[language].msg_setLanguage_success + language);
             })
             .catch(error => {
                 this.sendError(this.localization.msg_setLanguage_db_error);
