@@ -9,6 +9,9 @@
   },
   "author": "DEsimas<simasuh@gmail.com>",
   "license": "ISC",
+  "engines" : {
+    "node" : "v16.9.0"
+  },
   "dependencies": {
     "asciify-image": "^0.1.8",
     "discord.js": "^13.1.0",
