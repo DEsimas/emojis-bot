@@ -13,7 +13,7 @@ export default class rule34 {
     };
 
     rule34() {
-        if(!this.message.channel.nsfw) {
+        if (!this.message.channel.nsfw) {
             this.sendError(this.localization.msg_ruel34_nsfw_error);
             return;
         }
@@ -28,7 +28,7 @@ export default class rule34 {
         //request to rule34.xxx
         this.R34.posts({ tags: options.tags })
             .then(response => this.responseHandler(response, options))
-            .catch(err => this.sendError(this.localization.msg_rule34_fetch_error));
+            .catch(err => this.sendError(this.localization.msg_rule34_fetch_error + err));
 
     };
 
@@ -46,7 +46,7 @@ export default class rule34 {
             tags.push(element);
         });
 
-        if(limit > this.config.rule34_publication_limit) limit = this.config.rule34_publication_limit;
+        if (limit > this.config.rule34_publication_limit) limit = this.config.rule34_publication_limit;
 
         return {
             tags: tags,
@@ -77,16 +77,16 @@ export default class rule34 {
                 .setColor(this.config.embed_color);
             embeds.push(embed);
 
-            if ((index+1) % this.links_per_message == 0) {
+            if ((index + 1) % this.links_per_message == 0) {
                 this.message.channel.send({ embeds: embeds });
                 embeds = [];
             }
         });
-        
+
         if (embeds.length) this.message.channel.send({ embeds: embeds });
 
         //link to first message for comfortable fallback
-        if(limit > this.links_per_message) this.message.channel.send(this.message.url);
+        if (limit > this.links_per_message) this.message.channel.send(this.message.url);
     };
 
     //array shuffler for random output (not mine)

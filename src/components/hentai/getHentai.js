@@ -12,16 +12,28 @@ export default class getHentai {
 
         this.getHentai();
     };
-
+    
     async getHentai() {
         
         const ID = this.args[1]
         
         if(this.validate(ID)) return;
-
+        
         //fetch doujin using COOL nhentai library
         const api = new this.nhentai.API();
         api.fetchDoujin(ID).then(async doujin => {
+
+            //check if has prohibited tags
+            let isProhibited = false;
+            this.config.black_tags_list.forEach(el => {
+                if(doujin.tags.all.find(tag => (tag.name == el))) isProhibited = true;
+            });
+            
+            if(isProhibited) {
+                this.sendError(this.localization.msg_getHentai_black_list_error);
+                return;
+            };
+
             await this.sendInfo(doujin);
             this.sendDoujin(doujin);
         }).catch(error => this.sendError(this.localization.msg_getHentai_fetch_error + error));
