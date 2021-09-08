@@ -4,6 +4,7 @@ export default class rule34 {
         this.args = context.args;
         this.config = context.config;
         this.message = context.message;
+        this.Discord = context.Discord;
         this.links_per_message = context.config.links_per_message;
         this.localization = context.config.localization[context.user.language];
         this.sendError = error => context.sendError(context, error);
@@ -67,20 +68,25 @@ export default class rule34 {
 
     //sending images several in each message for optimization
     sendImages(posts, limit) {
-        let msg = "";
-        posts.forEach((el, index) => {
+        let embeds = [];
+        posts.forEach(async (el, index) => {
             if (index >= limit) return;
 
-            msg += (el.file_url + '\n');
-            if ((index + 1) % this.links_per_message == 0) {
-                this.message.channel.send(msg);
-                msg = "";
-            };
+            const embed = new this.Discord.MessageEmbed()
+                .setImage(el.file_url)
+                .setColor(this.config.embed_color);
+            embeds.push(embed);
+
+            if ((index+1) % this.links_per_message == 0) {
+                this.message.channel.send({ embeds: embeds });
+                embeds = [];
+            }
         });
+        
+        if (embeds.length) this.message.channel.send({ embeds: embeds });
 
-        if (msg) this.message.channel.send(msg);
-
-        if (limit >= 10) this.message.channel.send(this.message.url);
+        //link to first message for comfortable fallback
+        if(limit > this.links_per_message) this.message.channel.send(this.message.url);
     };
 
     //array shuffler for random output (not mine)

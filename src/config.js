@@ -5,7 +5,7 @@ export default {
     "default_doEmojis": false,
     "rule34_publication_limit": 200,
     "default_scan_limit": 100,
-    "links_per_message": 5,
+    "links_per_message": 10,
     "avatar_cooldown": 300000,
     "push_cooldown": 450000,
     "status_cooldown": 600000,
