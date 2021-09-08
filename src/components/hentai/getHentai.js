@@ -12,13 +12,18 @@ export default class getHentai {
 
         this.getHentai();
     };
-    
+
     async getHentai() {
-        
+
         const ID = this.args[1]
-        
-        if(this.validate(ID)) return;
-        
+
+        if (ID.toLowerCase() === this.config.random_id) {
+            this.getRandom();
+            return;
+        }
+
+        if (this.validate(ID)) return;
+
         //fetch doujin using COOL nhentai library
         const api = new this.nhentai.API();
         api.fetchDoujin(ID).then(async doujin => {
@@ -26,10 +31,10 @@ export default class getHentai {
             //check if has prohibited tags
             let isProhibited = false;
             this.config.black_tags_list.forEach(el => {
-                if(doujin.tags.all.find(tag => (tag.name == el))) isProhibited = true;
+                if (doujin.tags.all.find(tag => (tag.name == el))) isProhibited = true;
             });
-            
-            if(isProhibited) {
+
+            if (isProhibited) {
                 this.sendError(this.localization.msg_getHentai_black_list_error);
                 return;
             };
@@ -79,15 +84,42 @@ export default class getHentai {
 
             embeds.push(embed);
 
-            if ((index+1) % this.links_per_message == 0) {
-                this.message.channel.send({embeds: embeds});
+            if ((index + 1) % this.links_per_message == 0) {
+                this.message.channel.send({ embeds: embeds });
                 embeds = [];
             }
         });
 
-        if (embeds.length) this.message.channel.send({embeds: embeds});
+        if (embeds.length) this.message.channel.send({ embeds: embeds });
 
         //link to first message for comfortable fallback
         this.message.channel.send(this.message.url);
+    };
+
+    async getRandom() {
+        const api = new this.nhentai.API();
+        let acknowlaged = false;
+        while (!acknowlaged) {
+            const ID = this.getRandomID();
+            const doujin = await api.fetchDoujin(ID);
+
+            if(doujin !== null) {
+                //check if has prohibited tags
+                let isProhibited = false;
+                this.config.black_tags_list.forEach(el => {
+                    if (doujin.tags.all.find(tag => (tag.name == el))) isProhibited = true;
+                });
+    
+                if(!isProhibited) {
+                    this.sendInfo(doujin);
+                    this.sendDoujin(doujin);
+                    acknowlaged = true;
+                };
+            };
+        };
+    };
+
+    getRandomID() {
+        return Math.floor(Math.random() * 1000000);
     };
 };

@@ -12,6 +12,7 @@ export default {
     "error_color": "#ff0000",
     "success_color": "#00ff00",
     "embed_color": null,
+    "random_id": "random",
     "emoji_discord_link": "https://cdn.discordapp.com/emojis/",
     "emoji_extension": ".png",
     "ascII_file_name": "./ascII.txt",
