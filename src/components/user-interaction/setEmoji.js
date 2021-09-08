@@ -34,12 +34,21 @@ export default class setEmoji {
     };
 
     async checkEmoji() {
+        //check if same
+        const user = await this.dao.getUser(this.message.author.id);
+        if(user.emojiID == this.args[1]) {
+            this.sendError(this.localization.msg_setEmoji_same_emoji)
+            return true;
+        };
+
+        //check if valid
         try {
             await this.message.react(this.args[1]);
         } catch (e) {
             this.sendError(this.localization.msg_setEmoji_error);
             return true;
-        }
+        };
+
         return false;
     };
 };
