@@ -1,6 +1,7 @@
 export default class getHentai {
     constructor(context) {
         this.sendError = error => context.sendError(context, error);
+        this.config = context.config;
         this.Discord = context.Discord;
         this.nhentai = context.nhentai;
         this.message = context.message;
@@ -23,7 +24,7 @@ export default class getHentai {
         api.fetchDoujin(ID).then(async doujin => {
             await this.sendInfo(doujin);
             this.sendDoujin(doujin);
-        }).catch(error => this.sendError(this.localization.msg_getHentai_fetch_error));
+        }).catch(error => this.sendError(this.localization.msg_getHentai_fetch_error + error));
     };
 
     //check if you can send hentai
@@ -56,19 +57,23 @@ export default class getHentai {
         this.message.channel.send({ embeds: [embed] });
     };
 
-    //send doujin pages 5 per message for optimization
+    //send doujin pages several per message for optimization
     sendDoujin(doujin) {
-        let msg = "";
+        let embeds = [];
         doujin.pages.forEach((el, index) => {
-            msg = msg + el.url + '\n';
+            const embed = new this.Discord.MessageEmbed()
+                .setImage(el.url)
+                .setColor(this.config.embed_color);
+
+            embeds.push(embed);
 
             if ((index+1) % this.links_per_message == 0) {
-                this.message.channel.send(msg);
-                msg = "";
+                this.message.channel.send({embeds: embeds});
+                embeds = [];
             }
         });
 
-        if (msg) this.message.channel.send(msg);
+        if (embeds.length) this.message.channel.send({embeds: embeds});
 
         //link to first message for comfortable fallback
         this.message.channel.send(this.message.url);
