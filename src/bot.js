@@ -69,17 +69,17 @@ export default class bot {
     };
 
     //common functions//
-    sendError(context, error) {
-        const embed = new context.Discord.MessageEmbed()
-            .setColor(context.config.error_color)
-            .setTitle(error);
-        context.message.channel.send({ embeds: [embed] });
-    };
+    // sendError(context, error) {
+    //     const embed = new context.Discord.MessageEmbed()
+    //         .setColor(context.config.error_color)
+    //         .setTitle(error);
+    //     context.message.channel.send({ embeds: [embed] });
+    // };
 
-    sendSuccess(context, success) {
-        const embed = new context.Discord.MessageEmbed()
-            .setColor(context.config.success_color)
-            .setTitle(success);
-        context.message.channel.send({ embeds: [embed] });
-    };
+    // sendSuccess(context, success) {
+    //     const embed = new context.Discord.MessageEmbed()
+    //         .setColor(context.config.success_color)
+    //         .setTitle(success);
+    //     context.message.channel.send({ embeds: [embed] });
+    // };
 };

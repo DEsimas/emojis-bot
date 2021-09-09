@@ -1,15 +1,8 @@
-export default class getHentai {
-    constructor(context) {
-        this.sendError = error => context.sendError(context, error);
-        this.config = context.config;
-        this.Discord = context.Discord;
-        this.nhentai = context.nhentai;
-        this.message = context.message;
-        this.links_per_message = context.config.links_per_message;
-        this.args = context.args;
-        this.localization = context.config.localization[context.user.language];
-        this.embed_color = context.config.embed_color;
+import Command from "./../command.js"; 
 
+export default class getHentai extends Command{
+    constructor(context) {
+        super(context);
         this.getHentai();
     };
 
@@ -35,20 +28,20 @@ export default class getHentai {
             });
 
             if (isProhibited) {
-                this.sendError(this.localization.msg_getHentai_black_list_error);
+                super.sendError(this.localization.msg_getHentai_black_list_error);
                 return;
             };
 
             await this.sendInfo(doujin);
             this.sendDoujin(doujin);
-        }).catch(error => this.sendError(this.localization.msg_getHentai_fetch_error + error));
+        }).catch(error => super.sendError(this.localization.msg_getHentai_fetch_error + error));
     };
 
     //check if you can send hentai
     validate(ID) {
         //is channel nsfw
         if (!this.message.channel.nsfw) {
-            this.sendError(this.localization.msg_getHentai_nsfw_warn);
+            super.sendError(this.localization.msg_getHentai_nsfw_warn);
             return 1;
         };
 
@@ -56,7 +49,7 @@ export default class getHentai {
         if(ID == this.config.random_id) return 0;
 
         if (ID == "" || ID > 999999 || ID < 1 || isNaN(ID)) {
-            this.sendError(this.localization.msg_getHentai_id_warn);
+            super.sendError(this.localization.msg_getHentai_id_warn);
             return 1;
         };
 
