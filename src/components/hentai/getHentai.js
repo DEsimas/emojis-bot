@@ -17,13 +17,13 @@ export default class getHentai {
 
         const ID = this.args[1]
 
+        if (this.validate(ID)) return;
+
         if (ID.toLowerCase() === this.config.random_id) {
             this.getRandom();
             return;
         }
-
-        if (this.validate(ID)) return;
-
+        
         //fetch doujin using COOL nhentai library
         const api = new this.nhentai.API();
         api.fetchDoujin(ID).then(async doujin => {
@@ -53,6 +53,8 @@ export default class getHentai {
         };
 
         //check if id is valid
+        if(ID == this.config.random_id);
+
         if (ID == "" || ID > 999999 || ID < 1 || isNaN(ID)) {
             this.sendError(this.localization.msg_getHentai_id_warn);
             return 1;
