@@ -53,7 +53,7 @@ export default class getHentai {
         };
 
         //check if id is valid
-        if(ID == this.config.random_id);
+        if(ID == this.config.random_id) return 0;
 
         if (ID == "" || ID > 999999 || ID < 1 || isNaN(ID)) {
             this.sendError(this.localization.msg_getHentai_id_warn);
