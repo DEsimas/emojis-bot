@@ -10,111 +10,86 @@ import clear from "../components/interaction/clear.js";
 import help from "../components/interaction/help.js";
 import rule34 from "../components/hentai/rule34.js";
 
-export default class messageHandler {
-    constructor(context) {
-        this.context = context;
+//config
+import config from "./../config.js";
 
-        this.setCommandList();
-        this.setInfo()
-            .then(() => {
-                this.handleEmoji();
-                this.handleCommand();
-            })
-            .catch(error => console.log(this.context.config.log.db_error + error));
+export default class messageHandler {
+    constructor(data) {
+        this.parseData(data);
+        this.setCommandList(getHentai, rule34, imgToAscII, setEmoji, deleteEmoji, setLanguage, setPrefix, doEmojis, clear, help);
+        this.setInfo().then(() => {
+            this.handleEmoji();
+            this.handleCommand();
+        });
     };
 
+    //set received data to this
+    parseData(data) {
+        Object.keys(data).map(key => {
+            this[key] = data[key];
+        });
+    };
+
+    //list with all bots commands
+    setCommandList(...components) {
+        this.commands = [];
+        const commands = config.commands;
+        Object.keys(commands).map((key, index) => {
+            this.commands.push({
+                name: commands[key],
+                out: components[index]
+            });
+        });
+    };
 
     //find server and user in db and save into context if not found create with default params
     async setInfo() {
-        //users
-        const userID = this.context.message.author.id;
-        let user = await this.context.dao.getUser(userID);
-        if (user == null) {
-            user = await this.context.dao.addUser(userID, this.context.config.default_emoji, this.context.config.default_language, this.context.config.default_meme_channel)
-                .catch(error => console.log(this.context.config.log.db_error + error));
-        };
-        this.context.user = user;
+        await this.getUser();
+        await this.getServer();
+    };
 
-        //servers
-        const serverID = this.context.message.guild.id;
-        let server = await this.context.dao.getServer(serverID);
-        if (server == null) {
-            server = await this.context.dao.addServer(serverID, this.context.config.default_doEmojis, this.context.config.default_prefix)
-                .catch(error => console.log(this.config.log.db_error + error));
+    //get user from db, if null create new one
+    async getUser() {
+        const userID = this.message.author.id;
+        this.user = await this.dao.getUser(userID);
+        if (this.user === null) {
+            this.user = await this.dao.addUser(userID, config.default_emoji, config.default_language, config.default_meme_channel)
         };
-        this.context.server = server;
+    };
+
+    //get server from db, if null create new one
+    async getServer() {
+        const serverID = this.message.guild.id;
+        this.server = await this.dao.getServer(serverID);
+        if (this.server === null) {
+            this.server = await this.dao.addServer(serverID, config.default_doEmojis, config.default_prefix)
+        };
     };
 
     //add emoji from db to message (if allowed on server)
     handleEmoji() {
-        if (!this.context.server.doEmojis) return;
+        if (!this.server.doEmojis) return;
 
-        const emoji = this.context.user.emojiID;
+        const emoji = this.user.emojiID;
         if (emoji != null) {
-            this.context.message.react(emoji);
+            this.message.react(emoji);
         };
     };
 
     //if message contains command execute it using commands list
     handleCommand() {
-        if (this.context.message.author.id != this.context.client.user.id) {
-            const content = this.context.message.content.trim();
-            const args = content.split(" ");
-            this.context.args = args;
-            const command = args[0].toLowerCase();
+        if (this.message.author.id != this.client.user.id) {
+            //take from message command and args
+            const content = this.message.content.trim();
+            this.args = content.split(" ");
+            this.command = this.args[0].toLowerCase();
 
-            this.context.commands.forEach(el => {
+            //iterate through all commands if matches call module
+            this.commands.forEach(el => {
                 el.name.forEach(name => {
-                    if (this.context.server.prefix + name == command) new el.out(this.context);
+                    if (this.server.prefix + name === this.command) new el.out(this);
                 });
             });
         };
-    };
-
-    //list with all bots commands <----------------------rework this
-    setCommandList() {
-        const name = this.context.config.commands;
-        this.context.commands = [
-            {
-                name: name.getHentai,
-                out: getHentai
-            },
-            {
-                name: name.rule34,
-                out: rule34
-            },
-            {
-                name: name.imgToAscII,
-                out: imgToAscII
-            },
-            {
-                name: name.setEmoji,
-                out: setEmoji
-            },
-            {
-                name: name.deleteEmoji,
-                out: deleteEmoji
-            },
-            {
-                name: name.setLanguage,
-                out: setLanguage
-            },
-            {
-                name: name.setPrefix,
-                out: setPrefix
-            },
-            {
-                name: name.doEmojis,
-                out: doEmojis
-            },
-            {
-                name: name.clear,
-                out: clear
-            },
-            {
-                name: name.help,
-                out: help
-            }
-        ];
     };
 };

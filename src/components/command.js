@@ -1,25 +1,29 @@
-//all commands parrent. Contains common methods.
+import Discord from "discord.js";
+
+import config from "./../config.js";
+
 export default class Command {
-    constructor(context) {
-        this.parceContext(context);
+    constructor(data) {
+        console.log(data.client)
+        this.parseData(data);
     };
 
-    //set global object to this
-    parceContext(context) {
-        //iterate through context
-        Object.keys(context).map(key => {
-            this[key] = context[key];
+    //set received data to this
+    parseData(data) {
+        //iterate through data
+        Object.keys(data).map(key => {
+            this[key] = data[key];
         });
 
         //set localization for quick access
-        this.localization = this.config.localization[this.user.language];
+        this.localization = config.localization[this.user.language];
     };
 
     //send error message
     sendError(message) {
         //create embed
-        const embed = new this.Discord.MessageEmbed()
-            .setColor(this.config.error_color)
+        const embed = new Discord.MessageEmbed()
+            .setColor(config.error_color)
             .setTitle(message);
         //send embed
         this.message.channel.send({ embeds: [embed] });
@@ -28,8 +32,8 @@ export default class Command {
     //send success message
     sendSuccess(message) {
         //create embed
-        const embed = new this.Discord.MessageEmbed()
-            .setColor(this.config.success_color)
+        const embed = new Discord.MessageEmbed()
+            .setColor(config.success_color)
             .setTitle(message);
         //send embed
         this.message.channel.send({ embeds: [embed] });

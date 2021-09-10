@@ -1,4 +1,6 @@
-import Command from "./../command.js"; 
+import nhentai from "nhentai";
+
+import Command from "./../command.js";
 
 export default class getHentai extends Command{
     constructor(context) {
@@ -7,59 +9,79 @@ export default class getHentai extends Command{
     };
 
     async getHentai() {
-
         const ID = this.args[1]
 
+        //validate id
         if (this.validate(ID)) return;
 
+        //if id random send random
         if (ID.toLowerCase() === this.config.random_id) {
             this.getRandom();
             return;
         }
         
-        //fetch doujin using COOL nhentai library
-        const api = new this.nhentai.API();
-        api.fetchDoujin(ID).then(async doujin => {
-
-            //check if has prohibited tags
-            let isProhibited = false;
-            this.config.black_tags_list.forEach(el => {
-                if (doujin.tags.all.find(tag => (tag.name == el))) isProhibited = true;
-            });
-
-            if (isProhibited) {
-                super.sendError(this.localization.msg_getHentai_black_list_error);
-                return;
-            };
-
-            await this.sendInfo(doujin);
-            this.sendDoujin(doujin);
-        }).catch(error => super.sendError(this.localization.msg_getHentai_fetch_error + error));
+        //fetch doujin using nhentai library
+        const api = new nhentai.API();
+        api.fetchDoujin(ID).then(doujin => {
+            this.doujin = doujin;
+            this.handleDoujin();
+        });
     };
 
-    //check if you can send hentai
+    //validate id
     validate(ID) {
         //is channel nsfw
         if (!this.message.channel.nsfw) {
             super.sendError(this.localization.msg_getHentai_nsfw_warn);
-            return 1;
+            return true;
         };
 
-        //check if id is valid
-        if(ID == this.config.random_id) return 0;
+        //check if id is random
+        if(ID == this.config.random_id) return false;
 
+        //check if id in ids range
         if (ID == "" || ID > 999999 || ID < 1 || isNaN(ID)) {
             super.sendError(this.localization.msg_getHentai_id_warn);
-            return 1;
+            return true;
         };
 
-        return 0;
+        return false;
+    };
+
+    //check if has prohibited tags
+    isProhibited() {
+        let isProhibited = false;
+        this.config.black_tags_list.forEach(el => {
+            if (doujin.tags.all.find(tag => (tag.name == el))) isProhibited = true;
+        });
+
+        return isProhibited;
+    };
+
+    handleDoujin() {
+        //if didnt get doujin
+        if(!this.doujin){
+            super.sendError(this.localization.msg_getHentai_fetch_error);
+            return;
+        };
+
+        //if has prohimited tags
+        if(this.isProhibited()) {
+            super.sendError(this.localization.msg_getHentai_black_list_error);
+            return;
+        };
+
+        //send doujin
+        this.sendInfo(doujin);
+        this.sendDoujin(doujin);
     };
 
     //send info about doujin
-    async sendInfo(doujin) {
+    sendInfo(doujin) {
+        //parce tags to string
         let tags = doujin.tags.all.map(tag => tag.name).join(', ');
 
+        //create and send embed
         const embed = new this.Discord.MessageEmbed()
             .setAuthor(this.localization.msg_getHentai_nhentai)
             .addField(this.localization.msg_getHentai_intro, "**" + doujin.titles.pretty + "**")
@@ -71,6 +93,7 @@ export default class getHentai extends Command{
 
     //send doujin pages several per message for optimization
     sendDoujin(doujin) {
+        //iterate through all doujin pages
         let embeds = [];
         doujin.pages.forEach((el, index) => {
             const embed = new this.Discord.MessageEmbed()
@@ -79,42 +102,44 @@ export default class getHentai extends Command{
 
             embeds.push(embed);
 
+            //if in array [links_per_message] lincks send them
             if ((index + 1) % this.links_per_message == 0) {
                 this.message.channel.send({ embeds: embeds });
                 embeds = [];
             }
         });
 
+        //if urls remained in array send them
         if (embeds.length) this.message.channel.send({ embeds: embeds });
 
-        //link to first message for comfortable fallback
+        //link to the first message for comfortable fallback
         this.message.channel.send(this.message.url);
     };
 
+    //generate random id in ids range
+    getRandomID() {
+        return Math.floor(Math.random() * 1000000);
+    };
+
+    //send random doujin
     async getRandom() {
         const api = new this.nhentai.API();
         let acknowlaged = false;
+
+        //request doujins till get normal one
         while (!acknowlaged) {
             const ID = this.getRandomID();
-            const doujin = await api.fetchDoujin(ID);
-
-            if(doujin !== null) {
-                //check if has prohibited tags
-                let isProhibited = false;
-                this.config.black_tags_list.forEach(el => {
-                    if (doujin.tags.all.find(tag => (tag.name == el))) isProhibited = true;
-                });
-    
-                if(!isProhibited) {
-                    this.sendInfo(doujin);
-                    this.sendDoujin(doujin);
-                    acknowlaged = true;
+            if(!this.validate(ID)) {
+                this.doujin = await api.fetchDoujin(ID);
+                
+                if(doujin !== null) {    
+                    if(!this.isProhibited()) {
+                        this.sendInfo(doujin);
+                        this.sendDoujin(doujin);
+                        acknowlaged = true;
+                    };
                 };
             };
         };
-    };
-
-    getRandomID() {
-        return Math.floor(Math.random() * 1000000);
     };
 };

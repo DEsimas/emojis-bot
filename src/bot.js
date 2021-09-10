@@ -20,66 +20,34 @@ import config from "./config.js";
 
 export default class bot {
     constructor() {
-        this.config = config;
+        //set proccess.env
         dotenv.config();
 
-        this.config.db_settings.mongoose = mongoose;
-        this.dao = new dao(this.config.db_settings);
-
-        this.setLibs();
-        this.setFunctions();
-
-        const Intents = this.Discord.Intents.FLAGS;
+        //get intents
+        const Intents = Discord.Intents.FLAGS;
         this.intents = {
             intents: [Intents.GUILD_EMOJIS_AND_STICKERS, Intents.GUILD_MESSAGES, Intents.GUILD_MESSAGE_REACTIONS, Intents.GUILDS]
         };
+        
+        //connect to the data base
+        this.dao = new dao(config.db_settings);
 
         this.setClient();
         this.setEndpoints();
     };
 
-    //set imported packages in this
-    setLibs() {
-        this.getAverageColor = getAverageColor;
-        this.asciify = asciify;
-        this.nhentai = nhentai;
-        this.Discord = Discord;
-        this.R34 = R34;
-        this.fs = fs;
-    };
-
-    //set common functions in this
-    setFunctions() {
-        this.sendError = this.sendError;
-        this.sendSuccess = this.sendSuccess;
-    };
-
     //login bot using token from .env
     setClient() {
-        this.client = new this.Discord.Client(this.intents);
+        this.client = new Discord.Client(this.intents);
         this.client.login(process.env.TOKEN);
     };
 
     //set handlers for events
     setEndpoints() {
-        this.client.on(this.config.events.ready, () => new readyHandler({ ...this }));
-        this.client.on(this.config.events.message, message => new messageHandler({ ...this, message: message }));
-        this.client.on(this.config.events.guildCreate, guild => new guildCreateHandler({ ...this, guild: guild }));
-        this.client.on(this.config.events.guildDelete, guild => new guildDeleteHandler({ ...this, guild: guild }));
+        this.client.on("ready", () => console.log("less go"));
+        this.client.on(config.events.message, message => new messageHandler({ message: message, dao: this.dao, client: this.client }));
+        // this.client.on(this.config.events.ready, () => new readyHandler({ ...this }));
+        // this.client.on(this.config.events.guildCreate, guild => new guildCreateHandler({ ...this, guild: guild }));
+        // this.client.on(this.config.events.guildDelete, guild => new guildDeleteHandler({ ...this, guild: guild }));
     };
-
-    //common functions//
-    // sendError(context, error) {
-    //     const embed = new context.Discord.MessageEmbed()
-    //         .setColor(context.config.error_color)
-    //         .setTitle(error);
-    //     context.message.channel.send({ embeds: [embed] });
-    // };
-
-    // sendSuccess(context, success) {
-    //     const embed = new context.Discord.MessageEmbed()
-    //         .setColor(context.config.success_color)
-    //         .setTitle(success);
-    //     context.message.channel.send({ embeds: [embed] });
-    // };
 };

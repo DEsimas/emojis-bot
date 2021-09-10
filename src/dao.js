@@ -1,17 +1,18 @@
+import mongoose from "mongoose";
+
 export default class dao {
     constructor(settings) {
         this.settings = settings;
-        this.mongoose = settings.mongoose;
         
         this.connectDB();
-        this.emojis = this.mongoose.model(this.settings.db_collections.users, this.getUserSchema());
-        this.servers = this.mongoose.model(this.settings.db_collections.servers, this.getServerSchema());
-        this.avatars = this.mongoose.model(this.settings.db_collections.avatars, this.getAvatarSchema());
+        this.emojis = mongoose.model(this.settings.db_collections.users, this.getUserSchema());
+        this.servers = mongoose.model(this.settings.db_collections.servers, this.getServerSchema());
+        this.avatars = mongoose.model(this.settings.db_collections.avatars, this.getAvatarSchema());
     };
 
     //connecting db with uri from .env
     connectDB() {
-        this.mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
+        mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => {
                 console.log(this.settings.log.db)
                 this.setDefaults();
@@ -36,7 +37,7 @@ export default class dao {
 
     //schemas for collections//
     getUserSchema() {
-        const userSchema = new this.mongoose.Schema({
+        const userSchema = new mongoose.Schema({
             userID: String,
             emojiID: String,
             language: String
@@ -45,7 +46,7 @@ export default class dao {
     };
 
     getServerSchema() {
-        const serverSchema = new this.mongoose.Schema({
+        const serverSchema = new mongoose.Schema({
             serverID: String,
             doEmojis: Boolean,
             prefix: String,
@@ -55,7 +56,7 @@ export default class dao {
     };
 
     getAvatarSchema() {
-        const avatarSchema = new this.mongoose.Schema({
+        const avatarSchema = new mongoose.Schema({
             name: String,
             imageURL: String,
             emojiID: String
@@ -64,6 +65,7 @@ export default class dao {
     };
 
     //interaction methods//
+    //Users//
     async addUser(userID, emojiID, language) {
         return await new this.emojis({ userID: userID, emojiID: emojiID, language: language }).save();
     };
@@ -84,6 +86,7 @@ export default class dao {
         return await this.emojis.deleteOne({ userID: userID });
     };
 
+    //Servers//
     async addServer(serverID, doEmojis, prefix) {
         return await new this.servers({ serverID: serverID, doEmojis: doEmojis, prefix: prefix }).save();
     };
@@ -104,16 +107,17 @@ export default class dao {
         return await this.servers.deleteOne({ serverID: serverID });
     };
 
+    //Avatars//
     async addAvatar(name, imageURL, emojiID) {
         return await this.avatars({ name: name, imageURL, emojiID }).save();
     };
 
-    async getAvatar() {
-        return await this.avatars.findOne({ id: _id });
-    };
-    
     async getAvatars() {
         return await this.avatars.find();
+    };
+    
+    async getAvatar() {
+        return await this.avatars.findOne({ id: _id });
     };
     
     async updAvatar(_id, options) {
