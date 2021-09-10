@@ -1,21 +1,24 @@
-export default class help {
-    constructor(context) {
-        this.config = context.config;
-        this.message = context.message;
-        this.Discord = context.Discord;
-        this.localization = context.config.localization[context.user.language];
+import Discord from "discord.js";
 
+import Command from "./../command.js";
+import config from "./../../config.js";
+
+export default class help extends Command {
+    constructor(data) {
+        super(data);
         this.help();
     };
 
     async help() {
-        const embed = new this.Discord.MessageEmbed()
-            .setAuthor(this.localization.emd_help_author)
-            .setColor(this.config.embed_color);
+        const avatar = await this.dao.getAvatar();
 
-        Object.keys(this.config.commands).forEach((key) => {
-            const name = key + " - " + this.localization[this.config.about_prefix + this.config.commands[key][0]];
-            const value = this.localization[this.config.describtion_prefix + this.config.commands[key][0]];
+        const embed = new Discord.MessageEmbed()
+            .setAuthor(this.localization.emd_help_author)
+            .setColor(avatar.color);
+
+        Object.keys(config.commands).forEach((key) => {
+            const name = key + " - " + this.localization[config.about_prefix + config.commands[key][0]];
+            const value = this.localization[config.describtion_prefix + config.commands[key][0]];
             embed.addField(name, value);
         });
         this.message.channel.send({ embeds: [embed] });
