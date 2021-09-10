@@ -1,48 +1,39 @@
-export default class setLanguage {
-    constructor(context) {
-        this.dao = context.dao
-        this.args = context.args;
-        this.config = context.config;
-        this.message = context.message;
-        this.localization = context.config.localization[context.user.language];
-        this.sendError = error => context.sendError(context, error);
-        this.sendSuccess = success => context.sendSuccess(context, success);
+import Command from "./../command.js";
+import config from "./../../config.js";
 
-        this.setLanguage();
+export default class setLanguage extends Command {
+    constructor(data) {
+        super(data);
+        this.language = this.args[1];
+        if (!this.validate()) this.updateLanguage();
     };
-
-    setLanguage() {
+    
+    updateLanguage() {
         const userID = this.message.author.id;
-        const language = this.args[1];
-
-        if (this.validate(language)) return;
-
-
-        //update language
-        this.dao.updUser(userID, { $set: { language: language } })
+        this.dao.updUser(userID, { $set: { language: this.language } })
             .then(res => {
-                this.sendSuccess(this.config.localization[language].msg_setLanguage_success + language);
+                this.sendSuccess(config.localization[this.language].msg_setLanguage_success + this.language);
             })
             .catch(error => {
-                this.sendError(this.localization.msg_setLanguage_db_error);
+                this.sendError(this.localization.msg_setLanguage_db_error + error);
             });
-    };
+    }
 
-    validate(language) {
+    validate() {
         //validate language
-        if(language == undefined) {
+        if(this.language == undefined) {
             this.sendError(this.localization.msg_setLanguage_empty);
-            return 1;
+            return true;
         };
 
         let flag = false;
-        Object.keys(this.config.localization).map(function (objectKey, index) {
-            if (objectKey == language) flag = true;
+        Object.keys(config.localization).map((objectKey, index) => {
+            if (objectKey === this.language) flag = true;
         });
         if (!flag) {
             this.sendError(this.localization.msg_setLanguage_warn);
-            return 1;
+            return true;
         };
-        return 0;
+        return false;
     };
 };
