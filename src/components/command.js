@@ -37,4 +37,11 @@ export default class Command {
         //send embed
         this.message.channel.send({ embeds: [embed] });
     };
+
+    //check if user administrator
+    async isAdmin() {
+        const guildMember = await this.message.guild.members.fetch(this.message.author.id)
+        const isAdmin = guildMember.permissions.has(config.administrator_permission);
+        return isAdmin;
+    };
 };
