@@ -1,10 +1,9 @@
-export default class guildCreateHandler {
-    constructor(context) {
-        this.dao = context.dao;
-        this.guild = context.guild;
-        this.client = context.client;
-        this.config = context.config;
+import Handler from "./_handler.js";
+import config from "./../config.js";
 
+export default class guildCreateHandler extends Handler {
+    constructor(data) {
+        super(data);
         this.guildCreateHandler();
     };
 
@@ -15,8 +14,8 @@ export default class guildCreateHandler {
         //set current nickname on new server
         let nickname;
         this.client.guilds.cache.forEach(el => {
-            if(el.id == this.config.support_server_id)nickname = el.me.nickname;
+            if(el.id == config.support_server_id)nickname = el.me.nickname;
         });
-        this.guild.member(this.client.user).setNickname(nickname);
+        this.guild.members.fetch(this.client.user).then(user => user.setNickname(nickname));
     };
 };

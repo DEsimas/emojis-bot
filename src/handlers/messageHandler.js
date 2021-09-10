@@ -10,11 +10,12 @@ import clear from "../components/interaction/clear.js";
 import help from "../components/interaction/help.js";
 import rule34 from "../components/hentai/rule34.js";
 
-//config
+import Handler from "./_handler.js";
 import config from "./../config.js";
 
-export default class messageHandler {
+export default class messageHandler extends Handler {
     constructor(data) {
+        super(data);
         this.parseData(data);
         this.setCommandList(getHentai, rule34, imgToAscII, setEmoji, deleteEmoji, setLanguage, setPrefix, doEmojis, clear, help);
         this.setInfo().then(() => {
@@ -22,14 +23,6 @@ export default class messageHandler {
             this.handleCommand();
         });
     };
-
-    //set received data to this
-    parseData(data) {
-        Object.keys(data).map(key => {
-            this[key] = data[key];
-        });
-    };
-
     //list with all bots commands
     setCommandList(...components) {
         this.commands = [];

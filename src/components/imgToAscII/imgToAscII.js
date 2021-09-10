@@ -15,7 +15,6 @@ export default class imgToAscII extends Command {
     //main function
     async imgToAscII() {
         //convert each file using image-to-ascii library
-        console.log(this.options);
         this.files.forEach(async (el, index, array) => {
             const asciified = await asciifyImage(el, this.options).catch(err => super.sendError(this.localization.msg_imgToAscII_wrong_file));
 

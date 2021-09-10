@@ -1,8 +1,8 @@
-export default class guildDeleteHandler {
-    constructor(context) {
-        this.dao = context.dao;
-        this.guild = context.guild;
+import Handler from "./_handler.js";
 
+export default class guildDeleteHandler extends Handler {
+    constructor(data) {
+        super(data);
         this.guildDeleteHandler();
     };
 
