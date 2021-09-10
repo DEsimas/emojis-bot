@@ -47,6 +47,8 @@ export default class readyHandler extends Handler {
 
         let avatars = [];
         const msgs = messages.keys();
+        let current = await this.dao.getAvatar();
+        if(!current) current = { name: null };
         //iterater through messages in channel
         for (let i = 0; i < messages.size; i++) {
             const element = messages.get(msgs.next().value);
@@ -78,7 +80,7 @@ export default class readyHandler extends Handler {
                 imageURL: attachment.url,
                 emojiID: emojiID,
                 color: color.hex,
-                active: false
+                active: current.name === element.content ? true : false
             });
         };
 
@@ -89,6 +91,7 @@ export default class readyHandler extends Handler {
     async setUI() {
         const avatars = await this.dao.getAvatars();
         const UI = avatars[Math.floor(Math.random() * avatars.length)];
+        const prev = await this.dao.getAvatar();
 
         this.client.user.setAvatar(UI.imageURL).then(async () => {
             this.client.guilds.cache.forEach(async el => {
@@ -99,10 +102,9 @@ export default class readyHandler extends Handler {
             this.dao.updUser(this.client.user.id, { $set: { emojiID: UI.emojiID } });
 
             //update avatars in db
-            const prev = await this.dao.getAvatar();
-            await this.dao.updAvatar(prev._id, { $set: { active: false } });
+            if(prev) await this.dao.updAvatar(prev._id, { $set: { active: false } });
             await this.dao.updAvatar(UI._id, { $set: { active: true } });
 
-        }).catch(err => console.log(err));
+        }).catch(err => console.log(err+""));
     };
 };

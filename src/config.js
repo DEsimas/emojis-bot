@@ -18,7 +18,7 @@ export default {
     "administrator_permission": "ADMINISTRATOR",
     "about_prefix": "abt_",
     "describtion_prefix": "dsc_",
-    "avatar_channel_id": "883729587673120818",
+    "avatar_channel_id": "885941024478883873",
     "owner_id": "473817390887600129",
     "support_server_id": "822097415783055431",
     "black_tags_list": ["lolicon", "loli"],
