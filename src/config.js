@@ -11,7 +11,6 @@ export default {
     "status_cooldown": 600000,
     "error_color": "#ff0000",
     "success_color": "#00ff00",
-    "embed_color": null,
     "random_id": "random",
     "emoji_discord_link": "https://cdn.discordapp.com/emojis/",
     "emoji_extension": ".png",
@@ -42,8 +41,7 @@ export default {
         "guildDelete": "guildDelete"
     },
     "log": {
-        "ready": "bot started",
-        "avatar_error": "Can't change avatar: "
+        "ready": "bot started"
     },
     "status": ["on ", " servers with ", " users"],
     "img_to_ascii_defaults": {

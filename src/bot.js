@@ -1,12 +1,5 @@
-//libs
-import { getAverageColor } from 'fast-average-color-node';
-import asciify from "asciify-image";
 import Discord from "discord.js";
-import mongoose from "mongoose";
-import nhentai from "nhentai";
 import dotenv from "dotenv";
-import R34 from "rule34js";
-import fs from "fs";
 
 //modules
 import guildCreateHandler from "./handlers/guildCreateHandler.js";
@@ -30,7 +23,7 @@ export default class bot {
         };
         
         //connect to the data base
-        this.dao = new dao(config.db_settings);
+        this.dao = new dao();
 
         this.setClient();
         this.setEndpoints();
@@ -48,9 +41,8 @@ export default class bot {
         const options = { dao: this.dao, client: this.client }
 
         this.client.on(config.events.message, message => new messageHandler({ ...options,  message: message }));
-        // this.client.on(this.config.events.ready, () => new readyHandler({ ...this }));
+        this.client.on(config.events.ready, () => new readyHandler(options));
         this.client.on(config.events.guildCreate, guild => new guildCreateHandler({ ...options, guild: guild }));
         this.client.on(config.events.guildDelete, guild => new guildDeleteHandler({ ...options, guild: guild }));
-        this.client.on("ready", () => console.log("less go"));
     };
 };

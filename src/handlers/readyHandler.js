@@ -1,50 +1,48 @@
-export default class readyHandler {
-    constructor(context) {
-        this.getAverageColor = context.getAverageColor;
-        this.client = context.client;
-        this.config = context.config;
-        this.log = this.config.log;
-        this.dao = context.dao;
+import { getAverageColor } from "fast-average-color-node";
 
+import Handler from "./_handler.js";
+import config from "./../config.js";
+
+export default class readyHandler extends Handler {
+    constructor(data) {
+        super(data);
         this.readyHandler();
     };
 
     readyHandler() {
-        console.log(this.log.ready);
+        console.log(config.log.ready);
 
-        this.UI();
-        //set regular checking for new avatars & regular UI changing
-        this.pushAvatars(this.client, this.config, this.dao, this.loadAvatars);
-        setInterval(this.pushAvatars, this.config.push_cooldown, this.client, this.config, this.dao, this.loadAvatars);
+        //set status and regularly update it
+        this.setActivity();
+        setInterval(() => this.setActivity(), config.status_cooldown);
 
-        //set regular status updating
-        this.setActivity(this.client, this.dao, this.config.status);
-        setInterval(this.setActivity, this.config.status_cooldown, this.client, this.dao, this.config.status);
+        //get avatars, after change UI
+        this.getAvatars().then(() => this.setUI());
+
+        //set regular getting avatars and setting UI
+        setInterval(() => this.getAvatars(), config.push_cooldown);
+        setInterval(() => this.setUI(), config.avatar_cooldown);
     };
 
     //set bot statistics as activity
-    async setActivity(client, dao, status) {
-        const servers = await dao.getServers();
-        const users = await dao.getUsers();
+    async setActivity() {
+        const servers = await this.dao.getServers();
+        const users = await this.dao.getUsers();
 
-        client.user.setActivity(status[0] + servers.length + status[1] + users.length + status[2]);
+        this.client.user.setActivity(config.status[0] + servers.length + config.status[1] + users.length + config.status[2]);
     };
 
     //get avatars from avatars channel and push em in db
-    async pushAvatars(client, config, dao, loadAvatars) {
-        loadAvatars(client, config).then(async avatars => {
-            await dao.delAvatars();
-            avatars.forEach(el => {
-                dao.addAvatar(el.name, el.imageURL, el.emojiID);
-            });
+    async getAvatars() {
+        this.loadAvatars().then(async avatars => {
+            await this.dao.delAvatars();
+            avatars.forEach(el => this.dao.addAvatar(el.name, el.imageURL, el.emojiID, el.color, el.active));
         });
-    }
+    };
 
     //returns array with UIs from avatars channel on support server (very cursed)
-    async loadAvatars(client, config) {
-
-        
-        const channel = await client.channels.fetch(config.avatar_channel_id);
+    async loadAvatars() {
+        const channel = await this.client.channels.fetch(config.avatar_channel_id);
         const messages = await channel.messages.fetch();
 
         let avatars = [];
@@ -71,42 +69,40 @@ export default class readyHandler {
             const attachmentID = element.attachments.keys().next().value;
             const attachment = element.attachments.get(attachmentID);
 
+            //get color
+            const color = await getAverageColor(attachment.url);
+
             //add UI to list
             avatars.push({
                 name: element.content,
                 imageURL: attachment.url,
-                emojiID: emojiID
+                emojiID: emojiID,
+                color: color.hex,
+                active: false
             });
         };
 
         return avatars;
     };
 
-    //set new UI on initialization and setInterval for regular changes
-    UI() {
-        this.setUI(this.dao, this.client, this.config.avatar_error, image => this.setEmbedColor(image));
-        setInterval(this.setUI, this.config.avatar_cooldown, this.dao, this.client, this.config.avatar_error, image => this.setEmbedColor(image));
-    };
-
     //pick random UI from db and set it
-    async setUI(dao, client, error_msg, setEmbedColor) {
-        const avatars = await dao.getAvatars();
+    async setUI() {
+        const avatars = await this.dao.getAvatars();
         const UI = avatars[Math.floor(Math.random() * avatars.length)];
 
-        client.user.setAvatar(UI.imageURL).then(() => {
-            client.guilds.cache.forEach(async el => {
-                const user = await el.members.fetch(client.user.id)
+        this.client.user.setAvatar(UI.imageURL).then(async () => {
+            this.client.guilds.cache.forEach(async el => {
+                const user = await el.members.fetch(this.client.user.id)
                 user.setNickname(UI.name);
             });
-            dao.updUser(client.user.id, { $set: { emojiID: UI.emojiID } });
-            setEmbedColor(UI.imageURL);
-        }).catch(err => {
-            console.log(error_msg + err);
-        });
-    };
 
-    async setEmbedColor(image) {
-        const color = await this.getAverageColor(image);
-        this.config.embed_color = color.hex;
+            this.dao.updUser(this.client.user.id, { $set: { emojiID: UI.emojiID } });
+
+            //update avatars in db
+            const prev = await this.dao.getAvatar();
+            await this.dao.updAvatar(prev._id, { $set: { active: false } });
+            await this.dao.updAvatar(UI._id, { $set: { active: true } });
+
+        }).catch(err => console.log(err));
     };
 };

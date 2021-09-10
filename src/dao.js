@@ -1,28 +1,27 @@
 import mongoose from "mongoose";
+import config from "./config.js";
 
 export default class dao {
-    constructor(settings) {
-        this.settings = settings;
-        
+    constructor() {
         this.connectDB();
-        this.emojis = mongoose.model(this.settings.db_collections.users, this.getUserSchema());
-        this.servers = mongoose.model(this.settings.db_collections.servers, this.getServerSchema());
-        this.avatars = mongoose.model(this.settings.db_collections.avatars, this.getAvatarSchema());
+        this.emojis = mongoose.model(config.db_settings.db_collections.users, this.getUserSchema());
+        this.servers = mongoose.model(config.db_settings.db_collections.servers, this.getServerSchema());
+        this.avatars = mongoose.model(config.db_settings.db_collections.avatars, this.getAvatarSchema());
     };
 
     //connecting db with uri from .env
     connectDB() {
         mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => {
-                console.log(this.settings.log.db)
+                console.log(config.db_settings.log.db)
                 this.setDefaults();
             })
-            .catch(error => console.log(this.settings.log.db_error + error));
+            .catch(error => console.log(config.db_settings.log.db_error + error));
     };
     
     //setting default values for other bots
     setDefaults() {
-        this.settings.default_values.forEach(async el => {
+        config.db_settings.default_values.forEach(async el => {
             const data = await this.getUser(el.userID);
             if(data === null) {
                 await this.addUser(el.userID, el.emojiID, el.language);
@@ -59,7 +58,9 @@ export default class dao {
         const avatarSchema = new mongoose.Schema({
             name: String,
             imageURL: String,
-            emojiID: String
+            emojiID: String,
+            color: String,
+            active: Boolean
         });
         return avatarSchema;
     };
@@ -108,8 +109,8 @@ export default class dao {
     };
 
     //Avatars//
-    async addAvatar(name, imageURL, emojiID) {
-        return await this.avatars({ name: name, imageURL, emojiID }).save();
+    async addAvatar(name, imageURL, emojiID, color, active) {
+        return await this.avatars({ name: name, imageURL: imageURL, emojiID:emojiID, color: color, active:active }).save();
     };
 
     async getAvatars() {
@@ -117,7 +118,7 @@ export default class dao {
     };
     
     async getAvatar() {
-        return await this.avatars.findOne({ id: _id });
+        return await this.avatars.findOne({ active: true });
     };
     
     async updAvatar(_id, options) {
