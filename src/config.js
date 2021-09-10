@@ -51,8 +51,7 @@ export default {
         "color": false
     },
     "img_to_ascii_settings": {
-        "width": "width:",
-        "height": "height:"
+        "width": "width:"
     },
     "db_settings": {
         "db_collections": {

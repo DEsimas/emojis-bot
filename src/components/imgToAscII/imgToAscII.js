@@ -38,11 +38,9 @@ export default class imgToAscII extends Command {
     //if el contains width or height or link from argument
     parseArgument(el, index, array) {
         if (el.includes(config.img_to_ascii_settings.width)) {
-            // el = el.slice(config.img_to_ascii_settings.width.length);
-            // this.options.width = Number(el);
-        } else if (el.includes(config.img_to_ascii_settings.height)) {
-            // el = el.slice(config.img_to_ascii_settings.height.length);
-            // this.options.height = Number(el);
+            el = el.slice(config.img_to_ascii_settings.width.length);
+            this.options.width = Number(el);
+            this.options.height = Math.floor(this.options.width/2);
         } else if (index != 0) this.files.push(el);
     };
 
