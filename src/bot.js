@@ -44,8 +44,9 @@ export default class bot {
 
     //set handlers for events
     setEndpoints() {
+        const options = { dao: this.dao, client: this.client }
+        this.client.on(config.events.message, message => new messageHandler({ ...options,  message: message }));
         this.client.on("ready", () => console.log("less go"));
-        this.client.on(config.events.message, message => new messageHandler({ message: message, dao: this.dao, client: this.client }));
         // this.client.on(this.config.events.ready, () => new readyHandler({ ...this }));
         // this.client.on(this.config.events.guildCreate, guild => new guildCreateHandler({ ...this, guild: guild }));
         // this.client.on(this.config.events.guildDelete, guild => new guildDeleteHandler({ ...this, guild: guild }));

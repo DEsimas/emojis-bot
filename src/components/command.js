@@ -4,7 +4,6 @@ import config from "./../config.js";
 
 export default class Command {
     constructor(data) {
-        console.log(data.client)
         this.parseData(data);
     };
 
