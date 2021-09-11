@@ -77,6 +77,11 @@ export default {
                 "language": "eng"
             },
             {
+                "userID": "884799443621281875", //tracker
+                "emojiID": "886331600961433650",
+                "language": "eng"
+            },
+            {
                 "userID": "883020186339397693", //ME
                 "emojiID": null,
                 "language": "eng"
@@ -84,11 +89,6 @@ export default {
             {
                 "userID": "883051590959894538", //TEST
                 "emojiID": null,
-                "language": "eng"
-            },
-            {
-                "userID": "884799443621281875", //tracker
-                "emojiID": "884826873236947014",
                 "language": "eng"
             }
         ],
