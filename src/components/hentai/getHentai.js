@@ -144,7 +144,7 @@ export default class getHentai extends Command{
         while (!acknowlaged) {
             const ID = this.getRandomID();
             if(!this.validate(ID)) {
-                this.doujin = await api.fetchDoujin(ID).catch(() => super.sendError(this.localization.msg_getHentai_fetch_error));
+                this.doujin = await api.fetchDoujin(ID).catch(err => super.sendError(this.localization.msg_getHentai_fetch_error + err));
 
                 if(this.doujin === undefined) return;
                 
