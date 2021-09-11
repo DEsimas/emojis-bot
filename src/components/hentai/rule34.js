@@ -65,17 +65,20 @@ export default class rule34 extends Command {
     };
 
     //sending images several in each message for optimization
-    sendImages(posts, limit) {
+    async sendImages(posts, limit) {
+        const avatar = await this.dao.getAvatar();
+        const color = avatar.color;
+
         let embeds = [];
         posts.forEach(async (el, index) => {
             if (index >= limit) return;
 
-            const embed = Discord.MessageEmbed()
+            const embed = new Discord.MessageEmbed()
                 .setImage(el.file_url)
-                .setColor(config.embed_color);
+                .setColor(color);
             embeds.push(embed);
 
-            if ((index + 1) % this.links_per_message == 0) {
+            if ((index + 1) %  config.links_per_message == 0) {
                 this.message.channel.send({ embeds: embeds });
                 embeds = [];
             }

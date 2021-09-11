@@ -1,4 +1,5 @@
 import nhentai from "nhentai";
+import Discord from "discord.js";
 
 import Command from "./../command.js";
 import config from "./../../config.js";
@@ -16,7 +17,7 @@ export default class getHentai extends Command{
         if (this.validate(ID)) return;
 
         //if id random send random
-        if (ID.toLowerCase() === config.random_id) {
+        if (ID === config.random_id) {
             this.getRandom();
             return;
         }
@@ -26,7 +27,7 @@ export default class getHentai extends Command{
         api.fetchDoujin(ID).then(doujin => {
             this.doujin = doujin;
             this.handleDoujin();
-        }).catch(() => super.sendError(this.localization.msg_getHentai_fetch_error));
+        }).catch(err => super.sendError(this.localization.msg_getHentai_fetch_error + err));
     };
 
     //validate id
@@ -38,7 +39,7 @@ export default class getHentai extends Command{
         };
 
         //check if id is random
-        if(ID == config.random_id) return false;
+        if(ID === config.random_id) return false;
 
         //check if id in ids range
         if (ID == "" || ID > 999999 || ID < 1 || isNaN(ID)) {
@@ -59,7 +60,7 @@ export default class getHentai extends Command{
         return isProhibited;
     };
 
-    handleDoujin() {
+    async handleDoujin() {
         //if didnt get doujin
         if(!this.doujin){
             super.sendError(this.localization.msg_getHentai_fetch_error);
@@ -73,42 +74,45 @@ export default class getHentai extends Command{
         };
 
         //send doujin
-        this.sendInfo(doujin);
-        this.sendDoujin(doujin);
+        await this.sendInfo();
+        this.sendDoujin();
     };
 
     //send info about doujin
-    sendInfo(doujin) {
+    async sendInfo() {
+        const avatar = await this.dao.getAvatar();
+        const color = avatar.color;
+
         //parce tags to string
-        let tags = doujin.tags.all.map(tag => tag.name).join(', ');
+        let tags = this.doujin.tags.all.map(tag => tag.name).join(', ');
 
         //create and send embed
-        const embed = new this.Discord.MessageEmbed()
+        const embed = new Discord.MessageEmbed()
             .setAuthor(this.localization.msg_getHentai_nhentai)
-            .addField(this.localization.msg_getHentai_intro, "**" + doujin.titles.pretty + "**")
+            .addField(this.localization.msg_getHentai_intro, "**" + this.doujin.titles.pretty + "**")
             .addField(this.localization.msg_getHentai_tags, tags)
-            .setThumbnail(doujin.thumbnail.url)
-            .setColor(this.embed_color);
+            .setThumbnail(this.doujin.thumbnail.url)
+            .setColor(color);
         this.message.channel.send({ embeds: [embed] });
     };
 
     //send doujin pages several per message for optimization
-    async sendDoujin(doujin) {
+    async sendDoujin() {
         //get color from db
         const avatar = await this.dao.getAvatar();
         const color = avatar.color;
 
         //iterate through all doujin pages
         let embeds = [];
-        doujin.pages.forEach((el, index) => {
-            const embed = new this.Discord.MessageEmbed()
+        this.doujin.pages.forEach((el, index) => {
+            const embed = new Discord.MessageEmbed()
                 .setImage(el.url)
                 .setColor(color);
 
             embeds.push(embed);
 
             //if in array [links_per_message] lincks send them
-            if ((index + 1) % this.links_per_message == 0) {
+            if ((index + 1) % config.links_per_message == 0) {
                 this.message.channel.send({ embeds: embeds });
                 embeds = [];
             }
