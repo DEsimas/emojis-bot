@@ -1,34 +1,32 @@
-export default class rule34 {
-    constructor(context) {
-        this.R34 = context.R34;
-        this.args = context.args;
-        this.config = context.config;
-        this.message = context.message;
-        this.Discord = context.Discord;
-        this.links_per_message = context.config.links_per_message;
-        this.localization = context.config.localization[context.user.language];
-        this.sendError = error => context.sendError(context, error);
+import Discord from "discord.js";
+import R34 from "rule34js";
 
+import config from "./../../config.js";
+import Command from "./../command.js";
+
+export default class rule34 extends Command {
+    constructor(data) {
+        super(data);
         this.rule34();
     };
 
     rule34() {
         if (!this.message.channel.nsfw) {
-            this.sendError(this.localization.msg_ruel34_nsfw_error);
+            super.sendError(this.localization.msg_ruel34_nsfw_error);
             return;
         }
 
-        const options = this.parseArgs();
+        this.parseArgs();
 
-        if (!options.tags.length) {
-            this.sendError(this.localization.msg_rule34_tag_error);
+        if (!this.options.tags.length) {
+            super.sendError(this.localization.msg_rule34_tag_error);
             return;
         }
 
         //request to rule34.xxx
-        this.R34.posts({ tags: options.tags })
-            .then(response => this.responseHandler(response, options))
-            .catch(err => this.sendError(this.localization.msg_rule34_fetch_error + err));
+        R34.posts({ tags: this.options.tags })
+            .then(response => this.responseHandler(response))
+            .catch(err => super.sendError(this.localization.msg_rule34_fetch_error)); // check connection with vpn
 
     };
 
@@ -46,24 +44,24 @@ export default class rule34 {
             tags.push(element);
         });
 
-        if (limit > this.config.rule34_publication_limit) limit = this.config.rule34_publication_limit;
+        if (limit > config.rule34_publication_limit) limit = config.rule34_publication_limit;
 
-        return {
+        this.options = {
             tags: tags,
             limit: limit
         };
     };
 
     //handle responser from r34
-    responseHandler(response, options) {
+    responseHandler(response) {
         if (!response.count) {
-            this.sendError(this.localization.msg_rule34_hentai_not_found);
+            super.sendError(this.localization.msg_rule34_hentai_not_found);
             return;
         };
 
         const posts = response.posts.constructor === Array ? response.posts : [response.posts];
 
-        this.sendImages(this.shuffle(posts), response.count <= options.limit ? response.posts.length : options.limit);
+        this.sendImages(this.shuffle(posts), response.count <= this.options.limit ? response.posts.length : this.options.limit);
     };
 
     //sending images several in each message for optimization
@@ -72,9 +70,9 @@ export default class rule34 {
         posts.forEach(async (el, index) => {
             if (index >= limit) return;
 
-            const embed = new this.Discord.MessageEmbed()
+            const embed = Discord.MessageEmbed()
                 .setImage(el.file_url)
-                .setColor(this.config.embed_color);
+                .setColor(config.embed_color);
             embeds.push(embed);
 
             if ((index + 1) % this.links_per_message == 0) {

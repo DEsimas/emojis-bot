@@ -1,10 +1,11 @@
 import nhentai from "nhentai";
 
 import Command from "./../command.js";
+import config from "./../../config.js";
 
 export default class getHentai extends Command{
-    constructor(context) {
-        super(context);
+    constructor(data) {
+        super(data);
         this.getHentai();
     };
 
@@ -15,7 +16,7 @@ export default class getHentai extends Command{
         if (this.validate(ID)) return;
 
         //if id random send random
-        if (ID.toLowerCase() === this.config.random_id) {
+        if (ID.toLowerCase() === config.random_id) {
             this.getRandom();
             return;
         }
@@ -25,7 +26,7 @@ export default class getHentai extends Command{
         api.fetchDoujin(ID).then(doujin => {
             this.doujin = doujin;
             this.handleDoujin();
-        });
+        }).catch(() => super.sendError(this.localization.msg_getHentai_fetch_error));
     };
 
     //validate id
@@ -37,7 +38,7 @@ export default class getHentai extends Command{
         };
 
         //check if id is random
-        if(ID == this.config.random_id) return false;
+        if(ID == config.random_id) return false;
 
         //check if id in ids range
         if (ID == "" || ID > 999999 || ID < 1 || isNaN(ID)) {
@@ -51,8 +52,8 @@ export default class getHentai extends Command{
     //check if has prohibited tags
     isProhibited() {
         let isProhibited = false;
-        this.config.black_tags_list.forEach(el => {
-            if (doujin.tags.all.find(tag => (tag.name == el))) isProhibited = true;
+        config.black_tags_list.forEach(el => {
+            if (this.doujin.tags.all.find(tag => (tag.name == el))) isProhibited = true;
         });
 
         return isProhibited;
@@ -92,13 +93,17 @@ export default class getHentai extends Command{
     };
 
     //send doujin pages several per message for optimization
-    sendDoujin(doujin) {
+    async sendDoujin(doujin) {
+        //get color from db
+        const avatar = await this.dao.getAvatar();
+        const color = avatar.color;
+
         //iterate through all doujin pages
         let embeds = [];
         doujin.pages.forEach((el, index) => {
             const embed = new this.Discord.MessageEmbed()
                 .setImage(el.url)
-                .setColor(this.config.embed_color);
+                .setColor(color);
 
             embeds.push(embed);
 
@@ -116,6 +121,11 @@ export default class getHentai extends Command{
         this.message.channel.send(this.message.url);
     };
 
+    //check if doujin in english
+    isEnglish() {
+        return this.doujin.tags.all.find(tag => (tag.name === this.localization.english_lang_tag));
+    };
+
     //generate random id in ids range
     getRandomID() {
         return Math.floor(Math.random() * 1000000);
@@ -123,19 +133,21 @@ export default class getHentai extends Command{
 
     //send random doujin
     async getRandom() {
-        const api = new this.nhentai.API();
+        const api = new nhentai.API();
         let acknowlaged = false;
 
         //request doujins till get normal one
         while (!acknowlaged) {
             const ID = this.getRandomID();
             if(!this.validate(ID)) {
-                this.doujin = await api.fetchDoujin(ID);
+                this.doujin = await api.fetchDoujin(ID).catch(() => super.sendError(this.localization.msg_getHentai_fetch_error));
+
+                if(this.doujin === undefined) return;
                 
-                if(doujin !== null) {    
-                    if(!this.isProhibited()) {
-                        this.sendInfo(doujin);
-                        this.sendDoujin(doujin);
+                if(this.doujin !== null) {
+                    if(!this.isProhibited() && this.isEnglish()) {
+                        this.sendInfo(this.doujin);
+                        this.sendDoujin(this.doujin);
                         acknowlaged = true;
                     };
                 };
