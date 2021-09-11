@@ -127,7 +127,11 @@ export default class getHentai extends Command{
 
     //check if doujin in english
     isEnglish() {
-        return this.doujin.tags.all.find(tag => (tag.name === this.localization.english_lang_tag));
+        let isEnglish = false;
+        this.doujin.tags.all.forEach(tag => {
+            if (tag.name === config.english_lang_tag) isEnglish = true;
+        });
+        return isEnglish;
     };
 
     //generate random id in ids range
@@ -144,16 +148,11 @@ export default class getHentai extends Command{
         while (!acknowlaged) {
             const ID = this.getRandomID();
             if(!this.validate(ID)) {
-                this.doujin = await api.fetchDoujin(ID);
-
-                if(this.doujin === undefined) {
-                    super.sendError(this.localization.msg_getHentai_fetch_error);
-                    return;
-                };
+                this.doujin = await api.fetchDoujin(ID).catch(() => console.log("error in random hentai request"));
                 
-                if(this.doujin !== null) {
+                if(this.doujin !== null && this.doujin !== undefined) {
                     if(!this.isProhibited() && this.isEnglish()) {
-                        this.sendInfo(this.doujin);
+                        await this.sendInfo(this.doujin);
                         this.sendDoujin(this.doujin);
                         acknowlaged = true;
                     };
