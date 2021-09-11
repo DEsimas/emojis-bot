@@ -74,6 +74,11 @@ export default class readyHandler extends Handler {
             //get color
             const color = await getAverageColor(attachment.url);
 
+            //upd bot in users collection
+            if(current.name === element.content) {
+                this.dao.updUser(current.userID, current.emojiID);
+            };
+
             //add UI to list
             avatars.push({
                 name: element.content,

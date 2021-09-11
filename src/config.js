@@ -22,7 +22,7 @@ export default {
     "avatar_channel_id": "885941024478883873",
     "owner_id": "473817390887600129",
     "support_server_id": "822097415783055431",
-    "black_tags_list": ["lolicon", "loli"],
+    "black_tags_list": ["lolicon", "loli", "shotacon"],
     "commands": {
         "getHentai": ["gethentai", "nhentai"],
         "rule34": ["rule34", "r34"],
