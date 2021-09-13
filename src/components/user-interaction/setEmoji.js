@@ -15,6 +15,7 @@ export default class setEmoji extends Command{
 
         this.dao.updUser(this.message.author.id, { $set: { emojiID: this.args[1] } })
             .then(res => {
+                //if custom emoji send image else just emoji
                 if (this.args[1][0] == '<') {
                     const embed = new Discord.MessageEmbed()
                         .setTitle(this.localization.msg_setEmoji_updated)

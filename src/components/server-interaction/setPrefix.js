@@ -30,6 +30,7 @@ export default class setPrefix extends Command {
             super.sendError(this.localization.msg_setPrefix_empty_warn);
             return false;
         };
+        
         return true;
     };
 };

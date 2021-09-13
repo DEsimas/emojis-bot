@@ -65,11 +65,6 @@ export default class readyHandler extends Handler {
 
             //add UI to list
             avatars.push({ name: name, imageURL: imageURL, emojiID: emojiID, color: color, active: active});
-
-            //upd bot in users collection
-            if (active) {
-                this.dao.updUser(this.client.user.id, { $set: { emojiID: emojiID } });
-            };
         };
 
         return avatars;
@@ -128,8 +123,8 @@ export default class readyHandler extends Handler {
             this.dao.updUser(this.client.user.id, { $set: { emojiID: UI.emojiID } });
 
             //update avatars activity in db
-            if (prev) this.dao.updAvatar(prev._id, { $set: { active: false } });
-            this.dao.updAvatar(UI._id, { $set: { active: true } });
+            if (prev)await this.dao.updAvatar(prev._id, { $set: { active: false } });
+            await this.dao.updAvatar(UI._id, { $set: { active: true } });
 
         }).catch(err => console.log("" + err));
     };

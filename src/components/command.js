@@ -44,4 +44,10 @@ export default class Command {
         const isAdmin = guildMember.permissions.has(config.administrator_permission);
         return isAdmin;
     };
+
+    //get current embed color
+    async getEmbedColor() {
+        const avatar = await this.dao.getAvatar();
+        return avatar.color;
+    };
 };

@@ -19,13 +19,15 @@ export default class setLanguage extends Command {
             });
     }
 
+    //validate language
     validate() {
-        //validate language
+        //not empty
         if(this.language == undefined) {
             this.sendError(this.localization.msg_setLanguage_empty);
             return true;
         };
 
+        //in localization object
         let flag = false;
         Object.keys(config.localization).map((objectKey, index) => {
             if (objectKey === this.language) flag = true;
@@ -34,6 +36,7 @@ export default class setLanguage extends Command {
             this.sendError(this.localization.msg_setLanguage_warn);
             return true;
         };
+        
         return false;
     };
 };

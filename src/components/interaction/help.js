@@ -10,12 +10,12 @@ export default class help extends Command {
     };
 
     async help() {
-        const avatar = await this.dao.getAvatar();
-
+        //init embed
         const embed = new Discord.MessageEmbed()
             .setAuthor(this.localization.emd_help_author)
-            .setColor(avatar.color);
+            .setColor(await super.getEmbedColor());
 
+        //add fields with commands
         Object.keys(config.commands).forEach((key) => {
             const name = key + " - " + this.localization[config.about_prefix + config.commands[key][0]];
             const value = this.localization[config.describtion_prefix + config.commands[key][0]];
