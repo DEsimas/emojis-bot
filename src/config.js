@@ -21,7 +21,7 @@ export default {
     "describtion_prefix": "dsc_",
     "avatar_channel_id": "885941024478883873",
     "owner_id": "473817390887600129",
-    "support_server_id": "822097415783055431",
+    "support_server_id": "885941024478883870",
     "black_tags_list": ["lolicon", "loli", "shotacon"],
     "commands": {
         "getHentai": ["gethentai", "nhentai"],

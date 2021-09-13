@@ -16,13 +16,13 @@ import config from "./../config.js";
 export default class messageHandler extends Handler {
     constructor(data) {
         super(data);
-        this.parseData(data);
         this.setCommandList(getHentai, rule34, imgToAscII, setEmoji, deleteEmoji, setLanguage, setPrefix, doEmojis, clear, help);
         this.setInfo().then(() => {
             this.handleEmoji();
             this.handleCommand();
         });
     };
+
     //list with all bots commands
     setCommandList(...components) {
         this.commands = [];

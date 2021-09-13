@@ -3,10 +3,12 @@ import config from "./config.js";
 
 export default class dao {
     constructor() {
-        this.connectDB();
+        //set collections models
         this.emojis = mongoose.model(config.db_settings.db_collections.users, this.getUserSchema());
         this.servers = mongoose.model(config.db_settings.db_collections.servers, this.getServerSchema());
         this.avatars = mongoose.model(config.db_settings.db_collections.avatars, this.getAvatarSchema());
+
+        this.connectDB();
     };
 
     //connecting db with uri from .env
@@ -36,33 +38,30 @@ export default class dao {
 
     //schemas for collections//
     getUserSchema() {
-        const userSchema = new mongoose.Schema({
+        return new mongoose.Schema({
             userID: String,
             emojiID: String,
             language: String
         });
-        return userSchema;
     };
 
     getServerSchema() {
-        const serverSchema = new mongoose.Schema({
+        return new mongoose.Schema({
             serverID: String,
             doEmojis: Boolean,
             prefix: String,
             memeChannel: String
         });
-        return serverSchema;
     };
 
     getAvatarSchema() {
-        const avatarSchema = new mongoose.Schema({
+        return new mongoose.Schema({
             name: String,
             imageURL: String,
             emojiID: String,
             color: String,
             active: Boolean
         });
-        return avatarSchema;
     };
 
     //interaction methods//

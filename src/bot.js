@@ -1,11 +1,14 @@
+//external libs
 import Discord from "discord.js";
 import dotenv from "dotenv";
 
-//modules
+//events handlers
 import guildCreateHandler from "./handlers/guildCreateHandler.js";
 import guildDeleteHandler from "./handlers/guildDeleteHandler.js";
 import messageHandler from "./handlers/messageHandler.js";
 import readyHandler from "./handlers/readyHandler.js";
+
+//data access object
 import dao from "./dao.js";
 
 //config

@@ -26,6 +26,7 @@ export default class readyHandler extends Handler {
 
     //set bot statistics as activity
     async setActivity() {
+        //get all servers and users
         const servers = await this.dao.getServers();
         const users = await this.dao.getUsers();
 
@@ -42,74 +43,102 @@ export default class readyHandler extends Handler {
 
     //returns array with UIs from avatars channel on support server (very cursed)
     async loadAvatars() {
-        const channel = await this.client.channels.fetch(config.avatar_channel_id);
-        const messages = await channel.messages.fetch();
+        const messages = await this.getAvatarMessages();
+
+        //get current avatar
+        let current = await this.dao.getAvatar();
+        if (!current) current = { name: null };
 
         let avatars = [];
         const msgs = messages.keys();
-        let current = await this.dao.getAvatar();
-        if(!current) current = { name: null };
-        //iterater through messages in channel
+
+        //iterate through messages with avatars
         for (let i = 0; i < messages.size; i++) {
             const element = messages.get(msgs.next().value);
 
-            let emojiID = null;
-            const keys = element.reactions.cache.keys();
-
-            //iterater through reactions under single message
-            for (let i = 0; i < element.reactions.cache.size; i++) {
-                const reaction = element.reactions.cache.get(keys.next().value);
-
-                //if reaction user is owner save its id
-                if (await reaction.users.fetch().then(user => {
-                    if (user.entries().next().value[1].id == config.owner_id) return true;
-                    else return false;
-                })) emojiID = reaction._emoji.id;
-            };
-
-            //get image url from attachment
-            const attachmentID = element.attachments.keys().next().value;
-            const attachment = element.attachments.get(attachmentID);
-
-            //get color
-            const color = await getAverageColor(attachment.url);
-
-            //upd bot in users collection
-            if(current.name === element.content) {
-                this.dao.updUser(current.userID, current.emojiID);
-            };
+            //get fields
+            const name = element.content;
+            const imageURL = this.getImageUrlFromMessage(element);
+            const emojiID = await this.getEmojiIdFromMessage(element);
+            const color = await this.getColorFromAvatar(imageURL);
+            const active = current.name === name;
 
             //add UI to list
-            avatars.push({
-                name: element.content,
-                imageURL: attachment.url,
-                emojiID: emojiID,
-                color: color.hex,
-                active: current.name === element.content ? true : false
-            });
+            avatars.push({ name: name, imageURL: imageURL, emojiID: emojiID, color: color, active: active});
+
+            //upd bot in users collection
+            if (active) {
+                this.dao.updUser(this.client.user.id, { $set: { emojiID: emojiID } });
+            };
         };
 
         return avatars;
     };
 
+    //return messages with bot avatars
+    async getAvatarMessages() {
+        const channel = await this.client.channels.fetch(config.avatar_channel_id);
+        return await channel.messages.fetch();
+    };
+
+    //get avatar url
+    getImageUrlFromMessage(message) {
+        const attachmentID = message.attachments.keys().next().value;
+        const attachment = message.attachments.get(attachmentID);
+        return attachment.url;
+    }
+
+    //get emoji for avatar from messaje with this avatar
+    async getEmojiIdFromMessage(message) {
+        let emojiID = null;
+        const keys = message.reactions.cache.keys();
+
+        //iterater through reactions under single message
+        for (let i = 0; i < message.reactions.cache.size; i++) {
+            const reaction = message.reactions.cache.get(keys.next().value);
+
+            //if reaction user is owner save its id
+            if (await reaction.users.fetch().then(user => {
+                if (user.entries().next().value[1].id == config.owner_id) return true;
+                else return false;
+            })) emojiID = reaction._emoji.id;
+        };
+
+        return emojiID;
+    };
+
+    //get color for embeds
+    async getColorFromAvatar(url) {
+        const color = await getAverageColor(url);
+        return color.hex;
+    };
+
     //pick random UI from db and set it
     async setUI() {
+        //get new and old UI
         const avatars = await this.dao.getAvatars();
         const UI = avatars[Math.floor(Math.random() * avatars.length)];
         const prev = await this.dao.getAvatar();
 
+        //try to set avatar if ok set nickname
         this.client.user.setAvatar(UI.imageURL).then(async () => {
-            this.client.guilds.cache.forEach(async el => {
-                const user = await el.members.fetch(this.client.user.id)
-                user.setNickname(UI.name);
-            });
+            this.setNickname(UI.name);
 
+            //update user in db
             this.dao.updUser(this.client.user.id, { $set: { emojiID: UI.emojiID } });
 
-            //update avatars in db
-            if(prev) await this.dao.updAvatar(prev._id, { $set: { active: false } });
-            await this.dao.updAvatar(UI._id, { $set: { active: true } });
+            //update avatars activity in db
+            if (prev) this.dao.updAvatar(prev._id, { $set: { active: false } });
+            this.dao.updAvatar(UI._id, { $set: { active: true } });
 
-        }).catch(err => console.log(err+""));
+        }).catch(err => console.log("" + err));
+    };
+
+    //set new nickname
+    async setNickname(nickname) {
+        this.client.guilds.cache.forEach(async el => {
+            const user = await el.members.fetch(this.client.user.id)
+            user.setNickname(nickname);
+        });
     };
 };
