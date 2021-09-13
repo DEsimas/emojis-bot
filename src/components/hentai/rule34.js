@@ -87,7 +87,7 @@ export default class rule34 extends Command {
         if (embeds.length) this.message.channel.send({ embeds: embeds });
 
         //link to first message for comfortable fallback
-        if (limit > this.links_per_message) this.message.channel.send(this.message.url);
+        if (limit > config.links_per_message) this.message.channel.send(this.message.url);
     };
 
     //array shuffler for random output (not mine)
