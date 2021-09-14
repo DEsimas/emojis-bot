@@ -120,13 +120,18 @@ export default class readyHandler extends Handler {
             this.setNickname(UI.name);
 
             //update user in db
-            this.dao.updUser(this.client.user.id, { $set: { emojiID: UI.emojiID } });
+            await this.dao.updUser(this.client.user.id, { $set: { emojiID: UI.emojiID } });
 
             //update avatars activity in db
-            if (prev)await this.dao.updAvatar(prev._id, { $set: { active: false } });
+            if (prev) await this.dao.updAvatar(prev._id, { $set: { active: false } });
             await this.dao.updAvatar(UI._id, { $set: { active: true } });
 
-        }).catch(err => console.log("" + err));
+        }).catch(async err => {
+            console.log("" + err)
+            
+            //set current emoji to bot in db (cuz setting default values deleted it)
+            await this.dao.updUser(this.client.user.id, { $set: { emojiID: prev.emojiID } });
+        });
     };
 
     //set new nickname
