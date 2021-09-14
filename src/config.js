@@ -62,16 +62,6 @@ export default {
         },
         "default_values": [
             {
-                "userID": "235088799074484224", //Rythm
-                "emojiID": "822395665660379186",
-                "language": "eng"
-            },
-            {
-                "userID": "252128902418268161", //Rythm#2
-                "emojiID": "822845799738245130",
-                "language": "eng"
-            },
-            {
                 "userID": "159985870458322944", //MEE6
                 "emojiID": "872923821701726230",
                 "language": "eng"
@@ -87,7 +77,7 @@ export default {
                 "language": "eng"
             },
             {
-                "userID": "883051590959894538", //TEST
+                "userID": "883051590959894538", //ME BUT TEST
                 "emojiID": null,
                 "language": "eng"
             }

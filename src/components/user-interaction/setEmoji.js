@@ -14,7 +14,7 @@ export default class setEmoji extends Command{
         if (!await this.checkEmoji()) return;
 
         this.dao.updUser(this.message.author.id, { $set: { emojiID: this.args[1] } })
-            .then(res => {
+            .then(async res => {
                 //if custom emoji send image else just emoji
                 if (this.args[1][0] == '<') {
                     const embed = new Discord.MessageEmbed()
@@ -22,8 +22,13 @@ export default class setEmoji extends Command{
                         .setColor(config.success_color)
                         .setImage(config.emoji_discord_link + this.args[1].split(":")[2].slice(0, -1) + config.emoji_extension);
                     this.message.channel.send({ embeds: [ embed ] });
-                }
-                else
+                } else if(!isNaN(this.args[1])) {
+                    const embed = new Discord.MessageEmbed()
+                        .setTitle(this.localization.msg_setEmoji_updated)
+                        .setColor(config.success_color);
+                    const message = await this.message.channel.send({ embeds: [ embed ] });
+                    message.react(this.args[1]);
+                } else
                     this.sendSuccess(this.localization.msg_setEmoji_updated + '\n' + this.args[1]);
             })
             .catch(error => {
