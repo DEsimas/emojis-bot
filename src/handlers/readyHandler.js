@@ -127,7 +127,7 @@ export default class readyHandler extends Handler {
             await this.dao.updAvatar(UI._id, { $set: { active: true } });
 
         }).catch(async err => {
-            console.log("" + err)
+            console.log(err)
             
             //set current emoji to bot in db (cuz setting default values deleted it)
             await this.dao.updUser(this.client.user.id, { $set: { emojiID: prev.emojiID } });
