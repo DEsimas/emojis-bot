@@ -66,8 +66,7 @@ export default class rule34 extends Command {
 
     //sending images several in each message for optimization
     async sendImages(posts, limit) {
-        const avatar = await this.dao.getAvatar();
-        const color = avatar.color;
+        const color = this.avatar.color;
 
         let embeds = [];
         posts.forEach(async (el, index) => {

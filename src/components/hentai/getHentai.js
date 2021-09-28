@@ -16,11 +16,6 @@ export default class getHentai extends Command{
         //validate id
         if (this.validate(ID)) return;
 
-        //get embed color from db
-        const avatar = await this.dao.getAvatar();
-        this.color = avatar.color;
-        
-
         //if id random send random
         if (ID === config.random_id) {
             this.getRandom();
@@ -94,7 +89,7 @@ export default class getHentai extends Command{
             .addField(this.localization.msg_getHentai_intro, "**" + this.doujin.titles.pretty + "**")
             .addField(this.localization.msg_getHentai_tags, tags)
             .setThumbnail(this.doujin.thumbnail.url)
-            .setColor(this.color);
+            .setColor(this.avatar.color);
         this.message.channel.send({ embeds: [embed] });
     };
 
@@ -105,7 +100,7 @@ export default class getHentai extends Command{
         this.doujin.pages.forEach((el, index) => {
             const embed = new Discord.MessageEmbed()
                 .setImage(el.url)
-                .setColor(this.color);
+                .setColor(this.avatar.color);
 
             embeds.push(embed);
 

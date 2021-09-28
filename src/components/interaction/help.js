@@ -13,7 +13,7 @@ export default class help extends Command {
         //init embed
         const embed = new Discord.MessageEmbed()
             .setAuthor(this.localization.emd_help_author)
-            .setColor(await super.getEmbedColor());
+            .setColor(this.avatar.color);
 
         //add fields with commands
         Object.keys(config.commands).forEach((key) => {

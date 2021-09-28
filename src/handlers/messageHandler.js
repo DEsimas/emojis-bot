@@ -39,6 +39,7 @@ export default class messageHandler extends Handler {
     async setInfo() {
         await this.getUser();
         await this.getServer();
+        await this.getAvatar();
     };
 
     //get user from db, if null create new one
@@ -58,6 +59,11 @@ export default class messageHandler extends Handler {
             this.server = await this.dao.addServer(serverID, config.default_doEmojis, config.default_prefix)
         };
     };
+
+    //get current avatar from db
+    async getAvatar() {
+        this.avatar = await this.dao.getAvatar();
+    }
 
     //add emoji from db to message (if allowed on server)
     handleEmoji() {

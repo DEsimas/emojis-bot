@@ -31,15 +31,32 @@ export default class readyHandler extends Handler {
         const users = await this.dao.getUsers();
 
         this.client.user.setActivity(config.status[0] + servers.length + config.status[1] + users.length + config.status[2]);
+
+        console.log(new Date().toString(), ": activity updated: ", config.status[0] + servers.length + config.status[1] + users.length + config.status[2], '\n')
     };
 
     //get avatars from avatars channel and push em in db
     async getAvatars() {
         this.loadAvatars().then(async avatars => {
-            await this.dao.delAvatars();
-            avatars.forEach(el => this.dao.addAvatar(el.name, el.imageURL, el.emojiID, el.color, el.active));
+            const avatarsDB = await this.dao.getAvatars();
+            //
+            //compare avatars and avatarsDB
+            //
+            console.log(new Date().toString(), ": updating avatars(doin nothing)\n")
         });
     };
+
+    //compare two avatars (true if similar)
+    comareAvatars(avatar1, avatar2) {
+        if(
+            avatar1.name === avatar2.name &&
+            avatar1.imageURL === avatar2.imageURL &&
+            avatar1.emojiID === avatar2.emojiID &&
+            avatar1.color === avatar2.color &&
+            avatar1.active === avatar2.active
+            ) return true;
+        return false
+    }
 
     //returns array with UIs from avatars channel on support server (very cursed)
     async loadAvatars() {
@@ -126,8 +143,10 @@ export default class readyHandler extends Handler {
             if (prev) await this.dao.updAvatar(prev._id, { $set: { active: false } });
             await this.dao.updAvatar(UI._id, { $set: { active: true } });
 
+            console.log(new Date().toString(), ": UI updated", UI.name, '\n');
+
         }).catch(async err => {
-            console.log(err)
+            console.log(new Date().toString(), "Can't update UI\n")
             
             //set current emoji to bot in db (cuz setting default values deleted it)
             await this.dao.updUser(this.client.user.id, { $set: { emojiID: prev.emojiID } });
