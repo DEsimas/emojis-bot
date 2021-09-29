@@ -18,7 +18,7 @@ export default class readyHandler extends Handler {
 
         //set regular UI update
         await this.setAvatars();
-        setInterval(() => this.setAvatars(), config.avatar_cooldown);
+        setInterval(async () => await this.setAvatars(), config.avatar_cooldown);
     };
     
     //set bot statistics as activity
@@ -34,22 +34,35 @@ export default class readyHandler extends Handler {
     
     //get avatars, after change UI
     async setAvatars() {
-        await this.getAvatars()
-        await this.setUI();
+        const avatars = await this.getAvatars()
+        await this.setUI(avatars);
     };
 
     //get avatars from avatars channel and push em in db
     async getAvatars() {
         const avatars = await this.loadAvatars();
         const avatarsDB = await this.dao.getAvatars();
-        //
-        //compare avatars and avatarsDB
-        //
-        console.log(new Date().toString(), ": updating avatars(doin nothing)\n");
+
+        //please someone remake it
+        //   |
+        //   |
+        //  \ /
+        //   *
+        await this.dao.delAvatars();
+
+        for(let i in avatars) {
+
+            const avatar = avatars[i];
+            await this.dao.addAvatar(avatar.name, avatar.imageURL, avatar.emojiID, avatar.color, avatar.active);
+        };
+
+        console.log(new Date().toString(), ": avatars loaded\n");
+
+        return avatars;
     };
 
     //compare two avatars (true if similar)
-    comareAvatars(avatar1, avatar2) {
+    compareAvatars(avatar1, avatar2) {
         if(
             avatar1.name === avatar2.name &&
             avatar1.imageURL === avatar2.imageURL &&
@@ -128,27 +141,33 @@ export default class readyHandler extends Handler {
     };
 
     //pick random UI from db and set it
-    async setUI() {
+    async setUI(avatars) {
+        console.log(new Date().toString(), ": UI update start\n");
         //get new and old UI
-        const avatars = await this.dao.getAvatars();
         const UI = avatars[Math.floor(Math.random() * avatars.length)];
-        const prev = await this.dao.getAvatar();
+        const prev = avatars.filter(el => (el.active))[0];
 
         //try to set avatar if ok set nickname
         this.client.user.setAvatar(UI.imageURL).then(async () => {
+            console.log(new Date().toString(), ": avatar set\n");
+
             this.setNickname(UI.name);
 
             //update user in db
             await this.dao.updUser(this.client.user.id, { $set: { emojiID: UI.emojiID } });
+            console.log(new Date().toString(), ": user in db updated\n");
+
 
             //update avatars activity in db
-            if (prev) await this.dao.updAvatar(prev._id, { $set: { active: false } });
-            await this.dao.updAvatar(UI._id, { $set: { active: true } });
+            if (prev) await this.dao.updAvatar(prev.name, { $set: { active: false } });
+            await this.dao.updAvatar(UI.name, { $set: { active: true } });
+            console.log(new Date().toString(), ": avatars in db updated\n");
+
 
             console.log(new Date().toString(), ": UI updated", UI.name, '\n');
 
         }).catch(async err => {
-            console.log(new Date().toString(), "Can't update UI\n")
+            console.log(new Date().toString(), ": Can't update UI\n")
             
             //set current emoji to bot in db (cuz setting default values deleted it)
             await this.dao.updUser(this.client.user.id, { $set: { emojiID: prev.emojiID } });

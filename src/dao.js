@@ -120,8 +120,8 @@ export default class dao {
         return await this.avatars.findOne({ active: true });
     };
     
-    async updAvatar(_id, options) {
-        return await this.avatars.updateOne({ _id: _id }, options);
+    async updAvatar(name, options) {
+        return await this.avatars.updateOne({ name: name }, options);
     };
 
     async delAvatar(_id) {
