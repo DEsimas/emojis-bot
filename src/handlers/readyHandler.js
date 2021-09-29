@@ -9,41 +9,43 @@ export default class readyHandler extends Handler {
         this.readyHandler();
     };
 
-    readyHandler() {
+    async readyHandler() {
         console.log(config.log.ready);
 
         //set status and regularly update it
         this.setActivity();
         setInterval(() => this.setActivity(), config.status_cooldown);
 
-        //get avatars, after change UI
-        this.getAvatars().then(() => this.setUI());
-
-        //set regular getting avatars and setting UI
-        setInterval(() => this.getAvatars(), config.push_cooldown);
-        setInterval(() => this.setUI(), config.avatar_cooldown);
+        //set regular UI update
+        await this.setAvatars();
+        setInterval(() => this.setAvatars(), config.avatar_cooldown);
     };
-
+    
     //set bot statistics as activity
     async setActivity() {
         //get all servers and users
         const servers = await this.dao.getServers();
         const users = await this.dao.getUsers();
-
+        
         this.client.user.setActivity(config.status[0] + servers.length + config.status[1] + users.length + config.status[2]);
-
+        
         console.log(new Date().toString(), ": activity updated: ", config.status[0] + servers.length + config.status[1] + users.length + config.status[2], '\n')
+    };
+    
+    //get avatars, after change UI
+    async setAvatars() {
+        await this.getAvatars()
+        await this.setUI();
     };
 
     //get avatars from avatars channel and push em in db
     async getAvatars() {
-        this.loadAvatars().then(async avatars => {
-            const avatarsDB = await this.dao.getAvatars();
-            //
-            //compare avatars and avatarsDB
-            //
-            console.log(new Date().toString(), ": updating avatars(doin nothing)\n")
-        });
+        const avatars = await this.loadAvatars();
+        const avatarsDB = await this.dao.getAvatars();
+        //
+        //compare avatars and avatarsDB
+        //
+        console.log(new Date().toString(), ": updating avatars(doin nothing)\n");
     };
 
     //compare two avatars (true if similar)

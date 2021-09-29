@@ -7,7 +7,6 @@ export default {
     "default_scan_limit": 100,
     "links_per_message": 10,
     "avatar_cooldown": 300000,
-    "push_cooldown": 450000,
     "status_cooldown": 600000,
     "error_color": "#ff0000",
     "success_color": "#00ff00",
