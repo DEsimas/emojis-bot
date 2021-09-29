@@ -3,6 +3,7 @@ import Discord from "discord.js";
 
 import Command from "./../command.js";
 import config from "./../../config.js";
+import { logWarning } from "../../logger.js";
 
 export default class getHentai extends Command{
     constructor(data) {
@@ -141,7 +142,7 @@ export default class getHentai extends Command{
         while (!acknowlaged) {
             const ID = this.getRandomID();
             if(!this.validate(ID)) {
-                this.doujin = await api.fetchDoujin(ID).catch(() => console.log("error in random hentai request"));
+                this.doujin = await api.fetchDoujin(ID).catch(() => logWarning("Unknown \"gethentai random\" error"));
                 
                 if(this.doujin !== null && this.doujin !== undefined) {
                     if(!this.isProhibited() && this.isEnglish()) {
