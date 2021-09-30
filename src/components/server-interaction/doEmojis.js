@@ -31,7 +31,7 @@ export default class doEmojis extends Command {
     
     //switch ON
     caseON() {
-        this.dao.updServer(this.message.guild.id, { $set: { doEmojis: true } })
+        this.DAO.Servers.updateOne(this.message.guild.id, { $set: { doEmojis: true } })
             .then(res => {
                 this.sendSuccess(this.localization.msg_doEmojis_on);
             })
@@ -42,7 +42,7 @@ export default class doEmojis extends Command {
 
     //switch OFF
     caseOFF() {
-        this.dao.updServer(this.message.guild.id, { $set: { doEmojis: false } })
+        this.DAO.Servers.updateOne(this.message.guild.id, { $set: { doEmojis: false } })
             .then(res => {
                 this.sendSuccess(this.localization.msg_doEmojis_off);
             })

@@ -13,7 +13,7 @@ export default class setEmoji extends Command{
 
         if (!await this.checkEmoji()) return;
 
-        this.dao.updUser(this.message.author.id, { $set: { emojiID: this.args[1] } })
+        this.DAO.Users.updateOne(this.message.author.id, { $set: { emojiID: this.args[1] } })
             .then(async res => {
                 //if custom emoji send image else just emoji
                 if (this.args[1][0] == '<') {
@@ -38,7 +38,7 @@ export default class setEmoji extends Command{
 
     async checkEmoji() {
         //check if same
-        const user = await this.dao.getUser(this.message.author.id);
+        const user = await this.DAO.Users.getOne(this.message.author.id);
         if(user.emojiID == this.args[1]) {
             super.sendError(this.localization.msg_setEmoji_same_emoji)
             return false;

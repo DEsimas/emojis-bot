@@ -9,7 +9,7 @@ import messageHandler from "./handlers/messageHandler.js";
 import readyHandler from "./handlers/readyHandler.js";
 
 //data access object
-import dao from "./dao.js";
+import DAO from "./database/DAO.js";
 
 //config
 import config from "./config.js";
@@ -26,7 +26,7 @@ export default class bot {
         };
         
         //connect to the data base
-        this.dao = new dao();
+        this.DAO = new DAO();
 
         this.setClient();
         this.setEndpoints();
@@ -41,7 +41,7 @@ export default class bot {
     //set handlers for events
     setEndpoints() {
         //default arguments
-        const options = { dao: this.dao, client: this.client }
+        const options = { DAO: this.DAO, client: this.client }
 
         this.client.on(config.events.message, message => new messageHandler({ ...options,  message: message }));
         this.client.on(config.events.ready, () => new readyHandler(options));

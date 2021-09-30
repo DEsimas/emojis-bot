@@ -10,7 +10,7 @@ export default class setLanguage extends Command {
     
     updateLanguage() {
         const userID = this.message.author.id;
-        this.dao.updUser(userID, { $set: { language: this.language } })
+        this.DAO.Users.updateOne(userID, { $set: { language: this.language } })
             .then(res => {
                 this.sendSuccess(config.localization[this.language].msg_setLanguage_success + this.language);
             })

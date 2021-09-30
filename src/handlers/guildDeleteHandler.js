@@ -8,6 +8,6 @@ export default class guildDeleteHandler extends Handler {
 
     guildDeleteHandler() {
         //remove server from db
-        this.dao.delServer(this.guild.id);
+        this.DAO.Servers.deleteOne(this.guild.id);
     };
 };

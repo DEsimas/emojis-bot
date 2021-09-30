@@ -7,7 +7,7 @@ export default class deleteEmoji extends Command {
     };
 
     deleteEmoji() {
-        this.dao.updUser(this.message.author.id, { $set: { emojiID: null } })
+        this.DAO.Users.updateOne(this.message.author.id, { $set: { emojiID: null } })
             .then(res => {
                 super.sendSuccess(this.localization.msg_deleteEmoji_success);
             })
