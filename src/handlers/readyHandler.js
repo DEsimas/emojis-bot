@@ -1,5 +1,6 @@
 import { getAverageColor } from "fast-average-color-node";
 
+import DAO from './../database/DAO.js';
 import Handler from "./_handler.js";
 import config from "./../config.js";
 import Log from "../logger.js";
@@ -25,8 +26,8 @@ export default class readyHandler extends Handler {
     //set bot statistics as activity
     async setActivity() {
         //get all servers and users
-        const servers = await this.DAO.Servers.getAll();
-        const users = await this.DAO.Users.getAll();
+        const servers = await DAO.Servers.getAll();
+        const users = await DAO.Users.getAll();
         
         const activity = config.status[0] + servers.length + config.status[1] + users.length + config.status[2];
         this.client.user.setActivity(activity);
@@ -43,19 +44,19 @@ export default class readyHandler extends Handler {
     //get avatars from avatars channel and push em in db
     async getAvatars() {
         const avatars = await this.loadAvatars();
-        const avatarsDB = await this.DAO.Avatars.getActive();
+        const avatarsDB = await DAO.Avatars.getActive();
 
         //please someone remake it
         //   |
         //   |
         //  \ /
         //   *
-        await this.DAO.Avatars.deleteAll();
+        await DAO.Avatars.deleteAll();
 
         for(let i in avatars) {
 
             const avatar = avatars[i];
-            await this.DAO.Avatars.addOne(avatar.name, avatar.imageURL, avatar.emojiID, avatar.color, avatar.active);
+            await DAO.Avatars.addOne(avatar.name, avatar.imageURL, avatar.emojiID, avatar.color, avatar.active);
         };
 
         Log.info("UI's loaded");
@@ -80,7 +81,7 @@ export default class readyHandler extends Handler {
         const messages = await this.getAvatarMessages();
 
         //get current avatar
-        let current = await this.DAO.Avatars.getActive();
+        let current = await DAO.Avatars.getActive();
         if (!current) current = { name: null };
 
         let avatars = [];
@@ -156,12 +157,12 @@ export default class readyHandler extends Handler {
             this.setNickname(UI.name);
 
             //update user in db
-            await this.DAO.Users.updateOne(this.client.user.id, { $set: { emojiID: UI.emojiID } });
+            await DAO.Users.updateOne(this.client.user.id, { $set: { emojiID: UI.emojiID } });
             Log.info("user in db updated");
 
             //update avatars activity in db
-            if (prev) await this.DAO.Avatars.updateOne(prev.name, { $set: { active: false } });
-            await this.DAO.Avatars.updateOne(UI.name, { $set: { active: true } });
+            if (prev) await DAO.Avatars.updateOne(prev.name, { $set: { active: false } });
+            await DAO.Avatars.updateOne(UI.name, { $set: { active: true } });
             Log.info("avatar in db updated");
 
             Log.info("UI updated: " + UI.name);
@@ -169,7 +170,7 @@ export default class readyHandler extends Handler {
             Log.warning("Can't update UI");
             
             //set current emoji to bot in db (cuz setting default values deleted it)
-            await this.DAO.Users.updateOne(this.client.user.id, { $set: { emojiID: prev.emojiID } });
+            await DAO.Users.updateOne(this.client.user.id, { $set: { emojiID: prev.emojiID } });
         });
     };
 

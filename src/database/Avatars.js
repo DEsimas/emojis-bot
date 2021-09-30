@@ -4,7 +4,7 @@ import Config from './../config.js';
 
 export default class Avatars {
     constructor() {
-        this.avatars = mongoose.model(Config.db_settings.db_collections.avatars, this.getAvatarSchema());;
+        this.avatars = mongoose.model(Config.db_settings.db_collections.avatars, this.getAvatarSchema());
     };
 
     getAvatarSchema() {

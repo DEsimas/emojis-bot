@@ -25,8 +25,9 @@ export default class bot {
             intents: [Intents.GUILD_EMOJIS_AND_STICKERS, Intents.GUILD_MESSAGES, Intents.GUILD_MESSAGE_REACTIONS, Intents.GUILDS]
         };
         
-        //connect to the data base
-        this.DAO = new DAO();
+        //init collections and connection in DAO
+        DAO.init();
+        DAO.setDefaults();
 
         this.setClient();
         this.setEndpoints();
@@ -41,7 +42,7 @@ export default class bot {
     //set handlers for events
     setEndpoints() {
         //default arguments
-        const options = { DAO: this.DAO, client: this.client }
+        const options = { client: this.client }
 
         this.client.on(config.events.message, message => new messageHandler({ ...options,  message: message }));
         this.client.on(config.events.ready, () => new readyHandler(options));

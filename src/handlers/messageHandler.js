@@ -10,6 +10,7 @@ import clear from "../components/interaction/clear.js";
 import help from "../components/interaction/help.js";
 import rule34 from "../components/hentai/rule34.js";
 
+import DAO from "./../database/DAO.js";
 import Handler from "./_handler.js";
 import config from "./../config.js";
 
@@ -45,24 +46,24 @@ export default class messageHandler extends Handler {
     //get user from db, if null create new one
     async getUser() {
         const userID = this.message.author.id;
-        this.user = await this.DAO.Users.getOne(userID);
+        this.user = await DAO.Users.getOne(userID);
         if (this.user === null) {
-            this.user = await this.DAO.Users.addOne(userID, config.default_emoji, config.default_language, config.default_meme_channel)
+            this.user = await DAO.Users.addOne(userID, config.default_emoji, config.default_language, config.default_meme_channel)
         };
     };
 
     //get server from db, if null create new one
     async getServer() {
         const serverID = this.message.guild.id;
-        this.server = await this.DAO.Servers.getOne(serverID);
+        this.server = await DAO.Servers.getOne(serverID);
         if (this.server === null) {
-            this.server = await this.DAO.Servers.addOne(serverID, config.default_doEmojis, config.default_prefix)
+            this.server = await DAO.Servers.addOne(serverID, config.default_doEmojis, config.default_prefix)
         };
     };
 
     //get current avatar from db
     async getAvatar() {
-        this.avatar = await this.DAO.Avatars.getActive();
+        this.avatar = await DAO.Avatars.getActive();
     }
 
     //add emoji from db to message (if allowed on server)

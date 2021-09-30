@@ -1,4 +1,5 @@
 import Handler from "./_handler.js";
+import DAO from "./../database/DAO.js";
 
 export default class guildDeleteHandler extends Handler {
     constructor(data) {
@@ -8,6 +9,6 @@ export default class guildDeleteHandler extends Handler {
 
     guildDeleteHandler() {
         //remove server from db
-        this.DAO.Servers.deleteOne(this.guild.id);
+        DAO.Servers.deleteOne(this.guild.id);
     };
 };

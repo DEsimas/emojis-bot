@@ -8,26 +8,22 @@ import Servers from "./Servers.js";
 import Avatars from "./Avatars.js";
 
 export default class DAO {
-    constructor() {
+    static init() {
         this.Users = new Users();
         this.Servers = new Servers();
         this.Avatars = new Avatars();
-
+    
         this.connectDB();
-    };
+    }
 
     //connecting db with uri from .env
-    connectDB() {
-        mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
-            .then(() => {
-                Log.info(Config.db_settings.log.db);
-                this.setDefaults();
-            })
-            .catch(error => Log.error(Config.db_settings.log.db_error + error));
+    static async connectDB() {
+        await mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
+        Log.info(Config.db_settings.log.db);
     };
     
     //setting default values for other bots
-    setDefaults() {
+    static setDefaults() {
         Config.db_settings.default_values.forEach(async el => {
             const data = await this.Users.getOne(el.userID);
             if(data === null) {

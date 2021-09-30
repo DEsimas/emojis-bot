@@ -9,7 +9,7 @@ export default class guildCreateHandler extends Handler {
 
     guildCreateHandler() {
         //remove server from db so it can be recreated with default params
-        this.DAO.Servers.deleteOne(this.guild.id);
+        DAO.Servers.deleteOne(this.guild.id);
 
         //set current nickname on new server
         const nickname = this.getNickname();

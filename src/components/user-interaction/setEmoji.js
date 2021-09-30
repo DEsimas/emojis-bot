@@ -2,6 +2,7 @@ import Discord from "discord.js";
 
 import Command from "./../command.js";
 import config from "./../../config.js";
+import DAO from "./../../database/DAO.js";
 
 export default class setEmoji extends Command{
     constructor(data) {
@@ -13,7 +14,7 @@ export default class setEmoji extends Command{
 
         if (!await this.checkEmoji()) return;
 
-        this.DAO.Users.updateOne(this.message.author.id, { $set: { emojiID: this.args[1] } })
+        DAO.Users.updateOne(this.message.author.id, { $set: { emojiID: this.args[1] } })
             .then(async res => {
                 //if custom emoji send image else just emoji
                 if (this.args[1][0] == '<') {
@@ -38,7 +39,7 @@ export default class setEmoji extends Command{
 
     async checkEmoji() {
         //check if same
-        const user = await this.DAO.Users.getOne(this.message.author.id);
+        const user = await DAO.Users.getOne(this.message.author.id);
         if(user.emojiID == this.args[1]) {
             super.sendError(this.localization.msg_setEmoji_same_emoji)
             return false;

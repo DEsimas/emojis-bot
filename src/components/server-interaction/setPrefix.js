@@ -1,4 +1,5 @@
 import Command from "./../command.js";
+import DAO from "./../../database/DAO.js";
 
 export default class setPrefix extends Command {
     constructor(data) {
@@ -9,7 +10,7 @@ export default class setPrefix extends Command {
     async setPrefix() {
         if (!await this.validate()) return;
 
-        this.DAO.Servers.updateOne(this.message.guild.id, { $set: { prefix: this.args[1] } })
+        DAO.Servers.updateOne(this.message.guild.id, { $set: { prefix: this.args[1] } })
             .then(res => {
                 super.sendSuccess(this.localization.msg_setPrefix_success + this.args[1]);
             })

@@ -1,5 +1,6 @@
 import Command from "./../command.js";
 import config from "./../../config.js";
+import DAO from "./../../database/DAO.js";
 
 export default class setLanguage extends Command {
     constructor(data) {
@@ -10,7 +11,7 @@ export default class setLanguage extends Command {
     
     updateLanguage() {
         const userID = this.message.author.id;
-        this.DAO.Users.updateOne(userID, { $set: { language: this.language } })
+        DAO.Users.updateOne(userID, { $set: { language: this.language } })
             .then(res => {
                 this.sendSuccess(config.localization[this.language].msg_setLanguage_success + this.language);
             })

@@ -1,4 +1,5 @@
 import Command from "./../command.js";
+import DAO from "./../../database/DAO.js";
 
 export default class doEmojis extends Command {
     constructor(data) {
@@ -31,7 +32,7 @@ export default class doEmojis extends Command {
     
     //switch ON
     caseON() {
-        this.DAO.Servers.updateOne(this.message.guild.id, { $set: { doEmojis: true } })
+        DAO.Servers.updateOne(this.message.guild.id, { $set: { doEmojis: true } })
             .then(res => {
                 this.sendSuccess(this.localization.msg_doEmojis_on);
             })
@@ -42,7 +43,7 @@ export default class doEmojis extends Command {
 
     //switch OFF
     caseOFF() {
-        this.DAO.Servers.updateOne(this.message.guild.id, { $set: { doEmojis: false } })
+        DAO.Servers.updateOne(this.message.guild.id, { $set: { doEmojis: false } })
             .then(res => {
                 this.sendSuccess(this.localization.msg_doEmojis_off);
             })
