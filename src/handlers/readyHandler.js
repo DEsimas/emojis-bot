@@ -2,7 +2,7 @@ import { getAverageColor } from "fast-average-color-node";
 
 import Handler from "./_handler.js";
 import config from "./../config.js";
-import { logInfo, logWarning } from "../logger.js";
+import Log from "../logger.js";
 
 export default class readyHandler extends Handler {
     constructor(data) {
@@ -11,7 +11,7 @@ export default class readyHandler extends Handler {
     };
 
     async readyHandler() {
-        logInfo(config.log.ready);
+        Log.info(config.log.ready);
 
         //set status and regularly update it
         this.setActivity();
@@ -31,7 +31,7 @@ export default class readyHandler extends Handler {
         const activity = config.status[0] + servers.length + config.status[1] + users.length + config.status[2];
         this.client.user.setActivity(activity);
 
-        logInfo(activity);
+        Log.info(activity);
     };
     
     //get avatars, after change UI
@@ -58,7 +58,7 @@ export default class readyHandler extends Handler {
             await this.dao.addAvatar(avatar.name, avatar.imageURL, avatar.emojiID, avatar.color, avatar.active);
         };
 
-        logInfo("UI's loaded");
+        Log.info("UI's loaded");
 
         return avatars;
     };
@@ -144,29 +144,29 @@ export default class readyHandler extends Handler {
 
     //pick random UI from db and set it
     async setUI(avatars) {
-        logInfo("UI update start");
+        Log.info("UI update start");
         //get new and old UI
         const UI = avatars[Math.floor(Math.random() * avatars.length)];
         const prev = avatars.filter(el => (el.active))[0];
 
         //try to set avatar if ok set nickname
         this.client.user.setAvatar(UI.imageURL).then(async () => {
-            logInfo("avatar updated")
+            Log.info("avatar updated")
 
             this.setNickname(UI.name);
 
             //update user in db
             await this.dao.updUser(this.client.user.id, { $set: { emojiID: UI.emojiID } });
-            logInfo("user in db updated");
+            Log.info("user in db updated");
 
             //update avatars activity in db
             if (prev) await this.dao.updAvatar(prev.name, { $set: { active: false } });
             await this.dao.updAvatar(UI.name, { $set: { active: true } });
-            logInfo("avatar in db updated");
+            Log.info("avatar in db updated");
 
-            logInfo("UI updated");
+            Log.info("UI updated");
         }).catch(async err => {
-            logWarning("Can't update UI");
+            Log.warning("Can't update UI");
             
             //set current emoji to bot in db (cuz setting default values deleted it)
             await this.dao.updUser(this.client.user.id, { $set: { emojiID: prev.emojiID } });

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import config from "./config.js";
-import { logError, logInfo } from "./logger.js";
+import Log from "./logger.js";
 
 export default class dao {
     constructor() {
@@ -16,10 +16,10 @@ export default class dao {
     connectDB() {
         mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => {
-                logInfo(config.db_settings.log.db);
+                Log.info(config.db_settings.log.db);
                 this.setDefaults();
             })
-            .catch(error => logError(config.db_settings.log.db_error + error));
+            .catch(error => Log.error(config.db_settings.log.db_error + error));
     };
     
     //setting default values for other bots
