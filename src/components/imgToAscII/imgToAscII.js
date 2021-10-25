@@ -16,6 +16,12 @@ export default class imgToAscII extends Command {
     async imgToAscII() {
         //convert each file using image-to-ascii library
         this.files.forEach(async (el, index, array) => {
+            //skip if link
+            if(!super.validateURL(el)) {
+                super.sendError(el + this.localization.msg_imgToAscII_not_link);
+                return;
+            };
+            
             const asciified = await asciifyImage(el, this.options).catch(err => super.sendError(this.localization.msg_imgToAscII_wrong_file));
 
             //Send asiified image
@@ -28,7 +34,7 @@ export default class imgToAscII extends Command {
     parseParams() {
         //declare vars with params
         this.files = [];
-        this.options = config.img_to_ascii_defaults;
+        this.options = {...config.img_to_ascii_defaults};
 
         //iterate through message and take files and options
         this.args.forEach((el, index, array) => this.parseArgument(el, index, array));

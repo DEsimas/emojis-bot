@@ -106,6 +106,7 @@ export default {
             "msg_imgToAscII_error": "Error while processing an image UwU",
             "msg_imgToAscII_no_files": "There are no files in your message ¯\\_(ツ)_/¯",
             "msg_imgToAscII_wrong_file": "File not found",
+            "msg_imgToAscII_not_link": " - is not a link",
             "msg_clear_error": "What error could possibly happen while deleting messages???",
             "emd_help_author": "Some help:",
             "msg_doEmojis_on": "Emojis enabled!:white_check_mark:",
@@ -150,7 +151,7 @@ export default {
             "dsc_gethentai": "Find doujin from nhentai using 6 digit code",
             "dsc_rule34": "Find images from rule34.xxx using tags",
             "dsc_imgtoascii": "Convert image to ascII text",
-            "dsc_addtrack": "Adds track to database (special for maus999)",
+            "dsc_addTrack": "Adds track to database (special for maus999)",
             "dsc_clear": "You can state amount of messages to delete",
             "dsc_help": "Shows this message"
         },
@@ -170,6 +171,7 @@ export default {
             "msg_imgToAscII_error": "Не удалось сохранить файл UwU",
             "msg_imgToAscII_no_files": "В сообщении нет вложений ¯\\_(ツ)_/¯",
             "msg_imgToAscII_wrong_file": "Файл не найден",
+            "msg_imgToAscII_not_link": " - не ссылка",
             "emd_help_author": "Список команд:",
             "msg_doEmojis_on": "Эмодзи включены!:white_check_mark:",
             "msg_doEmojis_off": "Эмодзи выключены!:negative_squared_cross_mark:",
@@ -213,7 +215,7 @@ export default {
             "dsc_gethentai": "Найти мангу с nhentai по коду",
             "dsc_rule34": "Найти картинки с rule34.xxx по тегам",
             "dsc_imgtoascii": "Конвертировать картинку в текстовый файл",
-            "dsc_addtrack": "Добавить трек в базу данных (специально для maus999)",
+            "dsc_addTrack": "Добавить трек в базу данных (специально для maus999)",
             "dsc_clear": "Можно указать количество сообщений, которое нужно удалить",
             "dsc_help": "Показывает это сообщение"
         }

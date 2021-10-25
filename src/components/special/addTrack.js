@@ -8,16 +8,6 @@ export default class addTrack extends Command {
         this.addTrack();
     };
 
-    validateURL(str) {
-        var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-            '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-            '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-            '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
-        return !!pattern.test(str);
-    };
-
     validate() {
         if (this.message.author.id !== config.mous999_id) {
             super.sendError(this.localization.msg_addTrack_no_maus999);
@@ -55,7 +45,7 @@ export default class addTrack extends Command {
 
         this.args.forEach((el, index) => {
             if (!index) return;
-            if (this.validateURL(el)) this.tracks.push(el);
+            if (super.validateURL(el)) this.tracks.push(el);
             else wrong.push(el);
         });
 
