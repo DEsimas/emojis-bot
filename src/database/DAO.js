@@ -6,12 +6,14 @@ import Log from "./../logger.js";
 import Users from "./Users.js";
 import Servers from "./Servers.js";
 import Avatars from "./Avatars.js";
+import Notifications from "./Notifications.js";
 
 export default class DAO {
     static init() {
         this.Users = new Users();
         this.Servers = new Servers();
         this.Avatars = new Avatars();
+        this.Notifications = new Notifications();
     
         this.connectDB();
     }

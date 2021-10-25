@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import Config from './../config.js';
 
-export default class Servers {
+export default class Notifications {
     constructor() {
         this.notifications = mongoose.model(Config.db_settings.db_collections.notifications, this.getNotificationsSchema());
     };
