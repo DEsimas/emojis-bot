@@ -87,7 +87,7 @@ export default class getHentai extends Command{
         //create and send embed
         const embed = new Discord.MessageEmbed()
             .setAuthor(this.localization.msg_getHentai_nhentai)
-            .addField(this.localization.msg_getHentai_intro, "**" + this.doujin.titles.pretty + "**")
+            .addField(this.localization.msg_getHentai_intro, "**" + this.doujin.titles.pretty + "**" + " [" + this.doujin.id + "]")
             .addField(this.localization.msg_getHentai_tags, tags)
             .setThumbnail(this.doujin.thumbnail.url)
             .setColor(this.avatar.color);
