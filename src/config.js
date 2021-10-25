@@ -151,7 +151,7 @@ export default {
             "dsc_gethentai": "Find doujin from nhentai using 6 digit code",
             "dsc_rule34": "Find images from rule34.xxx using tags",
             "dsc_imgtoascii": "Convert image to ascII text",
-            "dsc_addTrack": "Adds track to database (special for maus999)",
+            "dsc_addtrack": "Adds track to database (special for maus999)",
             "dsc_clear": "You can state amount of messages to delete",
             "dsc_help": "Shows this message"
         },
@@ -215,7 +215,7 @@ export default {
             "dsc_gethentai": "Найти мангу с nhentai по коду",
             "dsc_rule34": "Найти картинки с rule34.xxx по тегам",
             "dsc_imgtoascii": "Конвертировать картинку в текстовый файл",
-            "dsc_addTrack": "Добавить трек в базу данных (специально для maus999)",
+            "dsc_addtrack": "Добавить трек в базу данных (специально для maus999)",
             "dsc_clear": "Можно указать количество сообщений, которое нужно удалить",
             "dsc_help": "Показывает это сообщение"
         }
