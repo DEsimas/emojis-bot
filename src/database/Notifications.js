@@ -20,8 +20,8 @@ export default class Notifications {
         return await this.notifications.find();
     };
 
-    async addOne(userID, date, duration) {
-        return await new this.notifications({ userID: userID, date: date, duration: duration }).save();
+    async addOne(userID, birth, duration) {
+        return await new this.notifications({ userID: userID, birth: birth, duration: duration }).save();
     };
 
     async deleteOne(userID) {

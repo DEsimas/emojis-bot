@@ -34,6 +34,7 @@ export default {
         "setLanguage": ["setlang", "lang", "setlanguage"],
         "setPrefix": ["setprefix"],
         "doEmojis": ["doemojis"],
+        "subscribe": ["subscribe", "sub"],
         "addTrack": ["addtrack", "at"],
         "clear": ["clear", "cls"],
         "help": ["help", "h"]
@@ -142,7 +143,8 @@ export default {
             "abt_gethentai": "Wanna read hentai in any(nsfw) channel? No problem (^_~)",
             "abt_rule34": "Hentai again",
             "abt_imgtoascii": "Convert an image to the text file",
-            "abt_addtrack": "Visit https://desimas.github.io/maus999/#/",
+            "abt_subscribe": "Counts how long are you going to live",
+            "abt_addtrack": "Not for common users",
             "abt_clear": "Deletes bot messages from this channel",
             "abt_help": "Help",
             "dsc_setlang": "We'll have more languages in future",
@@ -153,6 +155,7 @@ export default {
             "dsc_gethentai": "Find doujin from nhentai using 6 digit code",
             "dsc_rule34": "Find images from rule34.xxx using tags",
             "dsc_imgtoascii": "Convert image to ascII text",
+            "dsc_subscribe": "I will every day notify you, how much days you have till the end",
             "dsc_addtrack": "Adds track to database (special for maus999)",
             "dsc_clear": "You can state amount of messages to delete",
             "dsc_help": "Shows this message"
@@ -207,7 +210,8 @@ export default {
             "abt_gethentai": "Хотите читать хентай в любимом чате? Без проблем (^_~)",
             "abt_rule34": "И тут порно",
             "abt_imgtoascii": "Конвертировать картинку в текстовый файл",
-            "abt_addtrack": "https://desimas.github.io/maus999/#/ - заходите",
+            "abt_subscribe": "Считает сколько вам осталось",
+            "abt_addtrack": "Команда не для среднестатистического пользователя",
             "abt_clear": "Удаляет сообщения бота из этого канала",
             "abt_help": "Помощь",
             "dsc_setlang": "В аргументе код языка, в будующем бот будет переводиться на большее количество языков.",
@@ -218,6 +222,7 @@ export default {
             "dsc_gethentai": "Найти мангу с nhentai по коду",
             "dsc_rule34": "Найти картинки с rule34.xxx по тегам",
             "dsc_imgtoascii": "Конвертировать картинку в текстовый файл",
+            "dsc_subscribe": "Ежедневный счётчик, показывающий сколько вам осталось",
             "dsc_addtrack": "Добавить трек в базу данных (специально для maus999)",
             "dsc_clear": "Можно указать количество сообщений, которое нужно удалить",
             "dsc_help": "Показывает это сообщение"
