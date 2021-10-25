@@ -61,7 +61,8 @@ export default {
         "db_collections": {
             "users": "users",
             "servers": "servers",
-            "avatars": "avatars"
+            "avatars": "avatars",
+            "notifications": "notifications"
         },
         "default_values": [
             {
