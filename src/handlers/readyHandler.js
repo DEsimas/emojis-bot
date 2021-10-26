@@ -4,6 +4,7 @@ import DAO from './../database/DAO.js';
 import Handler from "./_handler.js";
 import config from "./../config.js";
 import Log from "../logger.js";
+import cron from "node-cron";
 
 export default class readyHandler extends Handler {
     constructor(data) {
@@ -14,6 +15,8 @@ export default class readyHandler extends Handler {
     async readyHandler() {
         Log.info(config.log.ready);
 
+        this.initNotifications();
+
         //set status and regularly update it
         this.setActivity();
         setInterval(() => this.setActivity(), config.status_cooldown);
@@ -22,19 +25,42 @@ export default class readyHandler extends Handler {
         await this.setAvatars();
         setInterval(async () => await this.setAvatars(), config.avatar_cooldown);
     };
-    
+
+    //every day notifications
+    async initNotifications() {
+        var task = cron.schedule(config.cron_regular, async () => {
+            const users = await DAO.Notifications.getAll();
+
+            users.forEach(async user => {
+                const channel = await this.client.users.fetch(user.userID);
+                const diff = Math.abs(Math.round((user.birth - new Date()) / (1000 * 60 * 60 * 24)));
+
+                var year = user.birth.getFullYear();
+                var month = user.birth.getMonth();
+                var day = user.birth.getDate();
+                let end = new Date(year + user.duration, month, day);
+
+                const sum = Math.abs(Math.round((user.birth - end) / (1000 * 60 * 60 * 24)));
+
+                channel.send(diff + "/" + sum);
+            });
+        });
+
+        task.start();
+    };
+
     //set bot statistics as activity
     async setActivity() {
         //get all servers and users
         const servers = await DAO.Servers.getAll();
         const users = await DAO.Users.getAll();
-        
+
         const activity = config.status[0] + servers.length + config.status[1] + users.length + config.status[2];
         this.client.user.setActivity(activity);
 
         Log.info(activity);
     };
-    
+
     //get avatars, after change UI
     async setAvatars() {
         const avatars = await this.getAvatars()
@@ -53,7 +79,7 @@ export default class readyHandler extends Handler {
         //   *
         await DAO.Avatars.deleteAll();
 
-        for(let i in avatars) {
+        for (let i in avatars) {
 
             const avatar = avatars[i];
             await DAO.Avatars.addOne(avatar.name, avatar.imageURL, avatar.emojiID, avatar.color, avatar.active);
@@ -66,13 +92,13 @@ export default class readyHandler extends Handler {
 
     //compare two avatars (true if similar)
     compareAvatars(avatar1, avatar2) {
-        if(
+        if (
             avatar1.name === avatar2.name &&
             avatar1.imageURL === avatar2.imageURL &&
             avatar1.emojiID === avatar2.emojiID &&
             avatar1.color === avatar2.color &&
             avatar1.active === avatar2.active
-            ) return true;
+        ) return true;
         return false
     }
 
@@ -99,7 +125,7 @@ export default class readyHandler extends Handler {
             const active = current.name === name;
 
             //add UI to list
-            avatars.push({ name: name, imageURL: imageURL, emojiID: emojiID, color: color, active: active});
+            avatars.push({ name: name, imageURL: imageURL, emojiID: emojiID, color: color, active: active });
         };
 
         return avatars;
@@ -168,7 +194,7 @@ export default class readyHandler extends Handler {
             Log.info("UI updated: " + UI.name);
         }).catch(async err => {
             Log.warning("Can't update UI");
-            
+
             //set current emoji to bot in db (cuz setting default values deleted it)
             await DAO.Users.updateOne(this.client.user.id, { $set: { emojiID: prev.emojiID } });
         });

@@ -21,7 +21,7 @@ export default class subscribe extends Command{
             return false;
         };
 
-        if(this.args[2] > 120 || this.args[2] <= 0 || Math.abs(new Date(this.args[1]).getFullYear() - new Date().getFullYear()) >= this.args[2] || isNaN(Number(this.args[2]))) {
+        if(this.args[2] > 100 || this.args[2] <= 0 || Math.abs(new Date(this.args[1]).getFullYear() - new Date().getFullYear()) >= this.args[2] || isNaN(Number(this.args[2]))) {
             super.sendError(this.localization.msg_subscribe_duration_error);
             return false;
         };

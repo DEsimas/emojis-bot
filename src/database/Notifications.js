@@ -9,7 +9,7 @@ export default class Notifications {
 
     getNotificationsSchema() {
         return new mongoose.Schema({
-            userID: Number,
+            userID: String,
             birth: Date,
             duration: Number
         });

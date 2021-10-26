@@ -19,6 +19,7 @@ export default {
     "administrator_permission": "ADMINISTRATOR",
     "about_prefix": "abt_",
     "describtion_prefix": "dsc_",
+    "cron_regular": "* * * * * *",
     "mous999_id": "453267651779887135",
     "avatar_channel_id": "885941024478883873",
     "owner_id": "473817390887600129",
