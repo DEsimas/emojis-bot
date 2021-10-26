@@ -29,6 +29,6 @@ export default class Notifications {
     };
 
     async deleteOne(userID) {
-        return await this.servers.deleteOne({ userID: userID });
+        return await this.notifications.deleteOne({ userID: userID });
     };
 };

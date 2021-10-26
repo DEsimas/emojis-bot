@@ -5,6 +5,7 @@ import setPrefix from "../components/server-interaction/setPrefix.js";
 import doEmojis from "../components/server-interaction/doEmojis.js";
 import setEmoji from "../components/user-interaction/setEmoji.js";
 import imgToAscII from "../components/imgToAscII/imgToAscII.js";
+import unsubscribe from "../components/counter/unsubscribe.js";
 import subscribe from "../components/counter/subscribe.js";
 import getHentai from "../components/hentai/getHentai.js";
 import addTrack from "../components/special/addTrack.js";
@@ -19,7 +20,7 @@ import config from "./../config.js";
 export default class messageHandler extends Handler {
     constructor(data) {
         super(data);
-        this.setCommandList(getHentai, rule34, imgToAscII, setEmoji, deleteEmoji, setLanguage, setPrefix, doEmojis, subscribe, addTrack, clear, help);
+        this.setCommandList(getHentai, rule34, imgToAscII, setEmoji, deleteEmoji, setLanguage, setPrefix, doEmojis, subscribe, unsubscribe, addTrack, clear, help);
         this.setInfo().then(() => {
             this.handleEmoji();
             this.handleCommand();
