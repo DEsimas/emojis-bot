@@ -23,7 +23,6 @@ export default {
     "avatar_channel_id": "885941024478883873",
     "owner_id": "473817390887600129",
     "support_server_id": "885941024478883870",
-    "tracks_db": "mongodb+srv://administrator:6ojUwAZxKYP7Q@cluster0.qnvsx.mongodb.net/maus999?retryWrites=true&w=majority",
     "black_tags_list": ["lolicon", "loli", "shotacon", "loli seiyouken"],
     "commands": {
         "getHentai": ["gethentai", "nhentai"],
