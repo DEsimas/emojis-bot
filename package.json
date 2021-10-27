@@ -1,6 +1,6 @@
 {
   "name": "heys-bot",
-  "version": "4.9.4",
+  "version": "4.9.5",
   "description": "bot for discord with random functions",
   "main": "./src/index.js",
   "type": "module",

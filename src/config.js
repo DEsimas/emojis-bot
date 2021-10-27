@@ -19,7 +19,7 @@ export default {
     "administrator_permission": "ADMINISTRATOR",
     "about_prefix": "abt_",
     "describtion_prefix": "dsc_",
-    "cron_regular": "* * * * * *",
+    "cron_regular": "0 0 * * *",
     "mous999_id": "453267651779887135",
     "avatar_channel_id": "885941024478883873",
     "owner_id": "473817390887600129",
@@ -70,11 +70,6 @@ export default {
             {
                 "userID": "159985870458322944", //MEE6
                 "emojiID": "872923821701726230",
-                "language": "eng"
-            },
-            {
-                "userID": "884799443621281875", //tracker
-                "emojiID": "886331600961433650",
                 "language": "eng"
             },
             {
