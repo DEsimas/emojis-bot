@@ -12,23 +12,25 @@ export default class getHentai extends Command{
     };
 
     async getHentai() {
-        const ID = this.args[1]
+        const ID = this.args[1];
 
         //validate id
         if (this.validate(ID)) return;
 
         //if id random send random
-        if (ID === config.random_id) {
-            this.getRandom();
-            return;
-        }
+        if(typeof ID.toLowerCase === "function"){
+            if (ID.toLowerCase() === config.random_id) {
+                this.getRandom();
+                return;
+            };
+        };
         
         //fetch doujin using nhentai library
         const api = new nhentai.API();
         api.fetchDoujin(ID).then(doujin => {
             this.doujin = doujin;
             this.handleDoujin();
-        }).catch(err => super.sendError(this.localization.msg_getHentai_fetch_error + err));
+        }).catch(err => super.sendError(this.localization.msg_getHentai_fetch_error));
     };
 
     //validate id
@@ -40,7 +42,9 @@ export default class getHentai extends Command{
         };
 
         //check if id is random
-        if(ID === config.random_id) return false;
+        if(typeof ID.toLowerCase === "function"){
+            if(ID.toLowerCase() === config.random_id) return false;
+        };
 
         //check if id in ids range
         if (ID == "" || ID > 999999 || ID < 1 || isNaN(ID)) {
