@@ -8,6 +8,7 @@ export default {
     "links_per_message": 10,
     "avatar_cooldown": 300000,
     "status_cooldown": 600000,
+    "average_lifetime": 70,
     "error_color": "#ff0000",
     "success_color": "#00ff00",
     "random_id": "random",
@@ -90,6 +91,10 @@ export default {
     },
     "localization": {
         "eng": {
+            "sub_lived": "Lived:",
+            "sub_time": ["years", "months", "days"],
+            "sub_in_days": "In days:",
+            "sub_end": ["Medium lifetime is ", " so you will die after:"],
             "msg_getHentai_nhentai": "NHENTAI",
             "msg_getHentai_intro": "Enjoy the masterpiece:",
             "msg_getHentai_tags": "Tags:",
@@ -165,6 +170,10 @@ export default {
             "dsc_help": "Shows this message"
         },
         "rus": {
+            "sub_lived": "Прожито:",
+            "sub_time": ["года", "месяцев", "дней"],
+            "sub_in_days": "В днях:",
+            "sub_end": ["При средней продолжительности жзни в ", " лет вам осталось:"],
             "msg_getHentai_nhentai": "NHENTAI",
             "msg_getHentai_intro": "Наслаждаемся произведением:",
             "msg_getHentai_tags": "Теги:",

@@ -10,8 +10,7 @@ export default class Notifications {
     getNotificationsSchema() {
         return new mongoose.Schema({
             userID: String,
-            birth: Date,
-            duration: Number
+            birth: Date
         });
     };
 
@@ -24,8 +23,8 @@ export default class Notifications {
         return await this.notifications.findOne({ userID: userID });
     }
 
-    async addOne(userID, birth, duration) {
-        return await new this.notifications({ userID: userID, birth: birth, duration: duration }).save();
+    async addOne(userID, birth) {
+        return await new this.notifications({ userID: userID, birth: birth }).save();
     };
 
     async deleteOne(userID) {

@@ -5,6 +5,7 @@ import Handler from "./_handler.js";
 import config from "./../config.js";
 import Log from "../logger.js";
 import cron from "node-cron";
+import Discord from "discord.js";
 
 export default class readyHandler extends Handler {
     constructor(data) {
@@ -26,23 +27,46 @@ export default class readyHandler extends Handler {
         setInterval(async () => await this.setAvatars(), config.avatar_cooldown);
     };
 
+    getDateObj(date) {
+        return {
+            year: date.getFullYear(),
+            month: date.getMonth() + 1,
+            day: date.getDate()
+        };
+    };
+
+    dateToDays(date) {
+        return Math.round(Math.abs(date) / (1000 * 60 * 60 * 24));
+    };
+
     //every day notifications
     async initNotifications() {
         var task = cron.schedule(config.cron_regular, async () => {
             const users = await DAO.Notifications.getAll();
 
             users.forEach(async user => {
+                const lang = (await DAO.Users.getOne(user.userID)).language;
+                const localization = config.localization[lang];
                 const channel = await this.client.users.fetch(user.userID);
-                const diff = Math.abs(Math.round((user.birth - new Date()) / (1000 * 60 * 60 * 24)));
 
-                var year = user.birth.getFullYear();
-                var month = user.birth.getMonth();
-                var day = user.birth.getDate();
-                let end = new Date(year + user.duration, month, day);
+                const birth = this.getDateObj(user.birth);
+                const current = this.getDateObj(new Date());
 
-                const sum = Math.abs(Math.round((user.birth - end) / (1000 * 60 * 60 * 24)));
+                const age = {
+                    year: Math.abs(birth.year - current.year),
+                    month: Math.abs(birth.month - current.month),
+                    day: Math.abs(birth.day - current.day)
+                };
 
-                channel.send(diff + "/" + sum);
+                const end = new Date("" + birth.month + "." + birth.day + "." + (birth.year + config.average_lifetime));
+
+                const embed = new Discord.MessageEmbed()
+                    .addField(localization.sub_lived, `${age.year} ${localization.sub_time[0]} ${age.month} ${localization.sub_time[1]} ${age.day} ${localization.sub_time[2]}`)
+                    .addField(localization.sub_in_days,  `${this.dateToDays(user.birth - new Date())}`)
+                    .addField(`${localization.sub_end[0]} ${config.average_lifetime} ${localization.sub_end[1]}`, `${this.dateToDays(new Date() - end)} ${localization.sub_time[2]}`)
+                    .setColor(config.success_color);
+
+                channel.send({ embeds: [embed] });
             });
         });
 
