@@ -13,7 +13,7 @@
     "node": "v16.9.0"
   },
   "dependencies": {
-    "asciify-image": "^0.1.8",
+    "asciify-image": "^0.1.1",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
     "fast-average-color-node": "^1.0.3",
