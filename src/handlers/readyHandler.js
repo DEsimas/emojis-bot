@@ -58,12 +58,8 @@ export default class readyHandler extends Handler {
                     day: Math.abs(birth.day - current.day)
                 };
 
-                const end = new Date("" + birth.month + "." + birth.day + "." + (birth.year + config.average_lifetime));
-
                 const embed = new Discord.MessageEmbed()
-                    .addField(localization.sub_lived, `${age.year} ${localization.sub_time[0]} ${age.month} ${localization.sub_time[1]} ${age.day} ${localization.sub_time[2]}`)
-                    .addField(localization.sub_in_days,  `${this.dateToDays(user.birth - new Date())}`)
-                    .addField(`${localization.sub_end[0]} ${config.average_lifetime} ${localization.sub_end[1]}`, `${this.dateToDays(new Date() - end)} ${localization.sub_time[2]}`)
+                    .addField(localization.sub_lived, `${age.year} ${localization.sub_time[0]} ${age.month} ${localization.sub_time[1]} ${age.day} ${localization.sub_time[2]} (${this.dateToDays(user.birth - new Date())} ${localization.sub_time[2]})`)
                     .setColor(config.success_color);
 
                 channel.send({ embeds: [embed] });
