@@ -39,6 +39,15 @@ export default class readyHandler extends Handler {
         return Math.round(Math.abs(date) / (1000 * 60 * 60 * 24));
     };
 
+    monthDiff(d1, d2) {
+        var months;
+        months = (d2.getFullYear() - d1.getFullYear()) * 12;
+        months -= d1.getMonth();
+        months += d2.getMonth();
+        return months <= 0 ? 0 : months;
+    }
+    
+
     //every day notifications
     async initNotifications() {
         var task = cron.schedule(config.cron_regular, async () => {
@@ -53,9 +62,9 @@ export default class readyHandler extends Handler {
                 const current = this.getDateObj(new Date());
 
                 const age = {
-                    year: Math.abs(birth.year - current.year),
-                    month: Math.abs(birth.month - current.month),
-                    day: Math.abs(birth.day - current.day)
+                    year: birth.getMonth > current.getMonth ? Math.abs(-birth.year + current.year) - 1 : Math.abs(-birth.year + current.year),
+                    month: birth.day > current.day ? Math.abs(birth.day  - current.day) - 1 : Math.abs(birth.day  - current.day),
+                    day: Math.abs(31 - birth.day + current.day)
                 };
 
                 const embed = new Discord.MessageEmbed()
