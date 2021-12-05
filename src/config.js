@@ -74,6 +74,11 @@ export default {
                 "userID": "883051590959894538", //ME BUT TEST
                 "emojiID": null,
                 "language": "eng"
+            },
+            {
+                "userID": "883051590959894538", //heys-bot
+                "emojiID": "916962332930879569",
+                "language": "end"
             }
         ],
         "log": {
