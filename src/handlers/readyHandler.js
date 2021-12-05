@@ -27,26 +27,9 @@ export default class readyHandler extends Handler {
         setInterval(async () => await this.setAvatars(), config.avatar_cooldown);
     };
 
-    getDateObj(date) {
-        return {
-            year: date.getFullYear(),
-            month: date.getMonth() + 1,
-            day: date.getDate()
-        };
-    };
-
     dateToDays(date) {
         return Math.round(Math.abs(date) / (1000 * 60 * 60 * 24));
     };
-
-    monthDiff(d1, d2) {
-        var months;
-        months = (d2.getFullYear() - d1.getFullYear()) * 12;
-        months -= d1.getMonth();
-        months += d2.getMonth();
-        return months <= 0 ? 0 : months;
-    }
-    
 
     //every day notifications
     async initNotifications() {
@@ -58,17 +41,32 @@ export default class readyHandler extends Handler {
                 const localization = config.localization[lang];
                 const channel = await this.client.users.fetch(user.userID);
 
-                const birth = this.getDateObj(user.birth);
-                const current = this.getDateObj(new Date());
+                const birth = user.birth;
+                const current = new Date();
+                const future = new Date(birth);
 
-                const age = {
-                    year: birth.getMonth > current.getMonth ? Math.abs(-birth.year + current.year) - 1 : Math.abs(-birth.year + current.year),
-                    month: birth.day > current.day ? Math.abs(birth.day  - current.day) - 1 : Math.abs(birth.day  - current.day),
-                    day: Math.abs(31 - birth.day + current.day)
-                };
+                let lived = {
+                    years: 0,
+                    months: 0,
+                    days: 0
+                }
+
+                while ((future.getFullYear() !== current.getFullYear()) || (future.getMonth() !== current.getMonth()) || (future.getDate() !== current.getDate())) {
+                    future.setDate(future.getDate() + 1);
+                    lived.days++;
+
+                    if (future.getDate() === birth.getDate()) {
+                        lived.months++;
+                        lived.days = 0;
+                    }
+                    if (future.getMonth() === birth.getMonth() && lived.days === 0) {
+                        lived.years++;
+                        lived.months = 0;
+                    }
+                }
 
                 const embed = new Discord.MessageEmbed()
-                    .addField(localization.sub_lived, `${age.year} ${localization.sub_time[0]} ${age.month} ${localization.sub_time[1]} ${age.day} ${localization.sub_time[2]} (${this.dateToDays(user.birth - new Date())} ${localization.sub_time[2]})`)
+                    .addField(localization.sub_lived, `${lived.years} ${localization.sub_time[0]} ${lived.months} ${localization.sub_time[1]} ${lived.days} ${localization.sub_time[2]} (${this.dateToDays(birth - new Date())} ${localization.sub_time[2]})`)
                     .setColor(config.success_color);
 
                 channel.send({ embeds: [embed] });
