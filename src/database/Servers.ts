@@ -2,9 +2,9 @@ import { model, Model, Schema, UpdateQuery } from "mongoose";
 import { config } from "../config";
 
 export interface Server {
-    serverID: string,
-    doEmojis: boolean,
-    prefix: string
+    serverID: string;
+    doEmojis: boolean;
+    prefix: string;
 };
 
 export class Servers {

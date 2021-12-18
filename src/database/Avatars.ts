@@ -45,14 +45,14 @@ export class Avatars {
     }
 
     public async updateOneByName(name: string, options: UpdateQuery<Avatar>): Promise<UpdateQuery<Avatar>> {
-        return await this.AvatarsModel.updateOne({ name: name }, options);
+        return this.AvatarsModel.updateOne({ name: name }, options);
     }
 
     public async deleteOneById(_id: string): Promise<{ acknowledged: boolean, deletedCount: number }> {
-        return await this.AvatarsModel.deleteOne({ _id: _id });
+        return this.AvatarsModel.deleteOne({ _id: _id });
     }
 
     public async deleteAll(): Promise<{ acknowledged: boolean, deletedCount: number }> {
-        return await this.AvatarsModel.deleteMany({});
+        return this.AvatarsModel.deleteMany({});
     }
 }

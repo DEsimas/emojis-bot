@@ -27,28 +27,20 @@ export class Bot {
         this.client = new Client({ intents: this.intents});
     }
 
-    public async connectDB(uri?: string): Promise<Bot> {
-        await this.DAO.connect(uri || process.env.MONGO || "");
-        console.log(await this.DAO.Servers.deleteOneByServerId('cum'));
-        return this;
+    public connectDB(uri?: string): Promise<void> {
+        return this.DAO.connect(uri || process.env.MONGO || "");
     }
 
-    public login(token?: string): Bot {
+    public login(token?: string): void {
         this.client.login(token || process.env.TOKEN).then(token => {
             Log.info(`Logged in with token: ${token}`);
         }).catch(error => {
             Log.error(`Failed to log in\n${error}`);
         });
 
-        this.client.on(this.config.events.ready, () => {console.log('ready')});
+        this.client.on(this.config.events.ready, async () => {console.log("ready")});
         this.client.on(this.config.events.message, () => {console.log('message')});
         this.client.on(this.config.events.guildCreate, () => {console.log('new guild')});
         this.client.on(this.config.events.guildDelete, () => {console.log('guild deleted')});
-
-        return this;
-    }
-
-    public async test() {
-        console.log(await this.DAO.Avatars.getAll());
     }
 };
