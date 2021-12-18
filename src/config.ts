@@ -1,9 +1,4 @@
 export const config = {
-    "default_prefix": "|",
-    "default_emoji": null,
-    "default_language": "eng",
-    "default_doEmojis": false,
-    "default_scan_limit": 100,
     "avatar_cooldown": 300000,
     "status_cooldown": 600000,
     "error_color": "#ff0000",
@@ -20,6 +15,14 @@ export const config = {
     "avatar_channel_id": "885941024478883873",
     "owner_id": "473817390887600129",
     "support_server_id": "885941024478883870",
+    "default": {
+        "nickname": "emojis-bot",
+        "prefix": "|",
+        "emoji": null,
+        "language": "eng",
+        "doEmojis": false,
+        "scan_limit": 100
+    },
     "commands": {
         "imgToAscII": ["imgtoascii", "ita"],
         "setEmoji": ["setemoji"],
