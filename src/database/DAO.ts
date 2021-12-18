@@ -2,13 +2,16 @@ import { connect } from 'mongoose';
 import { Log } from '../Log';
 import { Avatars } from './Avatars';
 import { Notifications } from './Notifications';
+import { Servers } from './Servers';
 
 export class DAO {
     public readonly Avatars: Avatars;
+    public readonly Servers: Servers;
     public readonly Notifications: Notifications;
 
     constructor() {
         this.Avatars = new Avatars();
+        this.Servers = new Servers();
         this.Notifications = new Notifications();
     }
 

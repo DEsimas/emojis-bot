@@ -29,6 +29,7 @@ export class Bot {
 
     public async connectDB(uri?: string): Promise<Bot> {
         await this.DAO.connect(uri || process.env.MONGO || "");
+        console.log(await this.DAO.Servers.deleteOneByServerId('cum'));
         return this;
     }
 
