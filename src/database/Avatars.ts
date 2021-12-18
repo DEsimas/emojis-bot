@@ -1,4 +1,4 @@
-import { model, Model, Schema } from "mongoose";
+import { model, Model, Schema, UpdateQuery } from "mongoose";
 import { config } from "../config";
 
 export interface Avatar {
@@ -44,13 +44,15 @@ export class Avatars {
         return this.AvatarsModel.insertMany(avatars);
     }
 
-    public async deleteOneById(_id: string): Promise<boolean> {
-        if((await this.AvatarsModel.deleteOne({ _id: _id })).deletedCount === 1) return true;
-        return false;
+    public async updateOneByName(name: string, options: UpdateQuery<Avatar>): Promise<UpdateQuery<Avatar>> {
+        return await this.AvatarsModel.updateOne({ name: name }, options);
     }
 
-    public async deleteAll(): Promise<boolean> {
-        if((await this.AvatarsModel.deleteMany({})).deletedCount === 0) return false;
-        return true;
+    public async deleteOneById(_id: string): Promise<{ acknowledged: boolean, deletedCount: number }> {
+        return await this.AvatarsModel.deleteOne({ _id: _id });
+    }
+
+    public async deleteAll(): Promise<{ acknowledged: boolean, deletedCount: number }> {
+        return await this.AvatarsModel.deleteMany({});
     }
 }
