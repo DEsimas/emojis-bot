@@ -18,7 +18,7 @@ export class Avatars {
         this.AvatarsModel = model<Avatar>(this.config.database.collections.avatars, this.getAvatarSchema());
     }
 
-    private getAvatarSchema(): Schema {
+    private getAvatarSchema(): Schema<Avatar> {
         return new Schema<Avatar>({
             name: String,
             imageURL: String,

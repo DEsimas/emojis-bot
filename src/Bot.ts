@@ -2,7 +2,7 @@ import { config } from './config';
 import { config as dotenv } from 'dotenv';
 import { Client, Intents } from 'discord.js';
 import { DAO } from './database/DAO';
-import { ObjectId } from 'mongoose';
+import { Log } from './Log';
 
 export class Bot {
     private readonly DAO: DAO;
@@ -29,12 +29,15 @@ export class Bot {
 
     public async connectDB(uri?: string): Promise<Bot> {
         await this.DAO.connect(uri || process.env.MONGO || "");
-        console.log(await this.DAO.Avatars.deleteAll());
         return this;
     }
 
     public login(token?: string): Bot {
-        this.client.login(token || process.env.TOKEN);
+        this.client.login(token || process.env.TOKEN).then(token => {
+            Log.info(`Logged in with token: ${token}`);
+        }).catch(error => {
+            Log.error(`Failed to log in\n${error}`);
+        });
 
         this.client.on(this.config.events.ready, () => {console.log('ready')});
         this.client.on(this.config.events.message, () => {console.log('message')});
