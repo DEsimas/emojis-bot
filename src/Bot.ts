@@ -1,12 +1,16 @@
-import { config } from 'dotenv';
+import { config } from './config';
+import { config as dotenv } from 'dotenv';
 import { Client, Intents } from 'discord.js';
 
 export class Bot {
     private readonly client: Client;
     private readonly intents: number[];
+    private readonly config: typeof config;
 
     constructor() {
-        config();
+        dotenv();
+
+        this.config = config;
 
         this.intents = [
             Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
@@ -22,6 +26,9 @@ export class Bot {
     public login() {
         this.client.login(process.env.TOKEN);
 
-        this.client.on("messageCreate", () => {console.log("uwu")})
+        this.client.on(this.config.events.ready, () => {console.log('ready')});
+        this.client.on(this.config.events.message, () => {console.log('message')});
+        this.client.on(this.config.events.guildCreate, () => {console.log('new guild')});
+        this.client.on(this.config.events.guildDelete, () => {console.log('guild deleted')});
     }
 };
