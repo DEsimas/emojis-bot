@@ -1,3 +1,3 @@
 import { Bot } from './bot';
 
-new Bot().login();
+const bot = new Bot().login().connectDB();

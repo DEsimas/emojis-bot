@@ -1,6 +1,6 @@
 {
 	"name": "emojis-bot",
-	"version": "6.2.3",
+	"version": "6.2.4",
 	"description": "bot for discord with random functions",
 	"keywords": [
 		"typescript",
@@ -34,7 +34,7 @@
 		"discord.js": "^13.1.0",
 		"dotenv": "^10.0.0",
 		"fast-average-color-node": "^1.0.3",
-		"mongoose": "^6.0.4",
+		"mongoose": "^6.1.2",
 		"node-cron": "^3.0.0",
 		"node-fetch": "^3.0.0"
 	},

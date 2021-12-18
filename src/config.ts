@@ -51,8 +51,8 @@ export const config = {
     "img_to_ascii_settings": {
         "width": "width:"
     },
-    "db_settings": {
-        "db_collections": {
+    "database": {
+        "collections": {
             "users": "users",
             "servers": "servers",
             "avatars": "avatars",
@@ -74,11 +74,7 @@ export const config = {
                 "emojiID": "916962332930879569",
                 "language": "end"
             }
-        ],
-        "log": {
-            "db": "database connected",
-            "db_error": "database error: "
-        }
+        ]
     },
     "localization": {
         "eng": {
@@ -196,4 +192,4 @@ export const config = {
             "dsc_help": "Показывает это сообщение"
         }
     }
-}
+};
