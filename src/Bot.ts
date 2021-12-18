@@ -4,6 +4,7 @@ import { Client, Intents } from 'discord.js';
 import { DAO } from './database/DAO';
 import { Log } from './Log';
 import { guildCreateHandler } from './handlers/guildCreateHandler';
+import { guildDeleteHandler } from './handlers/guildDeleteHandler';
 
 export class Bot {
     private readonly DAO: DAO;
@@ -42,6 +43,6 @@ export class Bot {
         this.client.on(this.config.events.ready, async () => {console.log("ready")});
         this.client.on(this.config.events.message, () => {console.log('message')});
         this.client.on(this.config.events.guildCreate, guild => new guildCreateHandler(this.client, this.DAO, guild ).handle());
-        this.client.on(this.config.events.guildDelete, () => {console.log('guild deleted')});
+        this.client.on(this.config.events.guildDelete, guild => new guildDeleteHandler(this.DAO, guild).handle());
     }
 };
