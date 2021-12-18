@@ -1,16 +1,33 @@
 {
-  "name": "heys-bot",
-  "version": "5.1.4",
+  "name": "emojis-bot",
+  "version": "6.1.0",
   "description": "bot for discord with random functions",
-  "main": "./src/index.js",
-  "type": "module",
+  "keywords": [
+    "typescript",
+    "node",
+    "discord",
+    "discordjs"
+  ],
+  "bugs": {
+    "url": "https://github.com/DEsimas/emojis-bot/issues",
+    "email": "simasuh@gmail.com"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Serafim Sukharev",
+    "email": "simasuh@gmail.com"
+  },
+  "main": "./dist/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DEsimas/emojis-bot"
+  },
   "scripts": {
     "start": "node ./src/index.js"
   },
-  "author": "DEsimas<simasuh@gmail.com>",
-  "license": "ISC",
   "engines": {
-    "node": "v16.9.0"
+    "node": "16.9.0",
+    "npm": "8.3.0"
   },
   "dependencies": {
     "asciify-image": "^0.1.1",
@@ -20,5 +37,9 @@
     "mongoose": "^6.0.4",
     "node-cron": "^3.0.0",
     "node-fetch": "^3.0.0"
-  }
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  },
+  "private": false
 }
