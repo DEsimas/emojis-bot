@@ -23,12 +23,14 @@ export class Bot {
         this.client = new Client({ intents: this.intents});
     }
 
-    public login() {
-        this.client.login(process.env.TOKEN);
+    public login(token?: string): Bot {
+        this.client.login(token || process.env.TOKEN);
 
         this.client.on(this.config.events.ready, () => {console.log('ready')});
         this.client.on(this.config.events.message, () => {console.log('message')});
         this.client.on(this.config.events.guildCreate, () => {console.log('new guild')});
         this.client.on(this.config.events.guildDelete, () => {console.log('guild deleted')});
+
+        return this;
     }
 };
