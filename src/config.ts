@@ -1,27 +1,10 @@
-export const config = {
-    "avatar_cooldown": 300000,
-    "status_cooldown": 600000,
-    "error_color": "#ff0000",
-    "success_color": "#00ff00",
-    "emoji_discord_link": "https://cdn.discordapp.com/emojis/",
-    "maus999_server_url": "https://maus999server.herokuapp.com/tracks",
-    "emoji_extension": ".png",
-    "ascII_file_name": "./ascII.txt",
+import { ColorResolvable } from "discord.js";
+
+export const config: Config = {
     "administrator_permission": "ADMINISTRATOR",
-    "about_prefix": "abt_",
-    "describtion_prefix": "dsc_",
-    "cron_regular": "0 0 * * *",
-    "mous999_id": "453267651779887135",
-    "avatar_channel_id": "885941024478883873",
-    "owner_id": "473817390887600129",
-    "support_server_id": "885941024478883870",
-    "default": {
-        "nickname": "emojis-bot",
-        "prefix": "|",
-        "emoji": null,
-        "language": "eng",
-        "doEmojis": false,
-        "scan_limit": 100
+    "scan_limit": 100,
+    "cron": {
+        "notifications": "0 0 * * *"
     },
     "commands": {
         "imgToAscII": ["imgtoascii", "ita"],
@@ -41,18 +24,27 @@ export const config = {
         "guildCreate": "guildCreate",
         "guildDelete": "guildDelete"
     },
-    "log": {
-        "ready": "bot started"
+    "embed_colors": {
+        "error": "#ff0000",
+        "success": "#00ff00",
+        "discord": "#202225"
     },
-    "status": ["on ", " servers with ", " users"],
-    "img_to_ascii_defaults": {
-        "fit": "box",
-        "width": 150,
-        "height": 75,
-        "color": false
+    "ids": {
+        "avatars_channel": "885941024478883873",
+        "support_server": "885941024478883870"
     },
-    "img_to_ascii_settings": {
-        "width": "width:"
+    "emojis": {
+        "link": "https://cdn.discordapp.com/emojis/",
+        "extension": ".png"
+    },
+    "img_to_ascii": {
+        "options": {
+            "fit": "box",
+            "width": 150,
+            "height": 75,
+            "color": false
+        },
+        "file_name": "./ascII.txt"
     },
     "database": {
         "collections": {
@@ -61,28 +53,27 @@ export const config = {
             "avatars": "avatars",
             "notifications": "notifications"
         },
-        "default_values": [
-            {
-                "userID": "159985870458322944", //MEE6
-                "emojiID": "872923821701726230",
-                "language": "eng"
-            },
-            {
-                "userID": "883020186339397693", //ME
-                "emojiID": null,
-                "language": "eng"
-            },
-            {
-                "userID": "883051590959894538", //heys-bot
-                "emojiID": "916962332930879569",
-                "language": "end"
-            }
-        ]
+        "defaults": {
+            "nickname": "emojis-bot",
+            "prefix": "|",
+            "emoji": null,
+            "language": "eng",
+            "doEmojis": false
+        }
     },
+    "status": ["on ", " servers with ", " users"],
     "localization": {
         "eng": {
-            "sub_lived": "Lived:",
-            "sub_time": ["years", "months", "days"],
+            "notifications": {
+                "header": "Lived",
+                "units": {
+                    "y": "years",
+                    "m": "months",
+                    "d": "days",
+                    "h": "hours",
+                    "min": "minutes"
+                }
+            },
             "msg_imgToAscII_error": "Error while processing an image UwU",
             "msg_imgToAscII_no_files": "There are no files in your message ¯\\_(ツ)_/¯",
             "msg_imgToAscII_wrong_file": "File not found",
@@ -138,8 +129,16 @@ export const config = {
             "dsc_help": "Shows this message"
         },
         "rus": {
-            "sub_lived": "Прожито:",
-            "sub_time": ["года", "месяцев", "дней"],
+            "notifications": {
+                "header": "Прожито",
+                "units": {
+                    "y": "лет",
+                    "m": "месяцев",
+                    "d": "дней",
+                    "h": "часов",
+                    "min": "минут",
+                }
+            },
             "msg_clear_error": "Какая ошибка могла случится во время удаления сообщений?",
             "msg_imgToAscII_error": "Не удалось сохранить файл UwU",
             "msg_imgToAscII_no_files": "В сообщении нет вложений ¯\\_(ツ)_/¯",
@@ -196,3 +195,165 @@ export const config = {
         }
     }
 };
+
+export interface Config {
+    administrator_permission: string;
+    scan_limit: number;
+    cron: Cron;
+    commands: Commands;
+    events: Events;
+    embed_colors: EmbedColors;
+    ids: Ids;
+    emojis: Emojis;
+    img_to_ascii: ImgToAscii;
+    database: Database;
+    status: string[];
+    localization: Localization;
+}
+
+interface Cron {
+    notifications: string;
+}
+
+interface Commands {
+    imgToAscII: string[];
+    setEmoji: string[];
+    deleteEmoji: string[];
+    setLanguage: string[];
+    setPrefix: string[];
+    doEmojis: string[];
+    subscribe: string[];
+    unsubscribe: string[];
+    clear: string[];
+    help: string[];
+}
+
+interface Events {
+    ready: string;
+    message: string;
+    guildCreate: string;
+    guildDelete: string;
+}
+
+interface EmbedColors {
+    error: ColorResolvable;
+    success: ColorResolvable;
+    discord: ColorResolvable;
+}
+
+interface Ids {
+    avatars_channel: string;
+    support_server: string;
+}
+
+interface Emojis {
+    link: string;
+    extension: string;
+}
+
+interface Options {
+    fit: string;
+    width: number;
+    height: number;
+    color: boolean;
+}
+
+interface ImgToAscii {
+    options: Options;
+    file_name: string;
+}
+
+interface Collections {
+    users: string;
+    servers: string;
+    avatars: string;
+    notifications: string;
+}
+
+interface Defaults {
+    nickname: string;
+    prefix: string;
+    emoji: null;
+    language: "rus" | "eng";
+    doEmojis: boolean;
+}
+
+interface Database {
+    collections: Collections;
+    defaults: Defaults;
+}
+
+interface Units {
+    y: string;
+    m: string;
+    d: string;
+    h: string;
+    min: string;
+}
+
+interface Notifications {
+    header: string;
+    units: Units;
+}
+
+interface Lang {
+    notifications: Notifications;
+    msg_imgToAscII_error: string;
+    msg_imgToAscII_no_files: string;
+    msg_imgToAscII_wrong_file: string;
+    msg_imgToAscII_not_link: string;
+    msg_clear_error: string;
+    emd_help_author: string;
+    msg_doEmojis_on: string;
+    msg_doEmojis_off: string;
+    msg_doEmojis_args_warn: string;
+    msg_doEmojis_access_warn: string;
+    msg_doEmojis_db_error: string;
+    msg_setPrefix_success: string;
+    msg_setPrefix_access_warn: string;
+    msg_setPrefix_empty_warn: string;
+    msg_setPrefix_db_error: string;
+    msg_deleteEmoji_success: string;
+    msg_deleteEmoji_db_error: string;
+    msg_setEmoji_updated: string;
+    msg_setEmoji_error: string;
+    msg_setEmoji_db_error: string;
+    msg_setEmoji_same_emoji: string;
+    msg_setLanguage_success: string;
+    msg_setLanguage_warn: string;
+    msg_setLanguage_empty: string;
+    msg_setLanguage_db_error: string;
+    msg_subscribe_date_error: string;
+    msg_subscribe_duration_error: string;
+    msg_subscribe_send_success: string;
+    msg_subscribe_existing_user: string;
+    msg_unsubscribe_not_subbed: string;
+    msg_unsubscribe_success: string;
+    abt_setlang: string;
+    abt_setemoji: string;
+    abt_delemoji: string;
+    abt_doemojis: string;
+    abt_setprefix: string;
+    abt_imgtoascii: string;
+    abt_subscribe: string;
+    abt_unsubscribe: string;
+    abt_addtrack: string;
+    abt_clear: string;
+    abt_help: string;
+    dsc_setlang: string;
+    dsc_setemoji: string;
+    dsc_delemoji: string;
+    dsc_doemojis: string;
+    dsc_setprefix: string;
+    dsc_imgtoascii: string;
+    dsc_subscribe: string;
+    dsc_unsubscribe: string;
+    dsc_addtrack: string;
+    dsc_clear: string;
+    dsc_help: string;
+}
+
+interface Localization {
+    eng: Lang;
+    rus: Lang;
+}

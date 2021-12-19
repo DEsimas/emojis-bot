@@ -16,12 +16,12 @@ export class guildCreateHandler {
     }
 
     public async handle(): Promise<void> {
-        this.DAO.Servers.insertOne({ serverID: this.guild.id, doEmojis: this.config.default.doEmojis, prefix: this.config.default.prefix });
+        this.DAO.Servers.insertOne({ serverID: this.guild.id, doEmojis: this.config.database.defaults.doEmojis, prefix: this.config.database.defaults.prefix });
         this.guild.me?.setNickname(await this.getNickname());
     }
 
     private async getNickname(): Promise<string> {
-        const support_guild = await this.client.guilds.fetch(this.config.support_server_id);
-        return support_guild.me?.nickname || this.config.default.nickname;
+        const support_guild = await this.client.guilds.fetch(this.config.ids.support_server);
+        return support_guild.me?.nickname || this.config.database.defaults.nickname;
     }
 };

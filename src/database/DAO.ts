@@ -6,10 +6,10 @@ import { Servers } from './Servers';
 import { Users } from './Users';
 
 export class DAO {
-    public readonly Users: Users;
-    public readonly Avatars: Avatars;
-    public readonly Servers: Servers;
-    public readonly Notifications: Notifications;
+    public Users: Users;
+    public Avatars: Avatars;
+    public Servers: Servers;
+    public Notifications: Notifications;
 
     constructor() {
         this.Users = new Users();

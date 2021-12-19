@@ -5,6 +5,7 @@ import { DAO } from './database/DAO';
 import { Log } from './Log';
 import { guildCreateHandler } from './handlers/guildCreateHandler';
 import { guildDeleteHandler } from './handlers/guildDeleteHandler';
+import { readyHandler } from './handlers/readyHandler';
 
 export class Bot {
     private readonly DAO: DAO;
@@ -40,7 +41,7 @@ export class Bot {
             Log.error(`Failed to log in\n${error}`);
         });
 
-        this.client.on(this.config.events.ready, async () => {console.log("ready")});
+        this.client.on(this.config.events.ready, () => new readyHandler(this.client, this.DAO).handle());
         this.client.on(this.config.events.message, () => {console.log('message')});
         this.client.on(this.config.events.guildCreate, guild => new guildCreateHandler(this.client, this.DAO, guild ).handle());
         this.client.on(this.config.events.guildDelete, guild => new guildDeleteHandler(this.DAO, guild).handle());

@@ -22,19 +22,19 @@ export class Notifications {
         });
     }
 
-    public async getAll(): Promise<Notification[]> {
+    async getAll(): Promise<Notification[]> {
         return this.NotificationModel.find({});
     }
 
-    public async findByUserId(userID: string): Promise<Notification | null> {
+    async findByUserId(userID: string): Promise<Notification | null> {
         return this.NotificationModel.findOne({ userID: userID });
     }
 
-    public async insertOne(notification: Notification): Promise<Notification> {
+    async insertOne(notification: Notification): Promise<Notification> {
         return new this.NotificationModel(notification).save();
     }
 
-    public async deleteByUserId(userID: string): Promise<boolean> {
+    async deleteByUserId(userID: string): Promise<boolean> {
         if((await this.NotificationModel.deleteOne({ userID: userID })).deletedCount === 1) return true;
         return false;
     }

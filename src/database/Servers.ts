@@ -24,23 +24,23 @@ export class Servers {
         });
     }
 
-    public async getAll(): Promise<Server[]> {
+    async getAll(): Promise<Server[]> {
         return this.ServersModel.find({});
     }
 
-    public async findByServerId(serverID: string): Promise<Server | null> {
+    async findByServerId(serverID: string): Promise<Server | null> {
         return this.ServersModel.findOne({ serverID: serverID });
     }
 
-    public async insertOne(server: Server): Promise<Server> {
+    async insertOne(server: Server): Promise<Server> {
         return new this.ServersModel(server).save();
     }
 
-    public async updateOneByServerId(serverID: string, options: UpdateQuery<Server>): Promise<UpdateQuery<Server>> {
+    async updateOneByServerId(serverID: string, options: UpdateQuery<Server>): Promise<UpdateQuery<Server>> {
         return await this.ServersModel.updateOne({ serverID: serverID }, options);
     }
 
-    public async deleteOneByServerId(serverID: string): Promise<{ acknowledged: boolean, deletedCount: number }> {
+    async deleteOneByServerId(serverID: string): Promise<{ acknowledged: boolean, deletedCount: number }> {
         return await this.ServersModel.deleteOne({ serverID: serverID });
     }
 }

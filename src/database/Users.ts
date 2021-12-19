@@ -4,7 +4,7 @@ import { config } from "../config";
 export interface User {
     userID: string;
     emojiID: string | null;
-    language: string;
+    language: 'rus' | 'eng';
 };
 
 export class Users {
