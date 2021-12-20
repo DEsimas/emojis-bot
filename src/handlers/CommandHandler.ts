@@ -1,8 +1,20 @@
-import { Client, Message } from "discord.js";
+import { DeleteEmoji } from "../commands/DeleteEmoji";
+import { SetLanguage } from "../commands/SetLanguage";
+import { Unsubscribe } from "../commands/Unsubscribe";
+import { ImgToAscII } from "../commands/ImgToAscII";
+import { SetPrefix } from "../commands/SetPrefix";
+import { Subscribe } from "../commands/Subscribe";
+import { DoEmojis } from "../commands/DoEmojis";
+import { SetEmoji } from "../commands/SetEmoji";
+import { Clear } from "../commands/Clear";
+import { Help } from "../commands/Help";
+
 import { Command } from "../commands/_Command";
-import { config } from "../config";
 import { Server } from "../database/Servers";
 import { User } from "../database/Users";
+import { config } from "../config";
+
+import { Client, Message } from "discord.js";
 
 export class CommandHandler {
     private readonly client: Client;
@@ -16,7 +28,7 @@ export class CommandHandler {
         this.message = message;
         this.user = user;
         this.server = server;
-        this.setCommandsList(Command, Command, Command, Command, Command, Command, Command, Command, Command, Command);
+        this.setCommandsList(ImgToAscII, SetEmoji, DeleteEmoji, SetLanguage, SetPrefix, DoEmojis, Subscribe, Unsubscribe, Clear, Help);
     }
 
     public async handle(): Promise<void> {
