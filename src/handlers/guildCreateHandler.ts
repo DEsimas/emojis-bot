@@ -1,12 +1,13 @@
-import { Client, Guild } from "discord.js";
-import { config } from "../config";
+import { Config, config } from "../config";
 import { DAO } from "../database/DAO";
+
+import { Client, Guild } from "discord.js";
 
 export class guildCreateHandler {
     private readonly DAO: DAO;
     private readonly guild: Guild;
     private readonly client: Client;
-    private readonly config: typeof config;
+    private readonly config: Config;
 
     constructor(client: Client, DAO: DAO, guild: Guild) {
         this.DAO = DAO;

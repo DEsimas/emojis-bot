@@ -1,12 +1,13 @@
 {
 	"name": "emojis-bot",
-	"version": "6.4.1",
+	"version": "6.4.2",
 	"description": "bot for discord with random functions",
 	"keywords": [
 		"typescript",
 		"node",
 		"discord",
-		"discordjs"
+		"discordjs",
+        "mongodb"
 	],
 	"bugs": {
 		"url": "https://github.com/DEsimas/emojis-bot/issues",

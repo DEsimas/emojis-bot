@@ -2,7 +2,8 @@ import { Client, MessageEmbed } from "discord.js";
 import { Config, config } from "../config";
 import { DAO } from "../database/DAO";
 import { Log } from "../Log";
-import { schedule, ScheduledTask } from 'node-cron'
+
+import { schedule, ScheduledTask } from 'node-cron';
 
 export class NotificationsSender {
 

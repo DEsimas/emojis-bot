@@ -1,17 +1,18 @@
-import { config } from './config';
-import { config as dotenv } from 'dotenv';
-import { Client, Intents } from 'discord.js';
-import { DAO } from './database/DAO';
-import { Log } from './Log';
 import { guildCreateHandler } from './handlers/guildCreateHandler';
 import { guildDeleteHandler } from './handlers/guildDeleteHandler';
 import { readyHandler } from './handlers/readyHandler';
+import { Config, config } from './config';
+import { DAO } from './database/DAO';
+import { Log } from './Log';
+
+import { Client, Intents } from 'discord.js';
+import { config as dotenv } from 'dotenv';
 
 export class Bot {
     private readonly DAO: DAO;
     private readonly client: Client;
+    private readonly config: Config;
     private readonly intents: number[];
-    private readonly config: typeof config;
 
     constructor() {
         dotenv();

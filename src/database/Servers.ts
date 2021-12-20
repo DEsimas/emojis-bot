@@ -1,5 +1,6 @@
+import { Config, config } from "../config";
+
 import { model, Model, Schema, UpdateQuery } from "mongoose";
-import { config } from "../config";
 
 export interface Server {
     serverID: string;
@@ -8,7 +9,7 @@ export interface Server {
 };
 
 export class Servers {
-    private readonly config: typeof config;
+    private readonly config: Config;
     private readonly ServersModel: Model<Server>;
 
     constructor() {

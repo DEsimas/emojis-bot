@@ -1,5 +1,6 @@
-import { Client, Guild } from "discord.js";
 import { DAO } from "../database/DAO";
+
+import { Guild } from "discord.js";
 
 export class guildDeleteHandler {
     private readonly DAO: DAO;

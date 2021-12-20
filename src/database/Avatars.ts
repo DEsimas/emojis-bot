@@ -1,5 +1,6 @@
+import { Config, config } from "../config";
+
 import { model, Model, Schema, UpdateQuery } from "mongoose";
-import { config } from "../config";
 
 export interface Avatar {
     name: string;
@@ -10,7 +11,7 @@ export interface Avatar {
 };
 
 export class Avatars {
-    private readonly config: typeof config;
+    private readonly config: Config;
     private readonly AvatarsModel: Model<Avatar>;
 
     constructor() {

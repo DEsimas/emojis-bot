@@ -1,9 +1,10 @@
-import { connect } from 'mongoose';
-import { Log } from '../Log';
-import { Avatars } from './Avatars';
 import { Notifications } from './Notifications';
+import { Avatars } from './Avatars';
 import { Servers } from './Servers';
 import { Users } from './Users';
+import { Log } from '../Log';
+
+import { connect } from 'mongoose';
 
 export class DAO {
     public Users: Users;

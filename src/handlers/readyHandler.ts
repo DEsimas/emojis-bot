@@ -1,8 +1,9 @@
-import { Client } from "discord.js";
 import { NotificationsSender } from "../components/NotificationsSender";
 import { Config, config } from "../config";
 import { DAO } from "../database/DAO";
 import { Log } from "../Log";
+
+import { Client } from "discord.js";
 
 export class readyHandler {
 
@@ -20,6 +21,6 @@ export class readyHandler {
 
     public async handle(): Promise<void> {
         const sender = new NotificationsSender(this.client, this.DAO);
-        sender.getTask(config.cron.notifications).start();
+        sender.getTask(this.config.cron.notifications).start();
     }
 };
