@@ -8,11 +8,9 @@ import { Client, Message } from "discord.js";
 
 export class AvatarsRefresher {
     private readonly client: Client;
-    private readonly DAO: DAO;
 
-    constructor(client: Client, DAO: DAO) {
+    constructor(client: Client) {
         this.client = client;
-        this.DAO = DAO;
     }
 
     public getTask(time: string): ScheduledTask {
@@ -23,9 +21,9 @@ export class AvatarsRefresher {
         const messages = await this.fetchMessages();
         const avatars = await this.parseAvatars(messages);
 
-        const count = await this.DAO.Avatars.count();
-        await this.DAO.Avatars.deleteAll();
-        await this.DAO.Avatars.insertMany(avatars);
+        const count = await DAO.Avatars.count();
+        await DAO.Avatars.deleteAll();
+        await DAO.Avatars.insertMany(avatars);
 
         Log.info(`AvatarsRefresher.ts:\tavatars in db refreshed (${count} -> ${avatars.length})`);
     }
@@ -43,7 +41,7 @@ export class AvatarsRefresher {
     
     private async parseAvatars(messages: Message[]): Promise<Avatar[]> {
         const avatars: Avatar[] = [];
-        const activeName = (await this.DAO.Avatars.getActive())?.name ;
+        const activeName = (await DAO.Avatars.getActive())?.name ;
         
         messages.forEach( msg => {
             const avatar = this.convMessageToAvatar(msg, activeName);

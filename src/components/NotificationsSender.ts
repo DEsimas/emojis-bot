@@ -7,11 +7,9 @@ import { schedule, ScheduledTask } from 'node-cron';
 
 export class NotificationsSender {
 
-    private readonly DAO: DAO;
     private readonly client: Client;
 
-    constructor(client: Client, DAO: DAO)  {
-        this.DAO = DAO;
+    constructor(client: Client)  {
         this.client = client;
     }
 
@@ -20,12 +18,12 @@ export class NotificationsSender {
     }
 
     private async sendNotifications(): Promise<void> {
-        const Notifications = await this.DAO.Notifications.getAll();
+        const Notifications = await DAO.Notifications.getAll();
         
         Notifications.forEach(async user => {
             const diff = this.getDifference(user.birth, new Date());
 
-            const localization = config.localization[(await this.DAO.Users.findByUserId(user.userID))?.language || config.database.defaults.language].notifications;
+            const localization = config.localization[(await DAO.Users.findByUserId(user.userID))?.language || config.database.defaults.language].notifications;
             
             const channel = await this.client.users.fetch(user.userID);
             const embed = new MessageEmbed()

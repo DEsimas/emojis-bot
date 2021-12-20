@@ -9,24 +9,21 @@ import { Client } from "discord.js";
 
 export class ReadyHandler {
 
-    private readonly DAO: DAO;
     private readonly client: Client;
 
-    constructor(client: Client, DAO: DAO)  {
+    constructor(client: Client)  {
         Log.info("ReadyHandler.ts:\tbot is ready");
-
-        this.DAO = DAO;
         this.client = client;
     }
 
     public async handle(): Promise<void> {
-        const sender = new NotificationsSender(this.client, this.DAO);
+        const sender = new NotificationsSender(this.client);
         sender.getTask(config.cron.notifications).start();
 
-        const updater = new UserInterfaceUpdater(this.client, this.DAO);
+        const updater = new UserInterfaceUpdater(this.client);
         updater.getTask(config.cron.UI).start();
 
-        const refresher = new AvatarsRefresher(this.client, this.DAO);
+        const refresher = new AvatarsRefresher(this.client);
         refresher.getTask(config.cron.avatars).start();
     }
 };

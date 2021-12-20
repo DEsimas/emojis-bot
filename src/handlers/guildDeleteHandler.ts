@@ -3,15 +3,13 @@ import { DAO } from "../database/DAO";
 import { Guild } from "discord.js";
 
 export class GuildDeleteHandler {
-    private readonly DAO: DAO;
     private readonly guild: Guild;
 
-    constructor(DAO: DAO, guild: Guild) {
-        this.DAO = DAO;
+    constructor(guild: Guild) {
         this.guild = guild;
     }
 
     public async handle(): Promise<void> {
-        this.DAO.Servers.deleteOneByServerId(this.guild.id);
+        DAO.Servers.deleteOneByServerId(this.guild.id);
     }
 };

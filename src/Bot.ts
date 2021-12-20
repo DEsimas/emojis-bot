@@ -12,14 +12,11 @@ import { User } from './database/Users';
 import { Server } from './database/Servers';
 
 export class Bot {
-    private readonly DAO: DAO;
     private readonly client: Client;
     private readonly intents: number[];
 
     constructor() {
         dotenv();
-
-        this.DAO = new DAO();
 
         this.intents = [
             Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
@@ -33,7 +30,7 @@ export class Bot {
     }
 
     public connectDB(uri?: string): Promise<void> {
-        return this.DAO.connect(uri || process.env.MONGO || "");
+        return DAO.connect(uri || process.env.MONGO || "");
     }
 
     public login(token?: string): void {
@@ -43,15 +40,15 @@ export class Bot {
             Log.error(`Bot.ts:\tfailed to log in\n${error}`);
         });
 
-        this.client.on(config.events.ready, () => new ReadyHandler(this.client, this.DAO).handle());
-        this.client.on(config.events.message, async (message: Message) => {new MessageHandler(this.client, this.DAO, message, await this.fetchUser(message.author.id), await this.fentchServer(message.guild?.id)).handle()});
-        this.client.on(config.events.guildCreate, guild => new GuildCreateHandler(this.client, this.DAO, guild ).handle());
-        this.client.on(config.events.guildDelete, guild => new GuildDeleteHandler(this.DAO, guild).handle());
+        this.client.on(config.events.ready, () => new ReadyHandler(this.client).handle());
+        this.client.on(config.events.message, async (message: Message) => {new MessageHandler(this.client, message, await this.fetchUser(message.author.id), await this.fentchServer(message.guild?.id)).handle()});
+        this.client.on(config.events.guildCreate, guild => new GuildCreateHandler(this.client, guild ).handle());
+        this.client.on(config.events.guildDelete, guild => new GuildDeleteHandler(guild).handle());
     }
 
     private async fetchUser(userID: string): Promise<User> {
-        const user = await this.DAO.Users.findByUserId(userID);
-        if(user === null) return this.DAO.Users.insertOne({
+        const user = await DAO.Users.findByUserId(userID);
+        if(user === null) return DAO.Users.insertOne({
             userID: userID,
             emojiID: config.database.defaults.emoji,
             language: config.database.defaults.language
@@ -61,8 +58,8 @@ export class Bot {
 
     private async fentchServer(serverID: string | undefined): Promise<Server | null> {
         if(serverID === undefined) return null;
-        const server = await this.DAO.Servers.findByServerId(serverID);
-        if(server === null) return this.DAO.Servers.insertOne({
+        const server = await DAO.Servers.findByServerId(serverID);
+        if(server === null) return DAO.Servers.insertOne({
             serverID: serverID,
             doEmojis: config.database.defaults.doEmojis,
             prefix: config.database.defaults.prefix

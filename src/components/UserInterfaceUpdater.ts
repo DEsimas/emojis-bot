@@ -6,11 +6,9 @@ import { Client } from "discord.js";
 import { schedule, ScheduledTask } from "node-cron";
 
 export class UserInterfaceUpdater {
-    private readonly DAO: DAO;
     private readonly client: Client;
 
-    constructor(client: Client, DAO: DAO) {
-        this.DAO = DAO;
+    constructor(client: Client) {
         this.client =  client;
     }
 
@@ -21,13 +19,13 @@ export class UserInterfaceUpdater {
     private async updateUI(): Promise<void> {
         this.setActivity();
 
-        const avatars = await this.DAO.Avatars.getNotActive();
+        const avatars = await DAO.Avatars.getNotActive();
         const avatar = avatars[Math.round(Math.random() * (avatars.length - 1))];
 
         this.client.user?.setAvatar(avatar.imageURL).then(async () => {
             Log.info(`UserInterfaceUpdater.ts:\tavatar updated ${avatar.imageURL}`);
             this.setNickname(avatar.name);
-            await this.DAO.Avatars.switchActive(avatar.name);
+            await DAO.Avatars.switchActive(avatar.name);
             Log.info(`UserInterfaceUpdater.ts:\tavatar in db updated`);
         }).catch(error => {
             Log.warning(`UserInterfaceUpdater.ts:\tcan't update UI\n${error}`);
@@ -35,8 +33,8 @@ export class UserInterfaceUpdater {
     }
 
     private async setActivity(): Promise<void> {
-        const servers = await this.DAO.Servers.count();
-        const users = await this.DAO.Users.count();
+        const servers = await DAO.Servers.count();
+        const users = await DAO.Users.count();
         let activity = config.status;
         activity = activity.replace("${servers}", servers.toString());
         activity = activity.replace("${users}", users.toString());
