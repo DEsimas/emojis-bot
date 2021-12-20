@@ -7,7 +7,6 @@ export const config: Config = {
     "cron": {
         "notifications": "0 0 * * *",
         "UI": "*/5 * * * *",
-        "avatars": "*/30 * * * *"
     },
     "commands": {
         "imgToAscII": ["imgtoascii", "ita"],
@@ -233,7 +232,6 @@ export interface Config {
 interface Cron {
     notifications: string;
     UI: string;
-    avatars: string;
 }
 
 interface Commands {

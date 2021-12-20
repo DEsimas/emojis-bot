@@ -1,3 +1,4 @@
+import { DAO } from "../database/DAO";
 import { Command } from "./_Command";
 
 export class Help extends Command {
