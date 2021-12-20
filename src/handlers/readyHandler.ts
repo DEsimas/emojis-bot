@@ -1,6 +1,5 @@
 import { UserInterfaceUpdater } from "../components/UserInterfaceUpdater";
 import { NotificationsSender } from "../components/NotificationsSender";
-import { AvatarsRefresher } from "../components/AvatarsRefresher";
 import { config } from "../config";
 import { Log } from "../Log";
 
@@ -21,8 +20,5 @@ export class ReadyHandler {
 
         const updater = new UserInterfaceUpdater(this.client);
         updater.getTask(config.cron.UI).start();
-
-        const refresher = new AvatarsRefresher(this.client);
-        refresher.getTask(config.cron.avatars).start();
     }
 };
