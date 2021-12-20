@@ -1,7 +1,7 @@
 import { GuildCreateHandler } from './handlers/GuildCreateHandler';
 import { GuildDeleteHandler } from './handlers/GuildDeleteHandler';
 import { ReadyHandler } from './handlers/ReadyHandler';
-import { Config, config } from './config';
+import { config } from './config';
 import { DAO } from './database/DAO';
 import { Log } from './Log';
 
@@ -11,14 +11,12 @@ import { config as dotenv } from 'dotenv';
 export class Bot {
     private readonly DAO: DAO;
     private readonly client: Client;
-    private readonly config: Config;
     private readonly intents: number[];
 
     constructor() {
         dotenv();
 
         this.DAO = new DAO();
-        this.config = config;
 
         this.intents = [
             Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
@@ -42,9 +40,9 @@ export class Bot {
             Log.error(`Bot.ts:\tfailed to log in\n${error}`);
         });
 
-        this.client.on(this.config.events.ready, () => new ReadyHandler(this.client, this.DAO).handle());
-        this.client.on(this.config.events.message, () => {console.log('message')});
-        this.client.on(this.config.events.guildCreate, guild => new GuildCreateHandler(this.client, this.DAO, guild ).handle());
-        this.client.on(this.config.events.guildDelete, guild => new GuildDeleteHandler(this.DAO, guild).handle());
+        this.client.on(config.events.ready, () => new ReadyHandler(this.client, this.DAO).handle());
+        this.client.on(config.events.message, () => {console.log('message')});
+        this.client.on(config.events.guildCreate, guild => new GuildCreateHandler(this.client, this.DAO, guild ).handle());
+        this.client.on(config.events.guildDelete, guild => new GuildDeleteHandler(this.DAO, guild).handle());
     }
 };

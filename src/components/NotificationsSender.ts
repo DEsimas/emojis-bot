@@ -1,6 +1,6 @@
 import { Client, MessageEmbed } from "discord.js";
-import { Config, config } from "../config";
 import { DAO } from "../database/DAO";
+import { config } from "../config";
 import { Log } from "../Log";
 
 import { schedule, ScheduledTask } from 'node-cron';
@@ -9,12 +9,10 @@ export class NotificationsSender {
 
     private readonly DAO: DAO;
     private readonly client: Client;
-    private readonly config: Config;
 
     constructor(client: Client, DAO: DAO)  {
         this.DAO = DAO;
         this.client = client;
-        this.config = config;
     }
 
     public getTask(time: string): ScheduledTask {
@@ -27,11 +25,11 @@ export class NotificationsSender {
         Notifications.forEach(async user => {
             const diff = this.getDifference(user.birth, new Date());
 
-            const localization = this.config.localization[(await this.DAO.Users.findByUserId(user.userID))?.language || this.config.database.defaults.language].notifications;
+            const localization = config.localization[(await this.DAO.Users.findByUserId(user.userID))?.language || config.database.defaults.language].notifications;
             
             const channel = await this.client.users.fetch(user.userID);
             const embed = new MessageEmbed()
-                .setColor(this.config.embed_colors.discord)
+                .setColor(config.embed_colors.discord)
                 .addField(localization.header, `${diff.years} ${localization.units.y} ${diff.months} ${localization.units.m} ${diff.days} ${localization.units.d}`)
                 .addField(`${localization.units.d}:`, diff.d.toString(), true)
                 .addField(`${localization.units.h}:`, diff.h.toString(), true)

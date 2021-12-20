@@ -1,4 +1,4 @@
-import { Config, config } from "../config";
+import { config } from "../config";
 
 import { model, Model, Schema, UpdateQuery } from "mongoose";
 
@@ -9,12 +9,10 @@ export interface Server {
 };
 
 export class Servers {
-    private readonly config: Config;
     private readonly ServersModel: Model<Server>;
 
     constructor() {
-        this.config = config;
-        this.ServersModel = model<Server>(this.config.database.collections.servers, this.getServerSchema());
+        this.ServersModel = model<Server>(config.database.collections.servers, this.getServerSchema());
     }
 
     private getServerSchema(): Schema<Server> {

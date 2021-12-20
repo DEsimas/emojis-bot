@@ -1,6 +1,6 @@
-import { Config, config } from "../config";
+import { config } from "../config";
 
-import { model, Model, ObjectId, Schema, UpdateQuery } from "mongoose";
+import { model, Model, Schema } from "mongoose";
 
 export interface Notification {
     userID: string;
@@ -8,12 +8,10 @@ export interface Notification {
 };
 
 export class Notifications {
-    private readonly config: Config;
     private readonly NotificationModel: Model<Notification>;
 
     constructor() {
-        this.config = config;
-        this.NotificationModel = model<Notification>(this.config.database.collections.notifications, this.getNotificationSchema());
+        this.NotificationModel = model<Notification>(config.database.collections.notifications, this.getNotificationSchema());
     }
 
     private getNotificationSchema(): Schema<Notification> {

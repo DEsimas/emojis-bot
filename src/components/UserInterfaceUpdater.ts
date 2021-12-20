@@ -1,5 +1,5 @@
-import { config, Config } from "../config";
 import { DAO } from "../database/DAO";
+import { config } from "../config";
 import { Log } from "../Log";
 
 import { Client } from "discord.js";
@@ -8,12 +8,10 @@ import { schedule, ScheduledTask } from "node-cron";
 export class UserInterfaceUpdater {
     private readonly DAO: DAO;
     private readonly client: Client;
-    private readonly config: Config;
 
     constructor(client: Client, DAO: DAO) {
         this.DAO = DAO;
         this.client =  client;
-        this.config = config;
     }
 
     public getTask(time: string): ScheduledTask {
@@ -39,7 +37,7 @@ export class UserInterfaceUpdater {
     private async setActivity(): Promise<void> {
         const servers = await this.DAO.Servers.count();
         const users = await this.DAO.Users.count();
-        let activity = this.config.status;
+        let activity = config.status;
         activity = activity.replace("${servers}", servers.toString());
         activity = activity.replace("${users}", users.toString());
         if(this.client.user?.setActivity(activity))
