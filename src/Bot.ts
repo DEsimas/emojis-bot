@@ -1,15 +1,13 @@
 import { GuildCreateHandler } from './handlers/GuildCreateHandler';
 import { GuildDeleteHandler } from './handlers/GuildDeleteHandler';
+import { MessageHandler } from './handlers/MessageHandler';
 import { ReadyHandler } from './handlers/ReadyHandler';
-import { config } from './config';
 import { DAO } from './database/DAO';
+import { config } from './config';
 import { Log } from './Log';
 
-import { Client, Intents, Message } from 'discord.js';
+import { Client, Intents } from 'discord.js';
 import { config as dotenv } from 'dotenv';
-import { MessageHandler } from './handlers/MessageHandler';
-import { User } from './database/Users';
-import { Server } from './database/Servers';
 
 export class Bot {
     private readonly client: Client;
@@ -41,29 +39,8 @@ export class Bot {
         });
 
         this.client.on(config.events.ready, () => new ReadyHandler(this.client).handle());
-        this.client.on(config.events.message, async (message: Message) => {new MessageHandler(this.client, message, await this.fetchUser(message.author.id), await this.fentchServer(message.guild?.id)).handle()});
+        this.client.on(config.events.message, message => new MessageHandler(this.client, message).handle());
         this.client.on(config.events.guildCreate, guild => new GuildCreateHandler(this.client, guild ).handle());
         this.client.on(config.events.guildDelete, guild => new GuildDeleteHandler(guild).handle());
-    }
-
-    private async fetchUser(userID: string): Promise<User> {
-        const user = await DAO.Users.findByUserId(userID);
-        if(user === null) return DAO.Users.insertOne({
-            userID: userID,
-            emojiID: config.database.defaults.emoji,
-            language: config.database.defaults.language
-        });
-        return user;
-    }
-
-    private async fentchServer(serverID: string | undefined): Promise<Server | null> {
-        if(serverID === undefined) return null;
-        const server = await DAO.Servers.findByServerId(serverID);
-        if(server === null) return DAO.Servers.insertOne({
-            serverID: serverID,
-            doEmojis: config.database.defaults.doEmojis,
-            prefix: config.database.defaults.prefix
-        });
-        return server;
     }
 };
