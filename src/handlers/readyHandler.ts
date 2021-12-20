@@ -1,7 +1,6 @@
 import { UserInterfaceUpdater } from "../components/UserInterfaceUpdater";
 import { NotificationsSender } from "../components/NotificationsSender";
 import { AvatarsRefresher } from "../components/AvatarsRefresher";
-import { DAO } from "../database/DAO";
 import { config } from "../config";
 import { Log } from "../Log";
 

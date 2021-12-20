@@ -25,9 +25,15 @@ export class MessageHandler {
         }
 
         if(server.doEmojis && user.emojiID) {
-            this.message.react(user.emojiID);
+            if(this.message.author.id !== this.client.user?.id) {
+                this.message.react(user.emojiID);
+            } else {
+                const avatar = await DAO.Avatars.getActive();
+                if(avatar) {
+                    this.message.react(avatar.emojiID);
+                }
+            }
         }
-
         const commandHandler = new CommandHandler(this.client, this.message, user, server);
         commandHandler.handle();
     }
