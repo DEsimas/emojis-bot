@@ -25,23 +25,27 @@ export class Servers {
         });
     }
 
-    async getAll(): Promise<Server[]> {
+    public async count(): Promise<number> {
+        return this.ServersModel.countDocuments({});
+    }
+
+    public async getAll(): Promise<Server[]> {
         return this.ServersModel.find({});
     }
 
-    async findByServerId(serverID: string): Promise<Server | null> {
+    public async findByServerId(serverID: string): Promise<Server | null> {
         return this.ServersModel.findOne({ serverID: serverID });
     }
 
-    async insertOne(server: Server): Promise<Server> {
+    public async insertOne(server: Server): Promise<Server> {
         return new this.ServersModel(server).save();
     }
 
-    async updateOneByServerId(serverID: string, options: UpdateQuery<Server>): Promise<UpdateQuery<Server>> {
+    public async updateOneByServerId(serverID: string, options: UpdateQuery<Server>): Promise<UpdateQuery<Server>> {
         return await this.ServersModel.updateOne({ serverID: serverID }, options);
     }
 
-    async deleteOneByServerId(serverID: string): Promise<{ acknowledged: boolean, deletedCount: number }> {
+    public async deleteOneByServerId(serverID: string): Promise<{ acknowledged: boolean, deletedCount: number }> {
         return await this.ServersModel.deleteOne({ serverID: serverID });
     }
 }

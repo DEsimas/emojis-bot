@@ -1,6 +1,6 @@
-import { guildCreateHandler } from './handlers/guildCreateHandler';
-import { guildDeleteHandler } from './handlers/guildDeleteHandler';
-import { readyHandler } from './handlers/readyHandler';
+import { GuildCreateHandler } from './handlers/GuildCreateHandler';
+import { GuildDeleteHandler } from './handlers/GuildDeleteHandler';
+import { ReadyHandler } from './handlers/ReadyHandler';
 import { Config, config } from './config';
 import { DAO } from './database/DAO';
 import { Log } from './Log';
@@ -37,14 +37,14 @@ export class Bot {
 
     public login(token?: string): void {
         this.client.login(token || process.env.TOKEN).then(token => {
-            Log.info(`Logged in with token: ${token}`);
+            Log.info(`Bot.ts:\tlogged in with token: ${token}`);
         }).catch(error => {
-            Log.error(`Failed to log in\n${error}`);
+            Log.error(`Bot.ts:\tfailed to log in\n${error}`);
         });
 
-        this.client.on(this.config.events.ready, () => new readyHandler(this.client, this.DAO).handle());
+        this.client.on(this.config.events.ready, () => new ReadyHandler(this.client, this.DAO).handle());
         this.client.on(this.config.events.message, () => {console.log('message')});
-        this.client.on(this.config.events.guildCreate, guild => new guildCreateHandler(this.client, this.DAO, guild ).handle());
-        this.client.on(this.config.events.guildDelete, guild => new guildDeleteHandler(this.DAO, guild).handle());
+        this.client.on(this.config.events.guildCreate, guild => new GuildCreateHandler(this.client, this.DAO, guild ).handle());
+        this.client.on(this.config.events.guildDelete, guild => new GuildDeleteHandler(this.DAO, guild).handle());
     }
 };

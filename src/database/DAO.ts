@@ -22,11 +22,11 @@ export class DAO {
     public async connect(uri: string): Promise<void> {
         return connect(uri, error => {
             if (error) {
-                Log.error(`Can't connect database\nuri: ${uri}\n${error}`);
+                Log.error(`DAO.ts:\tcan't connect database\nuri: ${uri}\n${error}`);
                 return;
             }
             
-            Log.info("Database connected");
+            Log.info("DAO.ts:\tdatabase connected");
         });
     }
 };

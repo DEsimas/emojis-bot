@@ -3,7 +3,7 @@ import { DAO } from "../database/DAO";
 
 import { Client, Guild } from "discord.js";
 
-export class guildCreateHandler {
+export class GuildCreateHandler {
     private readonly DAO: DAO;
     private readonly guild: Guild;
     private readonly client: Client;

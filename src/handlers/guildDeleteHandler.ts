@@ -2,7 +2,7 @@ import { DAO } from "../database/DAO";
 
 import { Guild } from "discord.js";
 
-export class guildDeleteHandler {
+export class GuildDeleteHandler {
     private readonly DAO: DAO;
     private readonly guild: Guild;
 

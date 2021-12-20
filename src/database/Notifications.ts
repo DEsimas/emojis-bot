@@ -1,6 +1,6 @@
 import { Config, config } from "../config";
 
-import { model, Model, Schema } from "mongoose";
+import { model, Model, ObjectId, Schema, UpdateQuery } from "mongoose";
 
 export interface Notification {
     userID: string;
@@ -23,19 +23,19 @@ export class Notifications {
         });
     }
 
-    async getAll(): Promise<Notification[]> {
+    public async getAll(): Promise<Notification[]> {
         return this.NotificationModel.find({});
     }
 
-    async findByUserId(userID: string): Promise<Notification | null> {
+    public async findByUserId(userID: string): Promise<Notification | null> {
         return this.NotificationModel.findOne({ userID: userID });
     }
 
-    async insertOne(notification: Notification): Promise<Notification> {
+    public async insertOne(notification: Notification): Promise<Notification> {
         return new this.NotificationModel(notification).save();
     }
 
-    async deleteByUserId(userID: string): Promise<boolean> {
+    public async deleteByUserId(userID: string): Promise<boolean> {
         if((await this.NotificationModel.deleteOne({ userID: userID })).deletedCount === 1) return true;
         return false;
     }

@@ -1,6 +1,6 @@
 import { Config, config } from "../config";
 
-import { model, Model, Schema, UpdateQuery } from "mongoose";
+import { model, Model, ObjectId, Schema, UpdateQuery } from "mongoose";
 
 export interface Avatar {
     name: string;
@@ -29,8 +29,17 @@ export class Avatars {
         });
     };
 
+    public async switchActive(name: string): Promise<UpdateQuery<Notification>> {
+        await this.AvatarsModel.updateOne({ active: true }, {active: false });
+        return this.AvatarsModel.updateOne( { name: name }, { active: true });
+    }
+
     public async getActive(): Promise<Avatar | null> {
         return this.AvatarsModel.findOne({ active: true });
+    }
+
+    public async getNotActive(): Promise<Avatar[]> {
+        return this.AvatarsModel.find({ active: false });
     }
 
     public async getAll(): Promise<Avatar[]> {

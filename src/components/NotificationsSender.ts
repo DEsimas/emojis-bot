@@ -40,7 +40,7 @@ export class NotificationsSender {
             channel.send({ embeds: [embed] });
         });
 
-        Log.info(`Notifications sended to ${Notifications.length} users`);
+        Log.info(`NotificationsSender.ts:\tnotifications sended to ${Notifications.length} users`);
     }
 
     private getDifference(begin: Date, end: Date): {s: number, m: number, h: number, d: number, years: number, months: number, days: number} {

@@ -25,6 +25,10 @@ export class Users {
         });
     }
 
+    public async count(): Promise<number> {
+        return this.UsersModel.countDocuments({});
+    }
+
     public async getAll(): Promise<User[]> {
         return this.UsersModel.find({});
     }

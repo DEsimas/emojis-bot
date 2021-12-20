@@ -3,8 +3,10 @@ import { ColorResolvable } from "discord.js";
 export const config: Config = {
     "administrator_permission": "ADMINISTRATOR",
     "scan_limit": 100,
+    "status": "on ${servers} servers with ${users} users",
     "cron": {
-        "notifications": "0 0 * * *"
+        "notifications": "0 0 * * *",
+        "UI": "*/5 * * * *"
     },
     "commands": {
         "imgToAscII": ["imgtoascii", "ita"],
@@ -61,7 +63,6 @@ export const config: Config = {
             "doEmojis": false
         }
     },
-    "status": ["on ", " servers with ", " users"],
     "localization": {
         "eng": {
             "notifications": {
@@ -215,6 +216,7 @@ export const config: Config = {
 export interface Config {
     administrator_permission: string;
     scan_limit: number;
+    status: string;
     cron: Cron;
     commands: Commands;
     events: Events;
@@ -223,12 +225,12 @@ export interface Config {
     emojis: Emojis;
     img_to_ascii: ImgToAscii;
     database: Database;
-    status: string[];
     localization: Localization;
 }
 
 interface Cron {
     notifications: string;
+    UI: string;
 }
 
 interface Commands {
