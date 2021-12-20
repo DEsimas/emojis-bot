@@ -20,7 +20,7 @@ export class MessageHandler {
         const server = await this.fentchServer(this.message.guild?.id);
 
         if(server === null) {
-            Log.warning(`MessageHandler.ts:\tcouldn't save server to the database`);
+            Log.warning("MessageHandler.ts", "Couldn't save server to the database");
             return;
         }
 

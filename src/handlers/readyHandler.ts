@@ -10,7 +10,7 @@ export class ReadyHandler {
     private readonly client: Client;
 
     constructor(client: Client)  {
-        Log.info("ReadyHandler.ts:\tbot is ready");
+        Log.info("ReadyHandler.ts", "bot is ready");
         this.client = client;
     }
 

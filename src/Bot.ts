@@ -33,9 +33,9 @@ export class Bot {
 
     public login(token?: string): void {
         this.client.login(token || process.env.TOKEN).then(token => {
-            Log.info(`Bot.ts:\tlogged in with token: ${token}`);
+            Log.info("Bot.ts", `logged in`, { token: token });
         }).catch(error => {
-            Log.error(`Bot.ts:\tfailed to log in\n${error}`);
+            Log.error("Bot.ts", "failed to log in", {token: token, error: error});
         });
 
         this.client.on(config.events.ready, () => new ReadyHandler(this.client).handle());

@@ -1,17 +1,40 @@
+import { DAO } from "./database/DAO";
+
 export class Log {
     private static readonly red = '\x1b[31m%s\x1b[0m';
     private static readonly yellow = '\x1b[33m%s\x1b[0m';
     private static readonly blue = '\x1b[34m%s\x1b[0m';
 
-    static error (message: string) {
-        console.log(this.red, new Date().toString()+": " + message);
+    static error (origin: string, message: string, data?: any) {
+        console.log(this.red, origin + " -> " + message);
+        DAO.Logs.insertOne({
+            type: "error",
+            time: new Date(),
+            origin: origin,
+            message: message,
+            payload: JSON.stringify(data)
+        });
     };
     
-    static warning (message:string) {
-        console.log(this.yellow, new Date().toString()+": " + message);
+    static warning (origin: string, message: string, data?: any) {
+        console.log(this.yellow, origin + " -> " + message);
+        DAO.Logs.insertOne({
+            type: "warning",
+            time: new Date(),
+            origin: origin,
+            message: message,
+            payload: JSON.stringify(data)
+        });
     };
     
-    static info (message: string) {
-        console.log(this.blue, new Date().toString()+": " + message);
+    static info (origin: string, message: string, data?: any) {
+        console.log(this.blue, origin + " -> " + message);
+        DAO.Logs.insertOne({
+            type: "info",
+            time: new Date(),
+            origin: origin,
+            message: message,
+            payload: JSON.stringify(data)
+        });
     };
 };

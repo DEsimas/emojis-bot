@@ -53,7 +53,8 @@ export const config: Config = {
             "users": "users",
             "servers": "servers",
             "avatars": "avatars",
-            "notifications": "notifications"
+            "notifications": "notifications",
+            "logs": "logs"
         },
         "defaults": {
             "nickname": "emojis-bot",
@@ -287,6 +288,7 @@ interface Collections {
     servers: string;
     avatars: string;
     notifications: string;
+    logs: string;
 }
 
 interface Defaults {

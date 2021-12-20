@@ -23,12 +23,12 @@ export class UserInterfaceUpdater {
         const avatar = avatars[Math.round(Math.random() * (avatars.length - 1))];
 
         this.client.user?.setAvatar(avatar.imageURL).then(async () => {
-            Log.info(`UserInterfaceUpdater.ts:\tavatar updated ${avatar.imageURL}`);
+            Log.info("UserInterfaceUpdater.ts", "Avatar updated", { avatar: avatar });
             this.setNickname(avatar.name);
             await DAO.Avatars.switchActive(avatar.name);
-            Log.info(`UserInterfaceUpdater.ts:\tavatar in db updated`);
+            Log.info("UserInterfaceUpdater.ts", "Active avatar changed");
         }).catch(error => {
-            Log.warning(`UserInterfaceUpdater.ts:\tcan't update UI\n${error}`);
+            Log.warning("UserInterfaceUpdater.ts", "Failed to update ui", { error: error });
         });
     }
 
@@ -39,13 +39,13 @@ export class UserInterfaceUpdater {
         activity = activity.replace("${servers}", servers.toString());
         activity = activity.replace("${users}", users.toString());
         if(this.client.user?.setActivity(activity))
-            Log.info(`UserInterfaceUpdater.ts:\tactivity updated: ${activity}`);
+            Log.info("UserInterfaceUpdater.ts", "Activity updated", {activity: activity});
     }
 
     private setNickname(nickname: string): void {
         this.client.guilds.cache.forEach(el => {
             el.me?.setNickname(nickname);
         });
-        Log.info(`UserInterfaceUpdater.ts:\tnickname updated: ${nickname}`);
+        Log.info("UserInterfaceUpdater.ts", "Nickname updated", {nickname: nickname});
     }
 };
