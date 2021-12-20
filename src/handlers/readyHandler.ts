@@ -1,9 +1,10 @@
+import { UserInterfaceUpdater } from "../components/UserInterfaceUpdater";
 import { NotificationsSender } from "../components/NotificationsSender";
+import { AvatarsRefresher } from "../components/AvatarsRefresher";
 import { DAO } from "../database/DAO";
 import { config } from "../config";
 import { Log } from "../Log";
 
-import { UserInterfaceUpdater } from "../components/UserInterfaceUpdater";
 import { Client } from "discord.js";
 
 export class ReadyHandler {
@@ -24,5 +25,8 @@ export class ReadyHandler {
 
         const updater = new UserInterfaceUpdater(this.client, this.DAO);
         updater.getTask(config.cron.UI).start();
+
+        const refresher = new AvatarsRefresher(this.client, this.DAO);
+        refresher.getTask(config.cron.avatars).start();
     }
 };

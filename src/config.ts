@@ -6,7 +6,8 @@ export const config: Config = {
     "status": "on ${servers} servers with ${users} users",
     "cron": {
         "notifications": "0 0 * * *",
-        "UI": "*/5 * * * *"
+        "UI": "*/5 * * * *",
+        "avatars": "*/30 * * * *"
     },
     "commands": {
         "imgToAscII": ["imgtoascii", "ita"],
@@ -60,7 +61,8 @@ export const config: Config = {
             "prefix": "|",
             "emoji": null,
             "language": "eng",
-            "doEmojis": false
+            "doEmojis": false,
+            "avatar": "https://cdn.discordapp.com/app-icons/883020186339397693/29bac6265dc018748578360634fe5c00.png"
         }
     },
     "localization": {
@@ -231,6 +233,7 @@ export interface Config {
 interface Cron {
     notifications: string;
     UI: string;
+    avatars: string;
 }
 
 interface Commands {
@@ -294,6 +297,7 @@ interface Defaults {
     emoji: null;
     language: "rus" | "eng";
     doEmojis: boolean;
+    avatar: string;
 }
 
 interface Database {

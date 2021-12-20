@@ -27,6 +27,10 @@ export class Avatars {
         });
     };
 
+    public async count(): Promise<number> {
+        return this.AvatarsModel.countDocuments();
+    }
+
     public async switchActive(name: string): Promise<UpdateQuery<Notification>> {
         await this.AvatarsModel.updateOne({ active: true }, {active: false });
         return this.AvatarsModel.updateOne( { name: name }, { active: true });

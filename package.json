@@ -1,13 +1,13 @@
 {
 	"name": "emojis-bot",
-	"version": "6.4.4",
+	"version": "6.4.5",
 	"description": "bot for discord with random functions",
 	"keywords": [
 		"typescript",
 		"node",
 		"discord",
 		"discordjs",
-        "mongodb"
+		"mongodb"
 	],
 	"bugs": {
 		"url": "https://github.com/DEsimas/emojis-bot/issues",
@@ -31,16 +31,16 @@
 		"npm": "8.3.0"
 	},
 	"dependencies": {
-        "asciify-image": "^0.1.1",
+		"asciify-image": "^0.1.1",
 		"discord.js": "^13.1.0",
 		"dotenv": "^10.0.0",
-		"fast-average-color-node": "^1.0.3",
 		"mongoose": "^6.1.2",
 		"node-cron": "^3.0.0",
-		"node-fetch": "^3.0.0"
+		"node-fetch": "^3.0.0",
+		"save": "^2.4.0"
 	},
 	"devDependencies": {
-        "@types/node-cron": "^3.0.0",
+		"@types/node-cron": "^3.0.0",
 		"typescript": "^4.5.4"
 	},
 	"private": false
