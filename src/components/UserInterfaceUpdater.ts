@@ -1,5 +1,4 @@
 import { DAO } from "../database/DAO";
-import { config } from "../config";
 import { Log } from "../Log";
 
 import { Client } from "discord.js";
@@ -7,6 +6,8 @@ import { schedule, ScheduledTask } from "node-cron";
 
 export class UserInterfaceUpdater {
     private readonly client: Client;
+
+    private readonly status = "on ${servers} servers with ${users} users";
 
     constructor(client: Client) {
         this.client =  client;
@@ -35,7 +36,7 @@ export class UserInterfaceUpdater {
     private async setActivity(): Promise<void> {
         const servers = await DAO.Servers.count();
         const users = await DAO.Users.count();
-        let activity = config.status;
+        let activity = this.status;
         activity = activity.replace("${servers}", servers.toString());
         activity = activity.replace("${users}", users.toString());
         if(this.client.user?.setActivity(activity))

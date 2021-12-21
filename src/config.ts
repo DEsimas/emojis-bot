@@ -1,9 +1,4 @@
-import { ColorResolvable } from "discord.js";
-
 export const config: Config = {
-    "administrator_permission": "ADMINISTRATOR",
-    "scan_limit": 100,
-    "status": "on ${servers} servers with ${users} users",
     "cron": {
         "notifications": "0 0 * * *",
         "UI": "*/5 * * * *",
@@ -17,19 +12,6 @@ export const config: Config = {
     "ids": {
         "avatars_channel": "885941024478883873",
         "support_server": "885941024478883870"
-    },
-    "emojis": {
-        "link": "https://cdn.discordapp.com/emojis/",
-        "extension": ".png"
-    },
-    "img_to_ascii": {
-        "options": {
-            "fit": "box",
-            "width": 150,
-            "height": 75,
-            "color": false
-        },
-        "file_name": "./ascII.txt"
     },
     "database": {
         "collections": {
@@ -199,14 +181,9 @@ export const config: Config = {
 };
 
 export interface Config {
-    administrator_permission: string;
-    scan_limit: number;
-    status: string;
     cron: Cron;
     events: Events;
     ids: Ids;
-    emojis: Emojis;
-    img_to_ascii: ImgToAscii;
     database: Database;
     localization: Localization;
 }

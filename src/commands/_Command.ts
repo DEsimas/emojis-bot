@@ -1,5 +1,4 @@
 import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
-import { config } from "../config";
 import { Server } from "../database/Servers";
 import { User } from "../database/Users";
 
