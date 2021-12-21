@@ -1,9 +1,6 @@
 import { Client, Message } from "discord.js";
-import { Server } from "../database/Servers";
-import { User } from "../database/Users";
 import { DAO } from "../database/DAO";
 import { Log } from "../Log";
-import { config } from "../config";
 import { CommandHandler } from "./CommandHandler";
 
 export class MessageHandler {
