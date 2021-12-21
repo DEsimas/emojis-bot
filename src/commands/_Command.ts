@@ -1,4 +1,4 @@
-import { Client, Message, MessageEmbed } from "discord.js";
+import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
 import { config } from "../config";
 import { Server } from "../database/Servers";
 import { User } from "../database/Users";
@@ -9,6 +9,11 @@ export class Command {
     protected readonly user: User;
     protected readonly server: Server;
     protected readonly args: string[];
+
+    private readonly embedColors: Record<"error" | "success", ColorResolvable> = {
+        error: "#ff0000",
+        success: "#00ff00"
+    };
 
     constructor(client: Client, message: Message, user: User, server: Server, args: string[]) {
         this.client = client;
@@ -33,22 +38,16 @@ export class Command {
     }
 
     protected sendError(message: string): void {
-        const embed = new MessageEmbed()
-            .setColor(config.embed_colors.error)
-            .setTitle(message);
-        this.message.channel.send({ embeds: [embed] });
+        this.sendMessage(message, this.embedColors.error);
     }
 
     protected sendSuccess(message: string): void {
-        const embed = new MessageEmbed()
-            .setColor(config.embed_colors.success)
-            .setTitle(message);
-        this.message.channel.send({ embeds: [embed] });
+        this.sendMessage(message, this.embedColors.success);
     }
 
-    protected sendRegular(message: string): void {
+    private sendMessage(message: string, color: ColorResolvable): void {
         const embed = new MessageEmbed()
-            .setColor(config.embed_colors.discord)
+            .setColor(color)
             .setTitle(message);
         this.message.channel.send({ embeds: [embed] });
     }

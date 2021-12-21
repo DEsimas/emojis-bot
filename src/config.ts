@@ -14,11 +14,6 @@ export const config: Config = {
         "guildCreate": "guildCreate",
         "guildDelete": "guildDelete"
     },
-    "embed_colors": {
-        "error": "#ff0000",
-        "success": "#00ff00",
-        "discord": "#202225"
-    },
     "ids": {
         "avatars_channel": "885941024478883873",
         "support_server": "885941024478883870"
@@ -209,7 +204,6 @@ export interface Config {
     status: string;
     cron: Cron;
     events: Events;
-    embed_colors: EmbedColors;
     ids: Ids;
     emojis: Emojis;
     img_to_ascii: ImgToAscii;
@@ -222,30 +216,11 @@ interface Cron {
     UI: string;
 }
 
-interface Commands {
-    imgToAscII: string[];
-    setEmoji: string[];
-    deleteEmoji: string[];
-    setLanguage: string[];
-    setPrefix: string[];
-    doEmojis: string[];
-    subscribe: string[];
-    unsubscribe: string[];
-    clear: string[];
-    help: string[];
-}
-
 interface Events {
     ready: string;
     message: string;
     guildCreate: string;
     guildDelete: string;
-}
-
-interface EmbedColors {
-    error: ColorResolvable;
-    success: ColorResolvable;
-    discord: ColorResolvable;
 }
 
 interface Ids {

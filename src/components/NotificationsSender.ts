@@ -6,8 +6,8 @@ import { Log } from "../Log";
 import { schedule, ScheduledTask } from 'node-cron';
 
 export class NotificationsSender {
-
     private readonly client: Client;
+        private readonly embed_color = "#202225";
 
     constructor(client: Client)  {
         this.client = client;
@@ -27,7 +27,7 @@ export class NotificationsSender {
             
             const channel = await this.client.users.fetch(user.userID);
             const embed = new MessageEmbed()
-                .setColor(config.embed_colors.discord)
+                .setColor(this.embed_color)
                 .addField(localization.header, `${diff.years} ${localization.units.y} ${diff.months} ${localization.units.m} ${diff.days} ${localization.units.d}`)
                 .addField(`${localization.units.d}:`, diff.d.toString(), true)
                 .addField(`${localization.units.h}:`, diff.h.toString(), true)
