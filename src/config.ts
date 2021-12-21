@@ -1,14 +1,4 @@
 export const config: Config = {
-    "cron": {
-        "notifications": "0 0 * * *",
-        "UI": "*/5 * * * *",
-    },
-    "events": {
-        "ready": "ready",
-        "message": "messageCreate",
-        "guildCreate": "guildCreate",
-        "guildDelete": "guildDelete"
-    },
     "ids": {
         "avatars_channel": "885941024478883873",
         "support_server": "885941024478883870"
@@ -181,23 +171,9 @@ export const config: Config = {
 };
 
 export interface Config {
-    cron: Cron;
-    events: Events;
     ids: Ids;
     database: Database;
     localization: Localization;
-}
-
-interface Cron {
-    notifications: string;
-    UI: string;
-}
-
-interface Events {
-    ready: string;
-    message: string;
-    guildCreate: string;
-    guildDelete: string;
 }
 
 interface Ids {
@@ -205,21 +181,11 @@ interface Ids {
     support_server: string;
 }
 
-interface Emojis {
-    link: string;
-    extension: string;
-}
-
 interface Options {
     fit: string;
     width: number;
     height: number;
     color: boolean;
-}
-
-interface ImgToAscii {
-    options: Options;
-    file_name: string;
 }
 
 interface Collections {

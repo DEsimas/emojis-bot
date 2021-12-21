@@ -1,13 +1,16 @@
 import { UserInterfaceUpdater } from "../components/UserInterfaceUpdater";
 import { NotificationsSender } from "../components/NotificationsSender";
-import { config } from "../config";
 import { Log } from "../Log";
 
 import { Client } from "discord.js";
 
 export class ReadyHandler {
-
     private readonly client: Client;
+
+    private readonly cron: Record<string, string> = {
+        notifications: "0 0 * * *",
+        UI: "*/5 * * * *"
+    }
 
     constructor(client: Client)  {
         Log.info("ReadyHandler.ts", "bot is ready");
@@ -16,9 +19,9 @@ export class ReadyHandler {
 
     public async handle(): Promise<void> {
         const sender = new NotificationsSender(this.client);
-        sender.getTask(config.cron.notifications).start();
+        sender.getTask(this.cron.notifications).start();
 
         const updater = new UserInterfaceUpdater(this.client);
-        updater.getTask(config.cron.UI).start();
+        updater.getTask(this.cron.UI).start();
     }
 };
