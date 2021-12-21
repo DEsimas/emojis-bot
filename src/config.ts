@@ -8,18 +8,6 @@ export const config: Config = {
         "notifications": "0 0 * * *",
         "UI": "*/5 * * * *",
     },
-    "commands": {
-        "imgToAscII": ["imgtoascii", "ita"],
-        "setEmoji": ["setemoji"],
-        "deleteEmoji": ["delemoji"],
-        "setLanguage": ["setlang", "lang", "setlanguage"],
-        "setPrefix": ["setprefix"],
-        "doEmojis": ["doemojis"],
-        "subscribe": ["subscribe", "sub"],
-        "unsubscribe": ["unsubscribe", "unsub"],
-        "clear": ["clear", "cls"],
-        "help": ["help", "h"]
-    },
     "events": {
         "ready": "ready",
         "message": "messageCreate",
@@ -220,7 +208,6 @@ export interface Config {
     scan_limit: number;
     status: string;
     cron: Cron;
-    commands: Commands;
     events: Events;
     embed_colors: EmbedColors;
     ids: Ids;
