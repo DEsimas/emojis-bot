@@ -1,6 +1,5 @@
-import { config } from "../config";
-
 import { model, Model, Schema } from "mongoose";
+import { collections } from "../config/Database";
 
 export interface Notification {
     userID: string;
@@ -11,7 +10,7 @@ export class Notifications {
     private readonly NotificationModel: Model<Notification>;
 
     constructor() {
-        this.NotificationModel = model<Notification>(config.database.collections.notifications, this.getNotificationSchema());
+        this.NotificationModel = model<Notification>(collections.notifications, this.getNotificationSchema());
     }
 
     private getNotificationSchema(): Schema<Notification> {

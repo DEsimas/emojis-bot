@@ -1,25 +1,4 @@
 export const config: Config = {
-    "ids": {
-        "avatars_channel": "885941024478883873",
-        "support_server": "885941024478883870"
-    },
-    "database": {
-        "collections": {
-            "users": "users",
-            "servers": "servers",
-            "avatars": "avatars",
-            "notifications": "notifications",
-            "logs": "logs"
-        },
-        "defaults": {
-            "nickname": "emojis-bot",
-            "prefix": "|",
-            "emoji": null,
-            "language": "eng",
-            "doEmojis": false,
-            "avatar": "https://cdn.discordapp.com/app-icons/883020186339397693/29bac6265dc018748578360634fe5c00.png"
-        }
-    },
     "localization": {
         "eng": {
             "notifications": {
@@ -171,43 +150,7 @@ export const config: Config = {
 };
 
 export interface Config {
-    ids: Ids;
-    database: Database;
     localization: Localization;
-}
-
-interface Ids {
-    avatars_channel: string;
-    support_server: string;
-}
-
-interface Options {
-    fit: string;
-    width: number;
-    height: number;
-    color: boolean;
-}
-
-interface Collections {
-    users: string;
-    servers: string;
-    avatars: string;
-    notifications: string;
-    logs: string;
-}
-
-interface Defaults {
-    nickname: string;
-    prefix: string;
-    emoji: null;
-    language: "rus" | "eng";
-    doEmojis: boolean;
-    avatar: string;
-}
-
-interface Database {
-    collections: Collections;
-    defaults: Defaults;
 }
 
 interface Units {

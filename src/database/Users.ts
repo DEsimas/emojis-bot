@@ -1,18 +1,19 @@
-import { config } from "../config";
-
 import { model, Model, Schema, UpdateQuery } from "mongoose";
+import { collections, user as defUser } from "../config/Database";
+
+export type Language = 'rus' | 'eng';
 
 export interface User {
     userID: string;
     emojiID: string | null;
-    language: 'rus' | 'eng';
+    language: Language;
 };
 
 export class Users {
     private readonly UsersModel: Model<User>;
 
     constructor() {
-        this.UsersModel = model<User>(config.database.collections.users, this.getUserSchema());
+        this.UsersModel = model<User>(collections.users, this.getUserSchema());
     }
 
     private getUserSchema(): Schema<User> {
@@ -31,8 +32,11 @@ export class Users {
         return this.UsersModel.find({});
     }
 
-    public async findByUserId(userID: string): Promise<User | null> {
-        return this.UsersModel.findOne({ userID: userID });
+    public async fetchByUserId(userID: string): Promise<User> {
+        const user = await this.UsersModel.findOne({ userID: userID });
+        if(user) return user;
+
+        return this.insertOne({ userID: userID, ...defUser });
     }
 
     public async insertOne(user: User): Promise<User> {

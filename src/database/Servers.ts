@@ -1,6 +1,5 @@
-import { config } from "../config";
-
 import { model, Model, Schema, UpdateQuery } from "mongoose";
+import { collections, server as defServer } from "../config/Database";
 
 export interface Server {
     serverID: string;
@@ -12,7 +11,7 @@ export class Servers {
     private readonly ServersModel: Model<Server>;
 
     constructor() {
-        this.ServersModel = model<Server>(config.database.collections.servers, this.getServerSchema());
+        this.ServersModel = model<Server>(collections.servers, this.getServerSchema());
     }
 
     private getServerSchema(): Schema<Server> {
@@ -31,8 +30,15 @@ export class Servers {
         return this.ServersModel.find({});
     }
 
-    public async findByServerId(serverID: string): Promise<Server | null> {
-        return this.ServersModel.findOne({ serverID: serverID });
+    public async fetchByServerId(serverID: string): Promise<Server> {
+        const server = await this.ServersModel.findOne({ serverID: serverID });
+        if(server) return server;
+
+        return this.insertNew(serverID);
+    }
+
+    public async insertNew(serverID: string): Promise<Server> {
+        return this.insertOne({ serverID: serverID, ...defServer });
     }
 
     public async insertOne(server: Server): Promise<Server> {

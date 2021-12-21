@@ -1,6 +1,5 @@
-import { config } from "../config";
-
 import { model, Model, Schema, UpdateQuery } from "mongoose";
+import { collections } from "../config/Database";
 
 export interface Log {
     type: "error" | "warning" | "info";
@@ -14,7 +13,7 @@ export class Logs {
     private readonly LogsModel: Model<Log>;
 
     constructor() {
-        this.LogsModel = model<Log>(config.database.collections.logs, this.getLogSchema());
+        this.LogsModel = model<Log>(collections.logs, this.getLogSchema());
     }
 
     private getLogSchema(): Schema<Log> {

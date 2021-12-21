@@ -23,7 +23,7 @@ export class NotificationsSender {
         Notifications.forEach(async user => {
             const diff = this.getDifference(user.birth, new Date());
 
-            const localization = config.localization[(await DAO.Users.findByUserId(user.userID))?.language || config.database.defaults.language].notifications;
+            const localization = config.localization[(await DAO.Users.fetchByUserId(user.userID)).language].notifications;
             
             const channel = await this.client.users.fetch(user.userID);
             const embed = new MessageEmbed()

@@ -1,6 +1,5 @@
-import { config } from "../config";
-
 import { model, Model, Schema, UpdateQuery } from "mongoose";
+import { collections } from "../config/Database";
 
 export interface Avatar {
     name: string;
@@ -14,7 +13,7 @@ export class Avatars {
     private readonly AvatarsModel: Model<Avatar>;
 
     constructor() {
-        this.AvatarsModel = model<Avatar>(config.database.collections.avatars, this.getAvatarSchema());
+        this.AvatarsModel = model<Avatar>(collections.avatars, this.getAvatarSchema());
     }
 
     private getAvatarSchema(): Schema<Avatar> {
