@@ -1,15 +1,15 @@
-import { ImgToAscII } from "../commands/special/ImgToAscII";
-import { DeleteEmoji } from "../commands/user/DeleteEmoji";
-import { SetLanguage } from "../commands/user/SetLanguage";
-import { Unsubscribe } from "../commands/user/Unsubscribe";
-import { SetPrefix } from "../commands/admin/SetPrefix";
-import { Subscribe } from "../commands/user/Subscribe";
-import { DoEmojis } from "../commands/admin/DoEmojis";
-import { Clear } from "../commands/interaction/Clear";
-import { SetEmoji } from "../commands/user/SetEmoji";
-import { Help } from "../commands/interaction/Help";
+import { ImgToAscII } from "../commands/special/ImgToAscII.js";
+import { DeleteEmoji } from "../commands/user/DeleteEmoji.js";
+import { SetLanguage } from "../commands/user/SetLanguage.js";
+import { Unsubscribe } from "../commands/user/Unsubscribe.js";
+import { SetPrefix } from "../commands/admin/SetPrefix.js";
+import { Subscribe } from "../commands/user/Subscribe.js";
+import { DoEmojis } from "../commands/admin/DoEmojis.js";
+import { Clear } from "../commands/interaction/Clear.js";
+import { SetEmoji } from "../commands/user/SetEmoji.js";
+import { Help } from "../commands/interaction/Help.js";
 
-import { Command } from "../commands/_Command";
+import { Command } from "../commands/_Command.js";
 
 export interface ICommand {
     name: "SetLanguage" | "SetEmoji" | "DeleteEmoji" | "DoEmojis" | "SetPrefix" | "ImgToAscII" | "Subscribe" | "Unsubscribe" | "Clear" | "Help";

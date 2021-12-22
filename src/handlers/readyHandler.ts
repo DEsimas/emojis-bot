@@ -1,6 +1,6 @@
-import { UserInterfaceUpdater } from "../components/UserInterfaceUpdater";
-import { NotificationsSender } from "../components/NotificationsSender";
-import { Log } from "../Log";
+import { UserInterfaceUpdater } from "../components/UserInterfaceUpdater.js";
+import { NotificationsSender } from "../components/NotificationsSender.js";
+import { Log } from "../Log.js";
 
 import { Client } from "discord.js";
 

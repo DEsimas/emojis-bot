@@ -1,4 +1,4 @@
-import { DAO } from "../database/DAO";
+import { DAO } from "../database/DAO.js";
 
 import { Guild } from "discord.js";
 

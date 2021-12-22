@@ -1,5 +1,5 @@
 import asciifyImage = require("asciify-image");
-import { Command } from "./../_Command";
+import { Command } from "./../_Command.js";
 
 export class ImgToAscII extends Command {
     private readonly widthParam = "width:";

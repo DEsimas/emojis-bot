@@ -1,8 +1,8 @@
-import { Server } from "../database/Servers";
-import { User } from "../database/Users";
+import { Server } from "../database/Servers.js";
+import { User } from "../database/Users.js";
 
 import { Client, Message } from "discord.js";
-import { commands } from "../config/CommandsList";
+import { commands } from "../config/CommandsList.js";
 
 export class CommandHandler {
     private readonly client: Client;

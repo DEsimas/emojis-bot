@@ -1,7 +1,7 @@
 import { MessageEmbed } from "discord.js";
-import { DAO } from "./../../database/DAO";
-import { Command } from "./../_Command";
-import { commands } from "./../../config/CommandsList";
+import { DAO } from "./../../database/DAO.js";
+import { Command } from "./../_Command.js";
+import { commands } from "./../../config/CommandsList.js";
 
 export class Help extends Command {
     public override async execute(): Promise<void> {

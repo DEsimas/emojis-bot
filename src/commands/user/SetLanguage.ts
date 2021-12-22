@@ -1,6 +1,6 @@
-import { Localization } from "./../../config/Localization";
-import { DAO } from "./../../database/DAO";
-import { Command } from "./../_Command";
+import { Localization } from "./../../config/Localization.js";
+import { DAO } from "./../../database/DAO.js";
+import { Command } from "./../_Command.js";
 
 export class SetLanguage extends Command {
     public override async execute(): Promise<void> {

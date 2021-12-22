@@ -1,5 +1,5 @@
-import { Log } from "./../../Log";
-import { Command } from "./../_Command";
+import { Log } from "./../../Log.js";
+import { Command } from "./../_Command.js";
 
 export class Clear extends Command {
     public override async execute(): Promise<void> {
