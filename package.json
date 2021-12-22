@@ -1,6 +1,6 @@
 {
 	"name": "emojis-bot",
-	"version": "6.8.3",
+	"version": "6.8.2",
 	"description": "bot for discord with random functions",
 	"keywords": [
 		"typescript",
@@ -25,7 +25,7 @@
 	},
 	"scripts": {
 		"start": "node dist/index.js",
-        "postinstall": "npx tsc"
+        "postinstall": "tsc"
     },
 	"engines": {
 		"node": "16.9.0",
