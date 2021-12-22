@@ -11,10 +11,10 @@ export class Command {
     protected readonly server: Server;
     protected readonly args: string[];
     protected readonly localization: ILocalization;
-
-    private readonly embedColors: Record<"error" | "success", ColorResolvable> = {
+    protected readonly embedColors: Record<"error" | "success" | "discord", ColorResolvable> = {
         error: "#ff0000",
-        success: "#00ff00"
+        success: "#00ff00",
+        discord: "#202225"
     };
 
     constructor(client: Client, message: Message, user: User, server: Server, args: string[]) {

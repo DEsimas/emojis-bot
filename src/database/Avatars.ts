@@ -1,3 +1,4 @@
+import { ColorResolvable } from "discord.js";
 import { model, Model, Schema, UpdateQuery } from "mongoose";
 import { collections } from "../config/Database";
 
@@ -5,7 +6,7 @@ export interface Avatar {
     name: string;
     imageURL: string;
     emojiID: string;
-    color: string;
+    color: ColorResolvable;
     active: boolean;
 };
 
