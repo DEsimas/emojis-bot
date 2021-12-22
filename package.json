@@ -25,8 +25,7 @@
 	},
 	"scripts": {
 		"start": "node dist/index.js",
-        "build": "tsc",
-        "postinstall": "npm run build"
+        "build": "tsc"
     },
 	"engines": {
 		"node": "16.9.0",
