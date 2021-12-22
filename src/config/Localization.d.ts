@@ -103,6 +103,7 @@ export interface Subscribe {
     date_error: string;
     duration_error: string;
     send_success: string;
+    send_error: string;
     existing_user: string;
 }
 

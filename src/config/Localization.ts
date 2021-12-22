@@ -33,7 +33,7 @@ export const Localization: Record<string, ILocalization> = {
                 "DoEmojis": "Enable and disable bot reactions on the server (admins only)",
                 "SetPrefix": "Set prefix, I suppose",
                 "ImgToAscII": "Convert an image to the text file",
-                "Subscribe": "Counts how long are you going to live",
+                "Subscribe": "Counts how long lived",
                 "Unsubscribe": "Unsubscribe from daily notifications",
                 "Clear": "Deletes bot messages from this channel",
                 "Help": "Help"
@@ -45,7 +45,7 @@ export const Localization: Record<string, ILocalization> = {
                 "DoEmojis": "on - switch on, off - switch off",
                 "SetPrefix": "p.s. only for admins",
                 "ImgToAscII": "Convert image to ascII text",
-                "Subscribe": "I will every day notify you, how much days you have till the end",
+                "Subscribe": "Use date in american format",
                 "Unsubscribe": "why? ¯\\_(ツ)_/¯",
                 "addtrack": "Adds track to database (special for maus999)",
                 "Clear": "You can state amount of messages to delete",
@@ -80,6 +80,7 @@ export const Localization: Record<string, ILocalization> = {
             "date_error": "Wrong date",
             "duration_error": "Wrong life duration ^_^",
             "send_success": "Subscribed",
+            "send_error": "Something went wrong. Try again later",
             "existing_user": "You are already subscribed. To change the data, unsubscribe and subscribe again."
         },
         "unsubscribe": {
@@ -119,7 +120,7 @@ export const Localization: Record<string, ILocalization> = {
                 "DoEmojis": "Включить и выключить реакции от бота на сервере",
                 "SetPrefix": "Изменить префикс на сервере",
                 "ImgToAscII": "Конвертировать картинку в текстовый файл",
-                "Subscribe": "Считает сколько вам осталось",
+                "Subscribe": "Считает сколько вы прожили",
                 "Unsubscribe": "Отписаться от ежедневной рассылки",
                 "Clear": "Удаляет сообщения бота из этого канала",
                 "Help": "Помощь"
@@ -131,7 +132,7 @@ export const Localization: Record<string, ILocalization> = {
                 "DoEmojis": "on - вкл. off - выкл.",
                 "SetPrefix": "Такое могут только админы",
                 "ImgToAscII": "Конвертировать картинку в текстовый файл",
-                "Subscribe": "Ежедневный счётчик, показывающий сколько вам осталось",
+                "Subscribe": "Дату рождения следует вводить в американском формате",
                 "Unsubscribe": "Зачем? ¯\\_(ツ)_/¯",
                 "addtrack": "Добавить трек в базу данных (специально для maus999)",
                 "Clear": "Можно указать количество сообщений, которое нужно удалить",
@@ -166,6 +167,7 @@ export const Localization: Record<string, ILocalization> = {
             "date_error": "Неверная дата рождения",
             "duration_error": "Неверная продолжительность жизни ^_^",
             "send_success": "Подписка оформлена",
+            "send_error": "Произошла ошибка, попробуйте позже",
             "existing_user": "Вы уже подписаны, для изменения данных отпишитесь и подпишитесь снова."
         },
         "unsubscribe": {
