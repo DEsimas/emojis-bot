@@ -40,6 +40,13 @@ export class Command {
         return !!pattern.test(str);
     }
 
+    protected async isAdmin() {
+        const guildMember = await this.message.guild?.members.fetch(this.message.author.id)
+        if(!guildMember) return false;
+        const isAdmin = guildMember.permissions.has("ADMINISTRATOR");
+        return isAdmin;
+    };
+
     protected sendError(message: string): void {
         this.sendMessage(message, this.embedColors.error);
     }
