@@ -1,4 +1,6 @@
 import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
+import { Localization } from "../config/Localization";
+import { ILocalization } from "../config/Localization.d";
 import { Server } from "../database/Servers";
 import { User } from "../database/Users";
 
@@ -8,6 +10,7 @@ export class Command {
     protected readonly user: User;
     protected readonly server: Server;
     protected readonly args: string[];
+    protected readonly localization: ILocalization;
 
     private readonly embedColors: Record<"error" | "success", ColorResolvable> = {
         error: "#ff0000",
@@ -20,6 +23,7 @@ export class Command {
         this.user = user;
         this.server = server;
         this.args = args;
+        this.localization = Localization[user.language];
     }
 
     public async execute(): Promise<void> {
