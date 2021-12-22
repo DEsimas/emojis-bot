@@ -1,6 +1,6 @@
 {
 	"name": "emojis-bot",
-	"version": "6.8.1",
+	"version": "6.8.2",
 	"description": "bot for discord with random functions",
 	"keywords": [
 		"typescript",
@@ -24,7 +24,7 @@
 		"url": "https://github.com/DEsimas/emojis-bot"
 	},
 	"scripts": {
-		"start": "node ./dist/main.js",
+		"start": "npx tsc && node ./dist/main.js",
         "start:dev": "tsc && node ./dist/main.js"
 	},
 	"engines": {
