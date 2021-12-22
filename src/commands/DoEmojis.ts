@@ -3,7 +3,7 @@ import { Command } from "./_Command";
 
 export class DoEmojis extends Command {
     public override async execute(): Promise<void> {
-        if(!this.isAdmin()) {
+        if(!await this.isAdmin()) {
             this.sendError(this.localization.doEmojis.access_warn);
             return;
         }
