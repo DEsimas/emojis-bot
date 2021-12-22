@@ -24,7 +24,7 @@
 		"url": "https://github.com/DEsimas/emojis-bot"
 	},
 	"scripts": {
-		"start": "node dist/index.js",
+		"start": "node ./dist/main.js",
         "build": "tsc"
     },
 	"engines": {
