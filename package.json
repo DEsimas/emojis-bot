@@ -25,7 +25,6 @@
 	},
 	"scripts": {
 		"start": "npx tsc && node ./dist/main.js",
-        "build": "npx tsc"
     },
 	"engines": {
 		"node": "16.9.0",
