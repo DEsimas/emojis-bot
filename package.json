@@ -25,7 +25,7 @@
 	},
 	"scripts": {
 		"start": "node ./dist/main.js",
-        "predeploy": "npx --package=typescript -- tsc"
+        "build": "npx --package=typescript -- tsc"
     },
 	"engines": {
 		"node": "16.9.0",
