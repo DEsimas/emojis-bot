@@ -1,9 +1,9 @@
-import { GuildCreateHandler } from './handlers/GuildCreateHandler.js';
-import { GuildDeleteHandler } from './handlers/GuildDeleteHandler.js';
-import { MessageHandler } from './handlers/MessageHandler.js';
-import { ReadyHandler } from './handlers/ReadyHandler.js';
-import { DAO } from './database/DAO.js';
-import { Log } from './Log.js';
+import { GuildCreateHandler } from './handlers/GuildCreateHandler';
+import { GuildDeleteHandler } from './handlers/GuildDeleteHandler';
+import { MessageHandler } from './handlers/MessageHandler';
+import { ReadyHandler } from './handlers/ReadyHandler';
+import { DAO } from './database/DAO';
+import { Log } from './Log';
 
 import { Client, Intents } from 'discord.js';
 import { config as dotenv } from 'dotenv';

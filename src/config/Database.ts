@@ -1,4 +1,4 @@
-import { Language } from "../database/Users.js"
+import { Language } from "../database/Users"
 
 export interface ICollections {
     users: string;

@@ -1,6 +1,6 @@
 import { Client, MessageEmbed } from "discord.js";
-import { DAO } from "../database/DAO.js";
-import { Log } from "../Log.js";
+import { DAO } from "../database/DAO";
+import { Log } from "../Log";
 
 import { schedule, ScheduledTask } from 'node-cron';
 import { Localization } from "../config/Localization";

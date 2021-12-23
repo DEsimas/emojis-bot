@@ -1,6 +1,6 @@
-import { DAO } from "./../../database/DAO.js";
-import { Log } from "./../../Log.js";
-import { Command } from "./../_Command.js";
+import { DAO } from "./../../database/DAO";
+import { Log } from "./../../Log";
+import { Command } from "./../_Command";
 
 export class Subscribe extends Command {
     public override async execute(): Promise<void> {

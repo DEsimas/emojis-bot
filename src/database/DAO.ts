@@ -1,9 +1,9 @@
-import { Notifications } from './Notifications.js';
-import { Avatars } from './Avatars.js';
-import { Servers } from './Servers.js';
-import { Users } from './Users.js';
-import { Logs } from './Logs.js';
-import { Log } from '../Log.js';
+import { Notifications } from './Notifications';
+import { Avatars } from './Avatars';
+import { Servers } from './Servers';
+import { Users } from './Users';
+import { Logs } from './Logs';
+import { Log } from '../Log';
 
 import { connect } from 'mongoose';
 

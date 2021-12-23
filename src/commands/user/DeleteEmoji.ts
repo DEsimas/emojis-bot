@@ -1,5 +1,5 @@
-import { DAO } from "./../../database/DAO.js";
-import { Command } from "./../_Command.js";
+import { DAO } from "./../../database/DAO";
+import { Command } from "./../_Command";
 
 export class DeleteEmoji extends Command {
     public override async execute(): Promise<void> {

@@ -1,6 +1,6 @@
 import { Client, Message } from "discord.js";
-import { DAO } from "../database/DAO.js";
-import { Log } from "../Log.js";
+import { DAO } from "../database/DAO";
+import { Log } from "../Log";
 import { CommandHandler } from "./CommandHandler";
 
 export class MessageHandler {

@@ -1,5 +1,5 @@
 import { model, Model, Schema, UpdateQuery } from "mongoose";
-import { collections, user as defUser } from "../config/Database.js";
+import { collections, user as defUser } from "../config/Database";
 
 export type Language = 'rus' | 'eng';
 

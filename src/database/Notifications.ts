@@ -1,5 +1,5 @@
 import { model, Model, Schema } from "mongoose";
-import { collections } from "../config/Database.js";
+import { collections } from "../config/Database";
 
 export interface Notification {
     userID: string;

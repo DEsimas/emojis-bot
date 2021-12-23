@@ -1,4 +1,4 @@
-import { DAO } from "./database/DAO.js";
+import { DAO } from "./database/DAO";
 
 export class Log {
     private static readonly red = '\x1b[31m%s\x1b[0m';
