@@ -1,8 +1,8 @@
 import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
-import { Localization } from "../config/Localization";
-import { ILocalization } from "../config/Localization.d";
-import { Server } from "../database/Servers";
-import { User } from "../database/Users";
+import { Localization } from "./../config/Localization";
+import { ILocalization } from "./../config/Localization.d";
+import { Server } from "./../database/Servers";
+import { User } from "./../database/Users";
 
 export class Command {
     protected readonly client: Client;

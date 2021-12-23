@@ -1,5 +1,5 @@
 import { model, Model, Schema, UpdateQuery } from "mongoose";
-import { collections } from "../config/Database";
+import { collections } from "./../config/Database";
 
 export interface Log {
     type: "error" | "warning" | "info";

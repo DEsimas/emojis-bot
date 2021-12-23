@@ -1,9 +1,9 @@
 import { Client, MessageEmbed } from "discord.js";
-import { DAO } from "../database/DAO";
-import { Log } from "../Log";
+import { DAO } from "./../database/DAO";
+import { Log } from "./../Log";
 
 import { schedule, ScheduledTask } from 'node-cron';
-import { Localization } from "../config/Localization";
+import { Localization } from "./../config/Localization";
 
 export class NotificationsSender {
     private readonly client: Client;

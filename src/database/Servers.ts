@@ -1,5 +1,5 @@
 import { model, Model, Schema, UpdateQuery } from "mongoose";
-import { collections, server as defServer } from "../config/Database";
+import { collections, server as defServer } from "./../config/Database";
 
 export interface Server {
     serverID: string;
