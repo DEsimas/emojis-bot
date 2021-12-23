@@ -1,14 +1,8 @@
 import asciifyImage = require("asciify-image");
-<<<<<<< HEAD:src/commands/special/ImgToAscII.ts
 import { Command } from "./../_Command.js";
-=======
-import { BufferResolvable } from "discord.js";
-import { Command } from "./_Command";
->>>>>>> parent of c5b0847 (commands grouping):src/commands/ImgToAscII.ts
 
 export class ImgToAscII extends Command {
     private readonly widthParam = "width:";
-    private readonly path = "./ascII.txt";
 
     private options: { fit: "box" | "width" | "height", width: number, color: boolean } = { 
         fit: "box",

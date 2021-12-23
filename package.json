@@ -1,10 +1,6 @@
 {
 	"name": "emojis-bot",
-<<<<<<< HEAD
 	"version": "6.8.4",
-=======
-	"version": "6.7.9",
->>>>>>> parent of c5b0847 (commands grouping)
 	"description": "bot for discord with random functions",
 	"keywords": [
 		"typescript",

@@ -1,10 +1,5 @@
-<<<<<<< HEAD:src/commands/interaction/Clear.ts
 import { Log } from "./../../Log.js";
 import { Command } from "./../_Command.js";
-=======
-import { Log } from "../Log";
-import { Command } from "./_Command";
->>>>>>> parent of c5b0847 (commands grouping):src/commands/Clear.ts
 
 export class Clear extends Command {
     public override async execute(): Promise<void> {

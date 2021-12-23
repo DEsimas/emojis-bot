@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { ImgToAscII } from "../commands/special/ImgToAscII.js";
 import { DeleteEmoji } from "../commands/user/DeleteEmoji.js";
 import { SetLanguage } from "../commands/user/SetLanguage.js";
@@ -9,18 +8,6 @@ import { DoEmojis } from "../commands/admin/DoEmojis.js";
 import { Clear } from "../commands/interaction/Clear.js";
 import { SetEmoji } from "../commands/user/SetEmoji.js";
 import { Help } from "../commands/interaction/Help.js";
-=======
-import { DeleteEmoji } from "../commands/DeleteEmoji";
-import { SetLanguage } from "../commands/SetLanguage";
-import { Unsubscribe } from "../commands/Unsubscribe";
-import { ImgToAscII } from "../commands/ImgToAscII";
-import { Subscribe } from "../commands/Subscribe";
-import { SetPrefix } from "../commands/SetPrefix";
-import { DoEmojis } from "../commands/DoEmojis";
-import { SetEmoji } from "../commands/SetEmoji";
-import { Clear } from "../commands/Clear";
-import { Help } from "../commands/Help";
->>>>>>> parent of c5b0847 (commands grouping)
 
 import { Command } from "../commands/_Command.js";
 

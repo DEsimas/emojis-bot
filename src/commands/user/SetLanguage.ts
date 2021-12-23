@@ -1,12 +1,6 @@
-<<<<<<< HEAD:src/commands/user/SetLanguage.ts
 import { Localization } from "./../../config/Localization.js";
 import { DAO } from "./../../database/DAO.js";
 import { Command } from "./../_Command.js";
-=======
-import { Localization } from "../config/Localization";
-import { DAO } from "../database/DAO";
-import { Command } from "./_Command";
->>>>>>> parent of c5b0847 (commands grouping):src/commands/SetLanguage.ts
 
 export class SetLanguage extends Command {
     public override async execute(): Promise<void> {
