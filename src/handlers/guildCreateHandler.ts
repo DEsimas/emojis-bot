@@ -1,4 +1,4 @@
-import { DAO } from "../database/DAO";
+import { DAO } from "./../database/DAO";
 import { Client, Guild } from "discord.js";
 
 export class GuildCreateHandler {
