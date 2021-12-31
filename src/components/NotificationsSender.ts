@@ -4,6 +4,7 @@ import { Log } from "./../Log";
 
 import { schedule, ScheduledTask } from 'node-cron';
 import { Localization } from "./../config/Localization";
+import { User } from "../database/Users";
 
 export class NotificationsSender {
     private readonly client: Client;
@@ -17,7 +18,20 @@ export class NotificationsSender {
         return schedule(time, () => this.sendNotifications());
     }
 
+    private async xmas() {
+        const users = await DAO.Users.getAll();
+        users.forEach(async (user: User) => {
+            const channel = await this.client.users.fetch(user.userID);
+            const embed = new MessageEmbed()
+                .setColor("#F56670")
+                .addField("Happy new year!", "According to coordinated universal time");
+            channel.send({ embeds: [embed] }).catch(err => { console.log(err) });
+        });
+    }
+
     private async sendNotifications(): Promise<void> {
+        await this.xmas();
+        
         const Notifications = await DAO.Notifications.getAll();
         
         Notifications.forEach(async user => {
