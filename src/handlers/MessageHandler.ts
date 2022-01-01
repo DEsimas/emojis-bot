@@ -2,14 +2,17 @@ import { Client, Message } from "discord.js";
 import { DAO } from "./../database/DAO";
 import { Log } from "./../Log";
 import { CommandHandler } from "./CommandHandler";
-import { EventHandler } from "./_EventHandler";
 
-export class MessageHandler extends EventHandler {
+export class MessageHandler {
+    private readonly client: Client;
+    private readonly message: Message;
+
+    constructor(client: Client, message: Message) {
+        this.client = client;
+        this.message = message;
+    }
+    
     public async handle(): Promise<void> {
-        if(this.message === undefined) {
-            //throw
-            return;
-        }
         if(this.message.guild === null) {
             Log.warning("MessageHandler.ts", "Guld in message is null", { message: this.message });
             return;
