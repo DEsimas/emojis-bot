@@ -15,12 +15,8 @@ export class DAO {
     public static readonly Logs = new Logs();
 
     public static async connect(uri: string): Promise<void> {
-        return connect(uri, error => {
-            if (error) {
-                Log.error("DAO.ts", `Can't connect database`, { uri: uri, error: error});
-                return;
-            }
-            
+        connect(uri, error => {
+            if (error) throw new Error("Cant connect database");
             Log.info("DAO.ts", "Database connected");
         });
     }
