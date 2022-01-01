@@ -6,7 +6,6 @@ import { DAO } from './database/DAO';
 import { Log } from './Log';
 
 import { Client, Intents } from 'discord.js';
-import { config as dotenv } from 'dotenv';
 
 export class Bot {
     private readonly client: Client;
@@ -20,8 +19,6 @@ export class Bot {
     }
 
     constructor() {
-        dotenv();
-
         this.intents = [
             Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
             Intents.FLAGS.GUILD_MESSAGES,
