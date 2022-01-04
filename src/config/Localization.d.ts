@@ -1,3 +1,5 @@
+import { CommandName } from "./Types";
+
 export interface ILocalization {
     notifications: Notifications;
     clear: Clear;
@@ -39,38 +41,10 @@ export interface DoEmojis {
     db_error: string;
 }
 
-export interface About {
-    SetLanguage: string;
-    SetEmoji: string;
-    DeleteEmoji: string;
-    DoEmojis: string;
-    SetPrefix: string;
-    ImgToAscII: string;
-    Subscribe: string;
-    Unsubscribe: string;
-    Poll: string;
-    Clear: string;
-    Help: string;
-}
-
-export interface Description {
-    SetLanguage: string;
-    SetEmoji: string;
-    DeleteEmoji: string;
-    DoEmojis: string;
-    SetPrefix: string;
-    ImgToAscII: string;
-    Subscribe: string;
-    Unsubscribe: string;
-    Poll: string;
-    Clear: string;
-    Help: string;
-}
-
 export interface Help {
     author: string;
-    about: About;
-    description: Description;
+    about: Record<CommandName, string>;
+    description: Record<CommandName, string>;
 }
 
 export interface ImgToAscII {

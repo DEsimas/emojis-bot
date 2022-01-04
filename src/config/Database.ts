@@ -1,12 +1,4 @@
-import { Language } from "./../database/Users"
-
-export interface ICollections {
-    users: string;
-    servers: string;
-    avatars: string;
-    notifications: string;
-    logs: string;
-}
+import { ICollections, Language } from "./Types"
 
 export const collections: ICollections = {
     users: "users",

@@ -1,7 +1,6 @@
 import { model, Model, Schema, UpdateQuery } from "mongoose";
+import { Language } from "../config/Types";
 import { collections, user as defUser } from "./../config/Database";
-
-export type Language = 'rus' | 'eng';
 
 export interface User {
     userID: string;
