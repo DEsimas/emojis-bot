@@ -18,7 +18,6 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
         },
         "Help": {
             "author": "Some help:",
-            
         },
         "ImgToAscII": {
             "error": "Error while processing an image UwU",

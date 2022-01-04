@@ -25,10 +25,10 @@ export class MessageHandler {
             return;
         }
 
-        if(server.doEmojis && user.emojiID) {
-            if(this.message.author.id !== this.client.user?.id) {
+        if(server.doEmojis) {
+            if(this.message.author.id !== this.client.user?.id && user.emojiID) {
                 this.message.react(user.emojiID);
-            } else {
+            } else if(this.message.author.id === this.client.user?.id) {
                 const avatar = await DAO.Avatars.getActive();
                 if(avatar) {
                     this.message.react(avatar.emojiID);
