@@ -4,7 +4,7 @@ import { Command } from "./../_Command";
 export class DoEmojis extends Command {
     public override async execute(): Promise<void> {
         if(!await this.isAdmin()) {
-            this.sendError(this.localization.doEmojis.access_warn);
+            this.sendError(this.localization.access_warn);
             return;
         }
 
@@ -16,20 +16,20 @@ export class DoEmojis extends Command {
                 this.off();
                 break;
             default:
-                this.sendError(this.localization.doEmojis.args_warn);
+                this.sendError(this.localization.args_warn);
                 break;
         }
     }
 
     private on() {
         DAO.Servers.updateOneByServerId(this.server.serverID, { doEmojis: true })
-            .then(() => this.sendSuccess(this.localization.doEmojis.on))
-            .catch(() => this.sendError(this.localization.doEmojis.db_error));
+            .then(() => this.sendSuccess(this.localization.on))
+            .catch(() => this.sendError(this.localization.db_error));
     }
 
     private off() {
         DAO.Servers.updateOneByServerId(this.server.serverID, { doEmojis: false })
-            .then(() => this.sendSuccess(this.localization.doEmojis.off))
-            .catch(() => this.sendError(this.localization.doEmojis.db_error));
+            .then(() => this.sendSuccess(this.localization.off))
+            .catch(() => this.sendError(this.localization.db_error));
     }
 }

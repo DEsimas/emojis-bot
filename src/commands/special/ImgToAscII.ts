@@ -12,7 +12,7 @@ export class ImgToAscII extends Command {
 
     public override async execute(): Promise<void> {
         if(this.args.length === 0) {
-            this.sendError(this.localization.imgToAscII.no_files)
+            this.sendError(this.localization.no_files)
             return;
         }
 
@@ -20,11 +20,11 @@ export class ImgToAscII extends Command {
 
         files.forEach(async el => {
             if(!this.validateURL(el)) {
-                this.sendError(el + this.localization.imgToAscII.not_link);
+                this.sendError(el + this.localization.not_link);
                 return;
             }
 
-            const asciified = await asciifyImage(el, this.options).catch(() => this.sendError(this.localization.imgToAscII.wrong_file));
+            const asciified = await asciifyImage(el, this.options).catch(() => this.sendError(this.localization.wrong_file));
 
             if(typeof asciified === "string") {    
                 let buf = Buffer.from(asciified);

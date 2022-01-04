@@ -13,7 +13,7 @@ export class Clear extends Command {
                 }
             });
         }).catch(error => {
-            this.sendError(this.localization.clear.error);
+            this.sendError(this.localization.error);
             Log.error("Clear.ts", "Epic clear fail", { error: error, limit: limit });
         });
     }

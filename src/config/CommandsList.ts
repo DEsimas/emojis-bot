@@ -10,62 +10,51 @@ import { SetEmoji } from "./../commands/user/SetEmoji";
 import { Help } from "./../commands/interaction/Help";
 import { Poll } from "../commands/interaction/Poll";
 
-import { ICommand } from "./Types";
+import { CommandName, Command } from "./Types";
 
-export const commands: Array<ICommand> = [
-    {
-        name: "ImgToAscII",
+export const commands: Record<CommandName, Command> = {
+    ImgToAscII: {
         alias: ["imagetoacii", "imgtoascii", "ita"],
         out: ImgToAscII
     },
-    {
-        name: "SetEmoji",
+    SetEmoji: {
         alias: ["setemoji", "set"],
         out: SetEmoji
     },
-    {
-        name: "DeleteEmoji",
+    DeleteEmoji: {
         alias: ["delemoji", "del"],
         out: DeleteEmoji
     },
-    {
-        name: "SetLanguage",
+    SetLanguage: {
         alias: ["setlang", "lang", "setlanguage"],
         out: SetLanguage
     },
-    {
-        name: "SetPrefix",
+    SetPrefix: {
         alias: ["setprefix"],
         out: SetPrefix
     },
-    {
-        name: "DoEmojis",
+    DoEmojis: {
         alias: ["doemojis"],
         out: DoEmojis
     },
-    {
-        name: "Subscribe",
+    Subscribe: {
         alias: ["subscribe", "sub"],
         out: Subscribe
     },
-    {
-        name: "Unsubscribe",
+    Unsubscribe: {
         alias: ["unsubscribe", "unsub"],
         out: Unsubscribe
     },
-    {
-        name: "Poll",
+    Poll: {
         alias: ["poll"],
         out: Poll
     },
-    {
-        name: "Clear",
+    Clear: {
         alias: ["clear", "cls"],
         out: Clear
     },
-    {
-        name: "Help",
+    Help: {
         alias: ["help", "h"],
         out: Help
-    },
-]
+    }
+}

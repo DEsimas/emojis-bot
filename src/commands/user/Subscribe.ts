@@ -12,9 +12,9 @@ export class Subscribe extends Command {
         }
 
         DAO.Notifications.insertOne(notification).then(() => {
-                this.sendSuccess(this.localization.subscribe.send_success);
+                this.sendSuccess(this.localization.send_success);
             }).catch(error => {
-                this.sendError(this.localization.subscribe.send_error);
+                this.sendError(this.localization.send_error);
                 Log.error("Subscribe.ts", "Can't save notification", { error: error, notification: notification });
             });
     }
@@ -24,17 +24,17 @@ export class Subscribe extends Command {
         const date = new Date(this.args[1]);
         
         if(notification) {
-            this.sendError(this.localization.subscribe.existing_user);
+            this.sendError(this.localization.existing_user);
             return false;
         }
 
         if(!(date instanceof Date && !isNaN(date.valueOf()))) {
-            this.sendError(this.localization.subscribe.date_error);
+            this.sendError(this.localization.date_error);
             return false;
         }
 
         if(date >= new Date()) {
-            this.sendError(this.localization.subscribe.date_error);
+            this.sendError(this.localization.date_error);
             return false;
         }
 

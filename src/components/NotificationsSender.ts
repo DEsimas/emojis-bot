@@ -3,7 +3,7 @@ import { DAO } from "./../database/DAO";
 import { Log } from "./../Log";
 
 import { schedule, ScheduledTask } from 'node-cron';
-import { Localization } from "./../config/Localization";
+import { notifications } from "../config/Localization";
 
 export class NotificationsSender {
     private readonly client: Client;
@@ -23,7 +23,7 @@ export class NotificationsSender {
         Notifications.forEach(async user => {
             const diff = this.getDifference(user.birth, new Date());
 
-            const localization = Localization[(await DAO.Users.fetchByUserId(user.userID)).language].notifications;
+            const localization = notifications[(await DAO.Users.fetchByUserId(user.userID)).language];
             
             const channel = await this.client.users.fetch(user.userID);
             const embed = new MessageEmbed()

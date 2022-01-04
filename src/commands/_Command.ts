@@ -1,6 +1,6 @@
 import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
-import { Localization } from "./../config/Localization";
-import { ILocalization } from "./../config/Localization.d";
+import { CommandName, Language } from "../config/Types";
+import { commandsLocalization } from "./../config/Localization";
 import { Server } from "./../database/Servers";
 import { User } from "./../database/Users";
 
@@ -10,20 +10,22 @@ export class Command {
     protected readonly user: User;
     protected readonly server: Server;
     protected readonly args: string[];
-    protected readonly localization: ILocalization;
+    protected readonly localization: Record<string, string>;
+    protected readonly language: Language;
     protected readonly embedColors: Record<"error" | "success" | "discord", ColorResolvable> = {
         error: "#ff0000",
         success: "#00ff00",
         discord: "#202225"
     };
 
-    constructor(client: Client, message: Message, user: User, server: Server, args: string[]) {
+    constructor(client: Client, message: Message, user: User, server: Server, args: string[], command: CommandName) {
         this.client = client;
         this.message = message;
         this.user = user;
         this.server = server;
         this.args = args;
-        this.localization = Localization[user.language];
+        this.language = user.language;
+        this.localization = commandsLocalization[this.language][command];
     }
 
     public async execute(): Promise<void> {

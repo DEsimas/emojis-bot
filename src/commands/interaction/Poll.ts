@@ -8,11 +8,11 @@ export class Poll extends Command{
     public override async execute(): Promise<void> {
         const time = this.getTime();
         if(time && time > 21600000) {
-            this.sendError(this.localization.poll.bad_time_error);
+            this.sendError(this.localization.bad_time_error);
             return;
         }
 
-        const msg = await this.message.channel.send({embeds: [new MessageEmbed().setColor(this.embedColors.success).setTitle(this.getMessage() || this.localization.poll.default_message)]});
+        const msg = await this.message.channel.send({embeds: [new MessageEmbed().setColor(this.embedColors.success).setTitle(this.getMessage() || this.localization.default_message)]});
         msg.react(this.check);
         msg.react(this.cross);
 

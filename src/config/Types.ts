@@ -1,15 +1,15 @@
-import { Command } from "../commands/_Command";
+import { Command as CommandsParrent } from "../commands/_Command";
 
-export const commandsArray = ["SetLanguage", "SetEmoji", "DeleteEmoji", "DoEmojis", "SetPrefix", "ImgToAscII", "Subscribe", "Unsubscribe", "Clear", "Help", "Poll"];
-export const languagesArray = ["eng", "rus"];
+export const commandsArray = ["SetLanguage", "SetEmoji", "DeleteEmoji", "DoEmojis", "SetPrefix", "ImgToAscII", "Subscribe", "Unsubscribe", "Clear", "Help", "Poll"] as const;
+export const languagesArray = ["eng", "rus"] as const;
 
 export type CommandName = typeof commandsArray[number];
 export type Language = typeof languagesArray[number];
+export type CommandLocalization = Record<CommandName, Record<string, string>>
 
-export interface ICommand {
-    name: CommandName;
+export interface Command {
     alias: string[];
-    out: typeof Command;
+    out: typeof CommandsParrent;
 };
 
 export interface ICollections {

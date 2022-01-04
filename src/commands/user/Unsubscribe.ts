@@ -6,12 +6,12 @@ export class Unsubscribe extends Command {
         const id = this.message.author.id;
 
         if(await DAO.Notifications.findByUserId(id) === null) {
-            this.sendError(this.localization.unsubscribe.not_subbed);
+            this.sendError(this.localization.not_subbed);
             return
         }
 
         DAO.Notifications.deleteByUserId(id);
 
-        this.sendSuccess(this.localization.unsubscribe.success);
+        this.sendSuccess(this.localization.success);
     }
 }

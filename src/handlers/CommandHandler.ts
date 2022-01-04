@@ -3,6 +3,7 @@ import { User } from "./../database/Users";
 
 import { Client, Message } from "discord.js";
 import { commands } from "./../config/CommandsList";
+import { commandsArray } from "../config/Types";
 
 export class CommandHandler {
     private readonly client: Client;
@@ -24,11 +25,11 @@ export class CommandHandler {
             const command = args[0].toLowerCase();
 
             if(command.search(this.server.prefix) === -1) return;
-            
-            commands.forEach(cmd => {
-                cmd.alias.forEach(alias => {
+
+            commandsArray.forEach(cmd => {
+                commands[cmd].alias.forEach(alias => {
                     if (this.server.prefix + alias === command)
-                        new cmd.out(this.client, this.message, this.user, this.server, args).execute();
+                        new commands[cmd].out(this.client, this.message, this.user, this.server, args, cmd).execute();
                 });
             });
         };

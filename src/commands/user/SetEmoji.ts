@@ -12,30 +12,30 @@ export class SetEmoji extends Command {
             .then(async () => {
                 if(this.args[1][0] === '<') {
                     const embed = new MessageEmbed()
-                        .setTitle(this.localization.setEmoji.updated)
+                        .setTitle(this.localization.updated)
                         .setColor(this.embedColors.success)
                         .setImage(this.emojiLink);
                     this.message.channel.send({ embeds: [ embed ] });
                 } else if(!isNaN(Number(this.args[1]))) {
                     const embed = new MessageEmbed()
-                        .setTitle(this.localization.setEmoji.updated)
+                        .setTitle(this.localization.updated)
                         .setColor(this.embedColors.success)
                     const message = await this.message.channel.send({ embeds: [ embed ] });
                     message.react(this.args[1]);
-                } else this.sendSuccess(this.localization.setEmoji.updated + '\n' + this.args[1]);
-            }).catch(() => this.sendError(this.localization.setEmoji.error));
+                } else this.sendSuccess(this.localization.updated + '\n' + this.args[1]);
+            }).catch(() => this.sendError(this.localization.error));
     }
 
     private async checkEmoji(): Promise<boolean> {
         if(this.user.emojiID === this.args[1]) {
-            this.sendError(this.localization.setEmoji.same_emoji);
+            this.sendError(this.localization.same_emoji);
             return false;
         }
 
         try {
             await this.message.react(this.args[1]);
         } catch(e) {
-            this.sendError(this.localization.setEmoji.error);
+            this.sendError(this.localization.error);
             return false;
         }
 

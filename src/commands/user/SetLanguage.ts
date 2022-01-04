@@ -1,4 +1,4 @@
-import { Localization } from "./../../config/Localization";
+import { languagesArray } from "./../../config/Types";
 import { DAO } from "./../../database/DAO";
 import { Command } from "./../_Command";
 
@@ -10,24 +10,21 @@ export class SetLanguage extends Command {
         if(!language) return;
     
         DAO.Users.updateByUserId(userID, { language: language })
-            .then(() => this.sendSuccess(this.localization.setLanguage.success + language))
-            .catch(() => super.sendError(this.localization.setLanguage.db_error));
+            .then(() => this.sendSuccess(this.localization.success + language))
+            .catch(() => super.sendError(this.localization.db_error));
     }
 
     private getLanguage(): string | undefined {
         const language = this.args[1];
         if(language === undefined) {
-            this.sendError(this.localization.setLanguage.empty);
+            this.sendError(this.localization.empty);
             return undefined;
         };
 
-        let flag = false;
-        Object.keys(Localization).map(objectKey => {
-            if (objectKey === language) flag = true;
-        });
+        const isLang: boolean = languagesArray.find(el => (el === language)) !== undefined;
 
-        if (!flag) {
-            this.sendError(this.localization.setLanguage.warn);
+        if (!isLang) {
+            this.sendError(this.localization.warn);
             return undefined;
         };
 
