@@ -35,6 +35,7 @@ export const Localization: Record<string, ILocalization> = {
                 "ImgToAscII": "Convert an image to the text file",
                 "Subscribe": "Counts how long lived",
                 "Unsubscribe": "Unsubscribe from daily notifications",
+                "Poll": "Creates poll message",
                 "Clear": "Deletes bot messages from this channel",
                 "Help": "Help"
             },
@@ -47,7 +48,7 @@ export const Localization: Record<string, ILocalization> = {
                 "ImgToAscII": "Convert image to ascII text",
                 "Subscribe": "Use date in american format",
                 "Unsubscribe": "why? ¯\\_(ツ)_/¯",
-                "addtrack": "Adds track to database (special for maus999)",
+                "Poll": "You can add timeout using *h, *m, *s attributes",
                 "Clear": "You can state amount of messages to delete",
                 "Help": "Shows this message"
             }
@@ -86,6 +87,10 @@ export const Localization: Record<string, ILocalization> = {
         "unsubscribe": {
             "not_subbed": "You wasn't subbed anyway",
             "success": "Unsubscribed"
+        },
+        "poll": {
+            "default_message": "Poll!",
+            "bad_time_error": "Poll time should be fewer than 6 hours, you can leave poll without timeout to make it infinite"
         }
     },
     "rus": {
@@ -122,6 +127,7 @@ export const Localization: Record<string, ILocalization> = {
                 "ImgToAscII": "Конвертировать картинку в текстовый файл",
                 "Subscribe": "Считает сколько вы прожили",
                 "Unsubscribe": "Отписаться от ежедневной рассылки",
+                "Poll": "Отправить сообщение с опросом",
                 "Clear": "Удаляет сообщения бота из этого канала",
                 "Help": "Помощь"
             },
@@ -134,7 +140,7 @@ export const Localization: Record<string, ILocalization> = {
                 "ImgToAscII": "Конвертировать картинку в текстовый файл",
                 "Subscribe": "Дату рождения следует вводить в американском формате",
                 "Unsubscribe": "Зачем? ¯\\_(ツ)_/¯",
-                "addtrack": "Добавить трек в базу данных (специально для maus999)",
+                "Poll": "используйте *h, *m, *s для задания времени опроса",
                 "Clear": "Можно указать количество сообщений, которое нужно удалить",
                 "Help": "Показывает это сообщение"
             }
@@ -173,6 +179,10 @@ export const Localization: Record<string, ILocalization> = {
         "unsubscribe": {
             "not_subbed": "Вы и так не подписаны",
             "success": "Вы отписаны"
+        },
+        "poll": {
+            "default_message": "Опрос!",
+            "bad_time_error": "Длительность опроса должна быть меньше 6 часов. Для создания бесконечного опроса не нужно указывать время."
         }
     }
 };

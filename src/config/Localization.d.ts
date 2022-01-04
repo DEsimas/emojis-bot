@@ -10,6 +10,7 @@ export interface ILocalization {
     setPrefix: SetPrefix;
     subscribe: Subscribe;
     unsubscribe: Unsubscribe;
+    poll: Poll;
 }
 
 export interface Notifications {
@@ -47,6 +48,7 @@ export interface About {
     ImgToAscII: string;
     Subscribe: string;
     Unsubscribe: string;
+    Poll: string;
     Clear: string;
     Help: string;
 }
@@ -60,7 +62,7 @@ export interface Description {
     ImgToAscII: string;
     Subscribe: string;
     Unsubscribe: string;
-    addtrack: string;
+    Poll: string;
     Clear: string;
     Help: string;
 }
@@ -112,16 +114,7 @@ export interface Unsubscribe {
     success: string;
 }
 
-export interface RootObject {
-    notifications: Notifications;
-    clear: Clear;
-    deleteEmoji: DeleteEmoji;
-    doEmojis: DoEmojis;
-    help: Help;
-    imgToAscII: ImgToAscII;
-    setEmoji: SetEmoji;
-    setLanguage: SetLanguage;
-    setPrefix: SetPrefix;
-    subscribe: Subscribe;
-    unsubscribe: Unsubscribe;
+export interface Poll {
+    default_message: string;
+    bad_time_error: string;
 }

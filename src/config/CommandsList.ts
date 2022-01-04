@@ -10,9 +10,10 @@ import { SetEmoji } from "./../commands/user/SetEmoji";
 import { Help } from "./../commands/interaction/Help";
 
 import { Command } from "./../commands/_Command";
+import { Poll } from "../commands/interaction/Poll";
 
 export interface ICommand {
-    name: "SetLanguage" | "SetEmoji" | "DeleteEmoji" | "DoEmojis" | "SetPrefix" | "ImgToAscII" | "Subscribe" | "Unsubscribe" | "Clear" | "Help";
+    name: "SetLanguage" | "SetEmoji" | "DeleteEmoji" | "DoEmojis" | "SetPrefix" | "ImgToAscII" | "Subscribe" | "Unsubscribe" | "Clear" | "Help" | "Poll";
     alias: string[];
     out: typeof Command;
 };
@@ -57,6 +58,11 @@ export const commands: Array<ICommand> = [
         name: "Unsubscribe",
         alias: ["unsubscribe", "unsub"],
         out: Unsubscribe
+    },
+    {
+        name: "Poll",
+        alias: ["poll"],
+        out: Poll
     },
     {
         name: "Clear",
