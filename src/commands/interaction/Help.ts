@@ -1,7 +1,7 @@
 import { MessageEmbed } from "discord.js";
 import { DAO } from "./../../database/DAO";
 import { Command } from "./../_Command";
-import { commandsArray } from "../../config/Types";
+import { commandsArray } from "../../config/CommandsList";
 import { help } from "../../config/Localization";
 
 export class Help extends Command {

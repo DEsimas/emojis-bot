@@ -12,6 +12,8 @@ import { Poll } from "../commands/interaction/Poll";
 
 import { CommandName, Command } from "./Types";
 
+export const commandsArray = ["SetLanguage", "SetEmoji", "DeleteEmoji", "DoEmojis", "SetPrefix", "ImgToAscII", "Subscribe", "Unsubscribe", "Clear", "Help", "Poll"] as const;
+
 export const commands: Record<CommandName, Command> = {
     ImgToAscII: {
         alias: ["imagetoacii", "imgtoascii", "ita"],

@@ -1,6 +1,6 @@
 import { Command as CommandsParrent } from "../commands/_Command";
+import { commandsArray } from "./CommandsList";
 
-export const commandsArray = ["SetLanguage", "SetEmoji", "DeleteEmoji", "DoEmojis", "SetPrefix", "ImgToAscII", "Subscribe", "Unsubscribe", "Clear", "Help", "Poll"] as const;
 export const languagesArray = ["eng", "rus"] as const;
 
 export type CommandName = typeof commandsArray[number];

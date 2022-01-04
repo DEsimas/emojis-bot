@@ -3,7 +3,7 @@ import { User } from "./../database/Users";
 
 import { Client, Message } from "discord.js";
 import { commands } from "./../config/CommandsList";
-import { commandsArray } from "../config/Types";
+import { commandsArray } from "../config/CommandsList";
 
 export class CommandHandler {
     private readonly client: Client;
