@@ -152,12 +152,12 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "Help": "Shows this message"
         },
         "categories": {
-            "admin": "a",
-            "emojis": "e",
-            "interaction": "i",
-            "notifications": "n",
-            "special": "s",
-            "user": "u"
+            "admin": "Commands that can be used only by admins",
+            "emojis": "Everything related to the emojis functional",
+            "interaction": "Interaction with bot",
+            "notifications": "Setting up daily notifications",
+            "special": "Spacial commands ( ͡° ͜ʖ ͡°)",
+            "user": "Customizing bot"
         }
     },
     "rus": {
@@ -188,12 +188,12 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "Help": "Показывает это сообщение"
         },
         "categories": {
-            "admin": "a",
-            "emojis": "e",
-            "interaction": "i",
-            "notifications": "n",
-            "special": "s",
-            "user": "u"
+            "admin": "Команды, предназначенные только для администраторов",
+            "emojis": "Всё, что связано с реакциями под сообщениями",
+            "interaction": "Взаимодействие с ботом",
+            "notifications": "Функционал, связанный с ежедневными уведомлениями",
+            "special": "Специальные ( ͡° ͜ʖ ͡°)",
+            "user": "Настройки бота для каждого пользователя"
         }
     }
 }

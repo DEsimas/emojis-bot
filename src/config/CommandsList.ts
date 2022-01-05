@@ -15,7 +15,7 @@ import { CommandName, Command, Categories } from "./Types";
 export const commandsArray = ["SetLanguage", "SetEmoji", "DeleteEmoji", "DoEmojis", "SetPrefix", "ImgToAscII", "Subscribe", "Unsubscribe", "Clear", "Help", "Poll"] as const;
 export const categories = ["admin", "emojis", "interaction", "notifications", "special", "user"] as const;
 
-export const commandsObject: Record<Categories, Array<typeof commandsArray[number]>> = {
+export const commandsObject: Record<Categories, Array<CommandName>> = {
     admin: ["DoEmojis", "SetPrefix"],
     emojis: ["DoEmojis", "DeleteEmoji", "SetEmoji"],
     interaction: ["Clear", "Help", "Poll"],
