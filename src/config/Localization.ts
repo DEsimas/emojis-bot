@@ -1,4 +1,4 @@
-import { CommandLocalization, CommandName, Language } from "./Types";
+import { Categories, CommandLocalization, CommandName, Language } from "./Types";
 
 export const commandsLocalization: Record<Language, CommandLocalization> = {
     "eng": {
@@ -17,7 +17,9 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "db_error": "We have some troubles with data base"
         },
         "Help": {
-            "author": "Some help:",
+            "commands_header": "Some help:",
+            "categories_header": "Categories:",
+            "categories_guide": "Provide a category name to see specific commands"
         },
         "ImgToAscII": {
             "error": "Error while processing an image UwU",
@@ -75,8 +77,9 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "db_error": "Произошла ошибка при записи в базу данных! Попробуйте снова"
         },
         "Help": {
-            "author": "Список команд:",
-            
+            "commands_header": "Список команд:",
+            "categories_header": "Категории:",
+            "categories_guide": "Укажите название категории для получения помощи по конкретным командам"
         },
         "ImgToAscII": {
             "error": "Не удалось сохранить файл UwU",
@@ -120,7 +123,7 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
     }
 };
 
-export const help: Record<Language, { about: Record<CommandName, string>, description: Record<CommandName, string> }> = {
+export const help: Record<Language, { about: Record<CommandName, string>, description: Record<CommandName, string>, categories: Record<Categories, string> }> = {
     "eng": {
         "about": {
             "SetLanguage": "Set language [rus, eng]",
@@ -147,6 +150,14 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "Poll": "You can add timeout using *h, *m, *s attributes",
             "Clear": "You can state amount of messages to delete",
             "Help": "Shows this message"
+        },
+        "categories": {
+            "admin": "a",
+            "emojis": "e",
+            "interaction": "i",
+            "notifications": "n",
+            "special": "s",
+            "user": "u"
         }
     },
     "rus": {
@@ -175,6 +186,14 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "Poll": "используйте *h, *m, *s для задания времени опроса",
             "Clear": "Можно указать количество сообщений, которое нужно удалить",
             "Help": "Показывает это сообщение"
+        },
+        "categories": {
+            "admin": "a",
+            "emojis": "e",
+            "interaction": "i",
+            "notifications": "n",
+            "special": "s",
+            "user": "u"
         }
     }
 }
