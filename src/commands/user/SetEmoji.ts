@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import { DAO } from "./../../database/DAO";
-import { Command } from "./../_Command";
+import { Command } from "./../Command";
 
 export class SetEmoji extends Command {
     private readonly emojiLink = "https://cdn.discordapp.com/emojis/";

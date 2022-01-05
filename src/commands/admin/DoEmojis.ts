@@ -1,5 +1,5 @@
 import { DAO } from "./../../database/DAO";
-import { Command } from "./../_Command";
+import { Command } from "./../Command";
 
 export class DoEmojis extends Command {
     public override async execute(): Promise<void> {

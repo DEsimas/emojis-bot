@@ -1,6 +1,6 @@
 import { languagesArray } from "./../../config/Types";
 import { DAO } from "./../../database/DAO";
-import { Command } from "./../_Command";
+import { Command } from "./../Command";
 
 export class SetLanguage extends Command {
     public override async execute(): Promise<void> {

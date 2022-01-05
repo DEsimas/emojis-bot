@@ -1,4 +1,4 @@
-import { Command as CommandsParrent } from "../commands/_Command";
+import { Command as CommandsParrent } from "../commands/Command";
 import { commandsArray } from "./CommandsList";
 
 export const languagesArray = ["eng", "rus"] as const;

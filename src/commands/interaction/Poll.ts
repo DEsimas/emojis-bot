@@ -1,5 +1,5 @@
 import { MessageEmbed, ReactionCollector } from "discord.js";
-import { Command } from "../_Command";
+import { Command } from "./../Command";
 
 export class Poll extends Command{
     private readonly check = "✅";
