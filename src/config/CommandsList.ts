@@ -1,18 +1,28 @@
+import { Unsubscribe } from "./../commands/notifications/Unsubscribe";
+import { Subscribe } from "./../commands/notifications/Subscribe";
+import { DeleteEmoji } from "./../commands/emojis/DeleteEmoji";
 import { ImgToAscII } from "./../commands/special/ImgToAscII";
-import { DeleteEmoji } from "./../commands/user/DeleteEmoji";
 import { SetLanguage } from "./../commands/user/SetLanguage";
-import { Unsubscribe } from "./../commands/user/Unsubscribe";
 import { SetPrefix } from "./../commands/admin/SetPrefix";
-import { Subscribe } from "./../commands/user/Subscribe";
-import { DoEmojis } from "./../commands/admin/DoEmojis";
+import { SetEmoji } from "./../commands/emojis/SetEmoji";
+import { DoEmojis } from "./../commands/emojis/DoEmojis";
 import { Clear } from "./../commands/interaction/Clear";
-import { SetEmoji } from "./../commands/user/SetEmoji";
 import { Help } from "./../commands/interaction/Help";
 import { Poll } from "../commands/interaction/Poll";
 
-import { CommandName, Command } from "./Types";
+import { CommandName, Command, Categories } from "./Types";
 
 export const commandsArray = ["SetLanguage", "SetEmoji", "DeleteEmoji", "DoEmojis", "SetPrefix", "ImgToAscII", "Subscribe", "Unsubscribe", "Clear", "Help", "Poll"] as const;
+export const categories = ["admin", "emojis", "interaction", "notifications", "special", "user"] as const;
+
+export const commandsObject: Record<Categories, string[]> = {
+    admin: ["DoEmojis", "SetPrefix"],
+    emojis: ["DoEmojis", "DeleteEmoji", "SetEmoji"],
+    interaction: ["Clear", "Help", "Poll"],
+    notifications: ["Subscribe", "Unsubscribe"],
+    special: ["ImgToAscII"],
+    user: ["DeleteEmoji", "SetEmoji", "SetLanguage"]
+};
 
 export const commands: Record<CommandName, Command> = {
     ImgToAscII: {

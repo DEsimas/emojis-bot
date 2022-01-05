@@ -1,10 +1,11 @@
 import { Command as CommandsParrent } from "../commands/Command";
-import { commandsArray } from "./CommandsList";
+import { categories, commandsArray } from "./CommandsList";
 
 export const languagesArray = ["eng", "rus"] as const;
 
 export type CommandName = typeof commandsArray[number];
 export type Language = typeof languagesArray[number];
+export type Categories = typeof categories[number];
 export type CommandLocalization = Record<CommandName, Record<string, string>>
 
 export interface Command {
