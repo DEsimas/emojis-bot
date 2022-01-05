@@ -1,7 +1,7 @@
 import { MessageEmbed } from "discord.js";
 import { DAO } from "./../../database/DAO";
 import { Command } from "./../Command";
-import { categories, commands } from "../../config/CommandsList";
+import { categories, commands, commandsObject } from "../../config/CommandsList";
 import { help } from "../../config/Localization";
 import { Categories } from "../../config/Types";
 
@@ -19,9 +19,10 @@ export class Help extends Command {
         return null;
     }
 
-    private async getEmbed(title: string): Promise<MessageEmbed> {
+    private async getEmbed(title: string, author: string): Promise<MessageEmbed> {
         const avatar = await DAO.Avatars.getActive();
         const embed = new MessageEmbed()
+            .setAuthor(author)
             .setTitle(title)
             .setColor(avatar?.color || this.embedColors.discord);
         return embed;
@@ -30,8 +31,7 @@ export class Help extends Command {
     private async sendCategories(): Promise<void> {
         const dsc = help[this.language].categories;
 
-        const embed = await this.getEmbed(this.localization.categories_header);
-        embed.setAuthor(this.localization.categories_guide);
+        const embed = await this.getEmbed(this.localization.categories_header, this.localization.categories_guide);
 
         categories.forEach(category => {
             embed.addField(category, dsc[category]);
@@ -41,6 +41,12 @@ export class Help extends Command {
     }
 
     private async sendCommands(category: Categories): Promise<void> {
-        this.message.channel.send("uwu");
+        const embed = await this.getEmbed(this.localization.commands_header, category);
+
+        commandsObject[category].forEach(command => {
+            embed.addField(`${command} - ${help[this.language].about[command]}`, help[this.language].description[command]);
+        });
+
+        this.message.channel.send({ embeds: [embed] });
     }
 }
