@@ -1,13 +1,15 @@
 import { Client, Message } from "discord.js";
-import { DAO } from "./../database/DAO";
-import { Log } from "./../Log";
-import { CommandHandler } from "./CommandHandler";
+import { Handler } from "../Handler";
+import { DAO } from "./../../database/DAO";
+import { Log } from "./../../Log";
+import { CommandHandler } from "./../other/CommandHandler";
 
-export class MessageHandler {
+export class MessageHandler extends Handler {
     private readonly client: Client;
     private readonly message: Message;
 
     constructor(client: Client, message: Message) {
+        super();
         this.client = client;
         this.message = message;
     }

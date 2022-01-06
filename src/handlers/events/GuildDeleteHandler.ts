@@ -1,11 +1,13 @@
-import { DAO } from "./../database/DAO";
+import { DAO } from "./../../database/DAO";
 
 import { Guild } from "discord.js";
+import { Handler } from "../Handler";
 
-export class GuildDeleteHandler {
+export class GuildDeleteHandler extends Handler {
     private readonly guild: Guild;
 
     constructor(guild: Guild) {
+        super();
         this.guild = guild;
     }
 

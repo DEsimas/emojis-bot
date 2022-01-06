@@ -1,10 +1,11 @@
-import { UserInterfaceUpdater } from "./../components/UserInterfaceUpdater";
-import { NotificationsSender } from "./../components/NotificationsSender";
-import { Log } from "./../Log";
+import { UserInterfaceUpdater } from "./../../components/UserInterfaceUpdater";
+import { NotificationsSender } from "./../../components/NotificationsSender";
+import { Handler } from "./../Handler";
+import { Log } from "./../../Log";
 
 import { Client } from "discord.js";
 
-export class ReadyHandler {
+export class ReadyHandler extends Handler {
     private readonly client: Client;
 
     private readonly cron: Record<string, string> = {
@@ -13,6 +14,7 @@ export class ReadyHandler {
     }
 
     constructor(client: Client)  {
+        super();
         Log.info("ReadyHandler.ts", "bot is ready");
         this.client = client;
     }

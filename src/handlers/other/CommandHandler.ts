@@ -1,17 +1,19 @@
-import { Server } from "./../database/Servers";
-import { User } from "./../database/Users";
+import { Server } from "./../../database/Servers";
+import { User } from "./../../database/Users";
 
 import { Client, Message } from "discord.js";
-import { commands } from "./../config/CommandsList";
-import { commandsArray } from "../config/CommandsList";
+import { commands } from "./../../config/CommandsList";
+import { commandsArray } from "./../../config/CommandsList";
+import { Handler } from "../Handler";
 
-export class CommandHandler {
+export class CommandHandler extends Handler {
     private readonly client: Client;
     private readonly message: Message;
     private readonly user: User;
     private readonly server: Server;
 
     constructor(client: Client, message: Message, user: User, server: Server) {
+        super();
         this.client = client;
         this.message = message;
         this.user = user;

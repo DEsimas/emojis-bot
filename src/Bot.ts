@@ -1,12 +1,12 @@
-import { GuildCreateHandler } from './handlers/GuildCreateHandler';
-import { GuildDeleteHandler } from './handlers/GuildDeleteHandler';
-import { MessageHandler } from './handlers/MessageHandler';
-import { ReadyHandler } from './handlers/ReadyHandler';
+import { GuildCreateHandler } from './handlers/events/GuildCreateHandler';
+import { GuildDeleteHandler } from './handlers/events/GuildDeleteHandler';
+import { GuildMemberAdd } from './handlers/events/GuildMemberAdd';
+import { MessageHandler } from './handlers/events/MessageHandler';
+import { ReadyHandler } from './handlers/events/ReadyHandler';
 import { DAO } from './database/DAO';
 import { Log } from './Log';
 
 import { Client, Intents } from 'discord.js';
-import { GuildMemberAdd } from './handlers/GuildMemberAdd';
 
 export class Bot {
     private readonly client: Client;
@@ -47,6 +47,6 @@ export class Bot {
         this.client.on(this.events.message, message => new MessageHandler(this.client, message).handle());
         this.client.on(this.events.guildCreate, guild => new GuildCreateHandler(this.client, guild ).handle());
         this.client.on(this.events.guildDelete, guild => new GuildDeleteHandler(guild).handle());
-        this.client.on(this.events.guildMemberAdd, member => new GuildMemberAdd(member).handle());
+        this.client.on(this.events.guildMemberAdd, member => console.log("uwu"));
     }
 };

@@ -1,9 +1,11 @@
-import { GuildMember, MessageEmbed } from "discord.js";
+import { GuildMember } from "discord.js";
+import { Handler } from "../Handler";
 
-export class GuildMemberAdd {
+export class GuildMemberAdd extends Handler {
     private readonly member: GuildMember;
 
     constructor(member: GuildMember) {
+        super();
         this.member = member;
     }
 
