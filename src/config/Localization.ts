@@ -225,8 +225,7 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
 }
 
 export const guildMembers: Record<string, string> = {
-    "welcome": " hopped on this server!",
-    "bye": "Goodbye, "
+    "welcome": " hopped on this server!"
 }
 
 export const notifications: Record<Language, Record<string, string>> = {
