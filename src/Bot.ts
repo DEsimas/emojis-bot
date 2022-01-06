@@ -6,6 +6,7 @@ import { DAO } from './database/DAO';
 import { Log } from './Log';
 
 import { Client, Intents } from 'discord.js';
+import { GuildMemberAdd } from './handlers/GuildMemberAdd';
 
 export class Bot {
     private readonly client: Client;
@@ -15,7 +16,8 @@ export class Bot {
         ready: "ready",
         message: "messageCreate",
         guildCreate: "guildCreate",
-        guildDelete: "guildDelete"
+        guildDelete: "guildDelete",
+        guildMemberAdd: "guildMemberAdd"
     }
 
     constructor() {
@@ -45,5 +47,6 @@ export class Bot {
         this.client.on(this.events.message, message => new MessageHandler(this.client, message).handle());
         this.client.on(this.events.guildCreate, guild => new GuildCreateHandler(this.client, guild ).handle());
         this.client.on(this.events.guildDelete, guild => new GuildDeleteHandler(guild).handle());
+        this.client.on(this.events.guildMemberAdd, member => new GuildMemberAdd(member).handle());
     }
 };

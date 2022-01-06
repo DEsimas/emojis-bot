@@ -13,7 +13,8 @@ export const user: {emojiID: string | null, language: Language} = {
     language: "eng"
 }
 
-export const server: {prefix: string, doEmojis: boolean} = {
+export const server: {prefix: string, doEmojis: boolean, doGreetings: false} = {
     prefix: "|",
-    doEmojis: false
+    doEmojis: false,
+    doGreetings: false
 }

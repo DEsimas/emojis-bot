@@ -4,6 +4,7 @@ import { collections, server as defServer } from "./../config/Database";
 export interface Server {
     serverID: string;
     doEmojis: boolean;
+    doGreetings: boolean;
     prefix: string;
 };
 
@@ -18,6 +19,7 @@ export class Servers {
         return new Schema<Server>({
             serverID: String,
             doEmojis: Boolean,
+            doGreetings: Boolean,
             prefix: String
         });
     }
