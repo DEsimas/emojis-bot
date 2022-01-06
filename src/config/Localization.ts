@@ -62,6 +62,11 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
         "Poll": {
             "default_message": "Poll!",
             "bad_time_error": "Poll time should be fewer than 6 hours, you can leave poll without timeout to make it infinite"
+        },
+        "DoGreetings": {
+            "wrong_input": "State on or off",
+            "on": "Greetings enabled (￣^￣)ゞ",
+            "off": "Functions disabled"
         }
     },
     "rus": {
@@ -125,6 +130,11 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
         "Poll": {
             "default_message": "Опрос!",
             "bad_time_error": "Длительность опроса должна быть меньше 6 часов. Для создания бесконечного опроса не нужно указывать время."
+        },
+        "DoGreetings": {
+            "wrong_input": "Передайте on или off",
+            "on": "Приветствие вклчено (￣^￣)ゞ",
+            "off": "Функция отключена"
         }
     }
 };
@@ -136,6 +146,7 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "SetEmoji": "Chose the message reaction",
             "DeleteEmoji": "Remove the message reaction",
             "DoEmojis": "Enable and disable bot reactions on the server (admins only)",
+            "DoGreetings": "Enable greetings in system channel",
             "SetPrefix": "Set prefix, I suppose",
             "ImgToAscII": "Convert an image to the text file",
             "GetAvatar": "Watch someones avatar clearly",
@@ -150,6 +161,7 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "SetEmoji": "State emoji after command. You can use default emojis and emojis from servers with this bot",
             "DeleteEmoji": "Delete reaction under your message",
             "DoEmojis": "on - switch on, off - switch off",
+            "DoGreetings": "state \"on\" or \"off\"",
             "SetPrefix": "p.s. only for admins",
             "ImgToAscII": "Convert image to ascII text",
             "GetAvatar": "Ping user, like GetAvatar @maus999",
@@ -174,6 +186,7 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "SetEmoji": "Выберите реакцию под сообщением",
             "DeleteEmoji": "Убрать реакцию под сообщениями",
             "DoEmojis": "Включить и выключить реакции от бота на сервере",
+            "DoGreetings": "Включить/выфключить приветствие новых пользователей",
             "SetPrefix": "Изменить префикс на сервере",
             "ImgToAscII": "Конвертировать картинку в текстовый файл",
             "GetAvatar": "Позволяет рассмотреть чью-то аватарку",
@@ -188,6 +201,7 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "SetEmoji": "Напишите команду и через пробел эмоджи для реакции под сообщением (если функция включена на сервере). Можно использовать дефолтные и эмоджи с серверов, на которых есть этот бот",
             "DeleteEmoji": "Убрать реакцию под сообщениями",
             "DoEmojis": "on - вкл. off - выкл.",
+            "DoGreetings": "on - вкл. off - выкл.",
             "SetPrefix": "Такое могут только админы",
             "ImgToAscII": "Конвертировать картинку в текстовый файл",
             "GetAvatar": "Укажите пользователя в следующем формате: getavatar @maus999",
