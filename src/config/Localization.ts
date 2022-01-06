@@ -27,6 +27,9 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "wrong_file": "File not found",
             "not_link": " - is not a link"
         },
+        "GetAvatar": {
+            "error": "Произощла ошибка, повторите позже"
+        },
         "SetEmoji": {
             "updated": "Reaction Updated",
             "error": "Wrong emoji >:(",
@@ -87,6 +90,9 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "wrong_file": "Файл не найден",
             "not_link": " - не ссылка"
         },
+        "GetAvatar": {
+            "error": "Failed to load avatar"
+        },
         "SetEmoji": {
             "updated": "Reaction Updated",
             "error": "Это не эмодзи >:(",
@@ -132,6 +138,7 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "DoEmojis": "Enable and disable bot reactions on the server (admins only)",
             "SetPrefix": "Set prefix, I suppose",
             "ImgToAscII": "Convert an image to the text file",
+            "GetAvatar": "Watch someones avatar clearly",
             "Subscribe": "Counts how long lived",
             "Unsubscribe": "Unsubscribe from daily notifications",
             "Poll": "Creates poll message",
@@ -145,6 +152,7 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "DoEmojis": "on - switch on, off - switch off",
             "SetPrefix": "p.s. only for admins",
             "ImgToAscII": "Convert image to ascII text",
+            "GetAvatar": "Ping user, like GetAvatar @maus999",
             "Subscribe": "Use date in american format",
             "Unsubscribe": "why? ¯\\_(ツ)_/¯",
             "Poll": "You can add timeout using *h, *m, *s attributes",
@@ -168,6 +176,7 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "DoEmojis": "Включить и выключить реакции от бота на сервере",
             "SetPrefix": "Изменить префикс на сервере",
             "ImgToAscII": "Конвертировать картинку в текстовый файл",
+            "GetAvatar": "Позволяет рассмотреть чью-то аватарку",
             "Subscribe": "Считает сколько вы прожили",
             "Unsubscribe": "Отписаться от ежедневной рассылки",
             "Poll": "Отправить сообщение с опросом",
@@ -181,6 +190,7 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "DoEmojis": "on - вкл. off - выкл.",
             "SetPrefix": "Такое могут только админы",
             "ImgToAscII": "Конвертировать картинку в текстовый файл",
+            "GetAvatar": "Укажите пользователя в следующем формате: getavatar @maus999",
             "Subscribe": "Дату рождения следует вводить в американском формате",
             "Unsubscribe": "Зачем? ¯\\_(ツ)_/¯",
             "Poll": "используйте *h, *m, *s для задания времени опроса",
