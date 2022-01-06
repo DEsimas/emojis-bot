@@ -1,4 +1,5 @@
-import { GuildMember } from "discord.js";
+import { GuildMember, MessageEmbed } from "discord.js";
+import { guildMembers } from "../../config/Localization";
 import { Handler } from "../Handler";
 
 export class GuildMemberAdd extends Handler {
@@ -10,6 +11,13 @@ export class GuildMemberAdd extends Handler {
     }
 
     public async handle(): Promise<void> {
-        console.log("uwu");
+        const embed = new MessageEmbed()
+            .setColor(this.embedColors.success)
+            .setThumbnail(this.member.user.avatarURL() || this.defaultAvatar)
+            .setTitle(this.member.user.username + guildMembers.welcome)
+            .setFooter(this.member.guild.name)
+            .setTimestamp();
+        
+        this.member.guild.systemChannel?.send({ embeds: [embed] });
     }
 }

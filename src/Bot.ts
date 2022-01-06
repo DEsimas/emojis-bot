@@ -26,7 +26,8 @@ export class Bot {
             Intents.FLAGS.GUILD_MESSAGES,
             Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
             Intents.FLAGS.GUILDS,
-            Intents.FLAGS.DIRECT_MESSAGES
+            Intents.FLAGS.DIRECT_MESSAGES,
+            Intents.FLAGS.GUILD_MEMBERS
         ];
 
         this.client = new Client({ intents: this.intents});
@@ -47,6 +48,6 @@ export class Bot {
         this.client.on(this.events.message, message => new MessageHandler(this.client, message).handle());
         this.client.on(this.events.guildCreate, guild => new GuildCreateHandler(this.client, guild ).handle());
         this.client.on(this.events.guildDelete, guild => new GuildDeleteHandler(guild).handle());
-        this.client.on(this.events.guildMemberAdd, member => console.log("uwu"));
+        this.client.on(this.events.guildMemberAdd, member => new GuildMemberAdd(member).handle());
     }
 };
