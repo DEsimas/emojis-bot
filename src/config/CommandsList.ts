@@ -56,7 +56,7 @@ export const commands: Record<CommandName, Command> = {
         out: DoEmojis
     },
     DoGreetings: {
-        alias: ["dogreetings, dowelcomes"],
+        alias: ["dogreetings", "dowelcomes"],
         out: DoGreetings
     },
     Subscribe: {

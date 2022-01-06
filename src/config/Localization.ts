@@ -66,7 +66,8 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
         "DoGreetings": {
             "wrong_input": "State on or off",
             "on": "Greetings enabled (￣^￣)ゞ",
-            "off": "Functions disabled"
+            "off": "Functions disabled",
+            "access_error": "This command is only for admins"
         }
     },
     "rus": {
@@ -134,7 +135,8 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
         "DoGreetings": {
             "wrong_input": "Передайте on или off",
             "on": "Приветствие вклчено (￣^￣)ゞ",
-            "off": "Функция отключена"
+            "off": "Функция отключена",
+            "access_error": "Эта команда только для администраторов"
         }
     }
 };
