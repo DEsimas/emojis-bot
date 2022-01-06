@@ -7,6 +7,7 @@ import { DAO } from './database/DAO';
 import { Log } from './Log';
 
 import { Client, Intents } from 'discord.js';
+import { GuildMemberRemove } from './handlers/events/GuildMemberRemove';
 
 export class Bot {
     private readonly client: Client;
@@ -17,7 +18,8 @@ export class Bot {
         message: "messageCreate",
         guildCreate: "guildCreate",
         guildDelete: "guildDelete",
-        guildMemberAdd: "guildMemberAdd"
+        guildMemberAdd: "guildMemberAdd",
+        guildMemberRemove: "guildMemberRemove"
     }
 
     constructor() {
@@ -49,5 +51,6 @@ export class Bot {
         this.client.on(this.events.guildCreate, guild => new GuildCreateHandler(this.client, guild ).handle());
         this.client.on(this.events.guildDelete, guild => new GuildDeleteHandler(guild).handle());
         this.client.on(this.events.guildMemberAdd, member => new GuildMemberAdd(member).handle());
+        this.client.on(this.events.guildMemberRemove, member => new GuildMemberRemove(member).handle());
     }
 };
