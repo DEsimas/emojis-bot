@@ -205,7 +205,7 @@ export const notifications: Record<Language, Record<string, string>> = {
         "m": "months",
         "d": "days",
         "h": "hours",
-        
+        "min": "minutes"
     },
     "rus": {
         "header": "Прожито",
@@ -213,5 +213,6 @@ export const notifications: Record<Language, Record<string, string>> = {
         "m": "месяцев",
         "d": "дней",
         "h": "часов",
+        "min": "минут"
     }
 }
