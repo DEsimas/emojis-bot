@@ -1,6 +1,7 @@
 import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
-import { CommandName, Language } from "../config/Types";
+
 import { commandsLocalization } from "./../config/Localization";
+import { CommandName, Language } from "./../config/Types";
 import { Server } from "./../database/Servers";
 import { User } from "./../database/Users";
 
@@ -41,12 +42,12 @@ export abstract class Command {
         return !!pattern.test(str);
     }
 
-    protected async isAdmin() {
+    protected async isAdmin(): Promise<boolean> {
         const guildMember = await this.message.guild?.members.fetch(this.message.author.id)
         if(!guildMember) return false;
         const isAdmin = guildMember.permissions.has("ADMINISTRATOR");
         return isAdmin;
-    };
+    }
 
     protected async sendError(message: string): Promise<Message> {
         return this.sendMessage(message, this.embedColors.error);
