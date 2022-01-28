@@ -4,6 +4,7 @@ import { Handler } from "./../Handler";
 import { Log } from "./../../Log";
 
 import { Client } from "discord.js";
+import { StateExamCounter } from "../../components/StateExamCounter";
 
 export class ReadyHandler extends Handler {
     private readonly client: Client;
@@ -25,5 +26,8 @@ export class ReadyHandler extends Handler {
 
         const updater = new UserInterfaceUpdater(this.client);
         updater.getTask(this.cron.UI).start();
+
+        const counter = new StateExamCounter(this.client)
+        counter.getTask("0 7 * * *").start();
     }
 };
