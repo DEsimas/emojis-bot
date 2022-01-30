@@ -23,7 +23,7 @@ export class Help extends Command {
     private async getEmbed(title: string, author: string): Promise<MessageEmbed> {
         const avatar = await DAO.Avatars.getActive();
         const embed = new MessageEmbed()
-            .setAuthor(author)
+            .setAuthor({ name: author })
             .setTitle(title)
             .setColor(avatar?.color || this.embedColors.discord);
         return embed;
