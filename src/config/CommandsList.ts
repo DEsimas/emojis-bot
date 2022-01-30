@@ -1,6 +1,7 @@
 import { DeleteEmoji } from "./../commands/DeleteEmoji/DeleteEmoji";
 import { DoGreetings } from "./../commands/DoGreetings/DoGreetings";
 import { SetPrefix } from "./../commands/SetPrefix/SetPrefix";
+import { GetAvatar } from "./../commands/GetAvatar/GetAvatar";
 import { DoEmojis } from "./../commands/DoEmojis/DoEmojis";
 import { SetEmoji } from "./../commands/SetEmoji/SetEmoji";
 import { Clear } from "./../commands/Clear/Clear";
@@ -13,7 +14,6 @@ import { Help } from "./../commands/interaction/Help";
 import { Poll } from "./../commands/interaction/Poll";
 
 import { CommandName, Command, Categories } from "./Types";
-import { GetAvatar } from "../commands/interaction/GetAvatar";
 
 export const commandsArray = ["SetLanguage", "SetEmoji", "DeleteEmoji", "DoGreetings", "DoEmojis", "SetPrefix", "GetAvatar", "ImgToAscII", "Subscribe", "Unsubscribe", "Clear", "Help", "Poll"] as const;
 export const categories = ["admin", "emojis", "interaction", "notifications", "special", "user"] as const;
