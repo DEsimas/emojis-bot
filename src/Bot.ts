@@ -4,7 +4,7 @@ import { GuildMemberAdd } from './handlers/events/GuildMemberAdd';
 import { MessageHandler } from './handlers/events/MessageHandler';
 import { ReadyHandler } from './handlers/events/ReadyHandler';
 import { DAO } from './database/DAO';
-import { Log } from './Log';
+import { Log } from './components/Log';
 
 import { Client, Intents } from 'discord.js';
 import { GuildMemberRemove } from './handlers/events/GuildMemberRemove';

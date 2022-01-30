@@ -1,6 +1,6 @@
 import { DAO } from "./../../database/DAO";
 import { Command } from "./../Command";
-import { Log } from "./../../Log";
+import { Log } from "./../../components/Log";
 
 export class Subscribe extends Command {
     public async execute(): Promise<void> {

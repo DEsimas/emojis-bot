@@ -1,5 +1,5 @@
 import asciifyImage = require("asciify-image");
-import { Log } from "../../Log";
+import { Log } from "../../components/Log";
 import { Command } from "./../Command";
 
 export class ImgToAscII extends Command {

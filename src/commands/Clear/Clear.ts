@@ -1,5 +1,5 @@
 import { Command } from "./../Command";
-import { Log } from "./../../Log";
+import { Log } from "./../../components/Log";
 
 export class Clear extends Command {
     public async execute(): Promise<void> {
