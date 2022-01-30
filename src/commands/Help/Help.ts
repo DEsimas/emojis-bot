@@ -1,12 +1,13 @@
-import { MessageEmbed } from "discord.js";
+import { categories, commandsObject } from "./../../config/CommandsList";
+import { help } from "./../../config/Localization";
+import { Categories } from "./../../config/Types";
 import { DAO } from "./../../database/DAO";
 import { Command } from "./../Command";
-import { categories, commands, commandsObject } from "../../config/CommandsList";
-import { help } from "../../config/Localization";
-import { Categories } from "../../config/Types";
+
+import { MessageEmbed } from "discord.js";
 
 export class Help extends Command {
-    public override async execute(): Promise<void> {
+    public async execute(): Promise<void> {
         const category = this.getCategory();
         if(category) this.sendCommands(category);
         else this.sendCategories();
