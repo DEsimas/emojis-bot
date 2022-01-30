@@ -1,6 +1,7 @@
-import { Client, MessageEmbed } from "discord.js";
-import { schedule, ScheduledTask } from "node-cron";
 import { Log } from "./../components/Log";
+
+import { schedule, ScheduledTask } from "node-cron";
+import { Client, MessageEmbed } from "discord.js";
 
 export class StateExamCounter {
     private readonly client: Client;
@@ -14,6 +15,7 @@ export class StateExamCounter {
         chemistry: new Date("05.27.2022")
     };
 
+    // TODO: move to localization object
     private readonly subjects: Record<string, string> = {
         "math": "Математика профиль",
         "russian": "Русский язык",
@@ -32,7 +34,7 @@ export class StateExamCounter {
     }
 
     private async sendNotifications(): Promise<void> {
-        Log.info("StateExamCounter.ts", "Regular state exam counter", { users: this.users });
+        Log.info("StateExamCounter.ts", "Regular state exam counter call", { users: this.users });
         Object.keys(this.users).forEach(async key => {
             const channel = await this.client.users.fetch(key);
             const embed = new MessageEmbed().setTitle("До егэ осталось:");
@@ -43,7 +45,7 @@ export class StateExamCounter {
         });
     }
 
-    // copypaste from another component
+    // TODO: make specific function
     private getDifference(begin: Date, end: Date): {s: number, m: number, h: number, d: number, years: number, months: number, days: number} {
         const future = new Date(begin);
 

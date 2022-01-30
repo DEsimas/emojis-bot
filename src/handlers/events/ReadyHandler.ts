@@ -27,6 +27,7 @@ export class ReadyHandler extends Handler {
         const updater = new UserInterfaceUpdater(this.client);
         updater.getTask(this.cron.UI).start();
 
+        // TODO: move cron regulat to the cron object
         const counter = new StateExamCounter(this.client)
         counter.getTask("0 7 * * *").start();
     }
