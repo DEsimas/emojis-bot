@@ -3,12 +3,12 @@ import { DoGreetings } from "./../commands/DoGreetings/DoGreetings";
 import { SetPrefix } from "./../commands/SetPrefix/SetPrefix";
 import { DoEmojis } from "./../commands/DoEmojis/DoEmojis";
 import { SetEmoji } from "./../commands/SetEmoji/SetEmoji";
+import { Clear } from "./../commands/Clear/Clear";
 
 import { Unsubscribe } from "./../commands/notifications/Unsubscribe";
 import { Subscribe } from "./../commands/notifications/Subscribe";
 import { ImgToAscII } from "./../commands/special/ImgToAscII";
 import { SetLanguage } from "./../commands/user/SetLanguage";
-import { Clear } from "./../commands/interaction/Clear";
 import { Help } from "./../commands/interaction/Help";
 import { Poll } from "./../commands/interaction/Poll";
 
