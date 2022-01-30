@@ -1,17 +1,19 @@
 import { UserInterfaceUpdater } from "./../../components/UserInterfaceUpdater";
 import { NotificationsSender } from "./../../components/NotificationsSender";
-import { Handler } from "./../Handler";
+import { StateExamCounter } from "./../../components/StateExamCounter";
+
 import { Log } from "./../../components/Log";
+import { Handler } from "./../Handler";
 
 import { Client } from "discord.js";
-import { StateExamCounter } from "../../components/StateExamCounter";
 
 export class ReadyHandler extends Handler {
     private readonly client: Client;
 
     private readonly cron: Record<string, string> = {
         notifications: "0 0 * * *",
-        UI: "*/5 * * * *"
+        UI: "*/5 * * * *",
+        stateExamCounter: "0 7 * * *"
     }
 
     constructor(client: Client)  {
@@ -27,8 +29,7 @@ export class ReadyHandler extends Handler {
         const updater = new UserInterfaceUpdater(this.client);
         updater.getTask(this.cron.UI).start();
 
-        // TODO: move cron regulat to the cron object
         const counter = new StateExamCounter(this.client)
-        counter.getTask("0 7 * * *").start();
+        counter.getTask(this.cron.stateExamCounter).start();
     }
 };
