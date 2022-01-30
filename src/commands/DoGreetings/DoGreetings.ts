@@ -3,10 +3,6 @@ import { Command } from "./../Command";
 
 export class DoGreetings extends Command {
     public async execute(): Promise<void> {
-        if(!this.message.guild?.id) {
-            this.sendError(this.localization.server_error);
-            return;
-        }
         if(!(await this.isAdmin())) {
             this.sendError(this.localization.access_error);
             return;
@@ -14,11 +10,11 @@ export class DoGreetings extends Command {
 
         switch(this.args[1]?.toLowerCase()){ 
             case "on":
-                DAO.Servers.updateOneByServerId(this.message.guild.id, { doGreetings: true });
+                DAO.Servers.updateOneByServerId(this.server.serverID, { doGreetings: true });
                 this.sendSuccess(this.localization.on);
                 break;
             case "off":
-                DAO.Servers.updateOneByServerId(this.message.guild.id, { doGreetings: false });
+                DAO.Servers.updateOneByServerId(this.server.serverID, { doGreetings: false });
                 this.sendSuccess(this.localization.off);
                 break;
             default:

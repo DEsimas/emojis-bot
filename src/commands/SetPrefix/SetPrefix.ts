@@ -3,10 +3,6 @@ import { Command } from "./../Command";
 
 export class SetPrefix extends Command {
     public override async execute(): Promise<void> {
-        if(!this.message.guild?.id)  {
-            this.sendError(this.localization.server_error);
-            return;
-        }
         if(!await this.isAdmin()) {
             this.sendError(this.localization.access_warn);
             return;
@@ -16,7 +12,7 @@ export class SetPrefix extends Command {
             return;
         }
 
-        DAO.Servers.updateOneByServerId(this.message.guild.id, { prefix: this.args[1] })
+        DAO.Servers.updateOneByServerId(this.server.serverID, { prefix: this.args[1] })
             .then(() => this.sendSuccess(this.localization.success + this.args[1]))
             .catch(() => super.sendError(this.localization.db_error));
     }

@@ -47,7 +47,6 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "access_warn": "This command is only avaliable for administrators :confused:",
             "empty_warn": "Prefix can't be empty",
             "db_error": "We have some troubles with data base",
-            "server_error": "This command can be used only on server"
         },
         "Subscribe": {
             "date_error": "Wrong date",
@@ -69,7 +68,6 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "on": "Greetings enabled (￣^￣)ゞ",
             "off": "Functions disabled",
             "access_error": "This command is only for admins",
-            "server_error": "This command can be used only on server"
         }
     },
     "rus": {
@@ -118,7 +116,6 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "access_warn": "Эта команда доступна только администраторам :confused:",
             "empty_warn": "Префикс не может быть пустым",
             "db_error": "Произошла ошибка при записи в базу данных! Попробуйте снова",
-            "server_error": "Эта команда может быть использована только на сервере"
         },
         "Subscribe": {
             "date_error": "Неверная дата рождения",
@@ -140,7 +137,6 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "on": "Приветствие вклчено (￣^￣)ゞ",
             "off": "Функция отключена",
             "access_error": "Эта команда только для администраторов",
-            "server_error": "Эта команда может быть использована только на сервере"
         }
     }
 };
