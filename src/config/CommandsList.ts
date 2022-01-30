@@ -2,6 +2,7 @@ import { DeleteEmoji } from "./../commands/DeleteEmoji/DeleteEmoji";
 import { DoGreetings } from "./../commands/DoGreetings/DoGreetings";
 import { SetPrefix } from "./../commands/SetPrefix/SetPrefix";
 import { GetAvatar } from "./../commands/GetAvatar/GetAvatar";
+import { Subscribe } from "./../commands/Subscribe/Subscribe";
 import { DoEmojis } from "./../commands/DoEmojis/DoEmojis";
 import { SetEmoji } from "./../commands/SetEmoji/SetEmoji";
 import { Clear } from "./../commands/Clear/Clear";
@@ -9,7 +10,6 @@ import { Help } from "./../commands/Help/Help";
 import { Poll } from "./../commands/Poll/Poll";
 
 import { Unsubscribe } from "./../commands/notifications/Unsubscribe";
-import { Subscribe } from "./../commands/notifications/Subscribe";
 import { ImgToAscII } from "./../commands/special/ImgToAscII";
 import { SetLanguage } from "./../commands/user/SetLanguage";
 
