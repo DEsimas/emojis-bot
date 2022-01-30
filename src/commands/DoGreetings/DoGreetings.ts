@@ -1,9 +1,16 @@
-import { DAO } from "../../database/DAO";
-import { Command } from "../Command";
+import { DAO } from "./../../database/DAO";
+import { Command } from "./../Command";
 
 export class DoGreetings extends Command {
-    public override async execute(): Promise<void> {
-        if(!this.message.guild?.id || !(await this.isAdmin())) return this.sendError(this.localization.access_error);
+    public async execute(): Promise<void> {
+        if(!this.message.guild?.id) {
+            this.sendError(this.localization.server_error);
+            return;
+        }
+        if(!(await this.isAdmin())) {
+            this.sendError(this.localization.access_error);
+            return;
+        }
 
         switch(this.args[1]?.toLowerCase()){ 
             case "on":

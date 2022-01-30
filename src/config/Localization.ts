@@ -67,7 +67,8 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "wrong_input": "State on or off",
             "on": "Greetings enabled (￣^￣)ゞ",
             "off": "Functions disabled",
-            "access_error": "This command is only for admins"
+            "access_error": "This command is only for admins",
+            "server_error": "This command can be used only on server"
         }
     },
     "rus": {
@@ -136,7 +137,8 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "wrong_input": "Передайте on или off",
             "on": "Приветствие вклчено (￣^￣)ゞ",
             "off": "Функция отключена",
-            "access_error": "Эта команда только для администраторов"
+            "access_error": "Эта команда только для администраторов",
+            "server_error": "Эта команда может быть использована только на сервере"
         }
     }
 };
