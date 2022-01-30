@@ -46,7 +46,8 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "success": "New prefix: ",
             "access_warn": "This command is only avaliable for administrators :confused:",
             "empty_warn": "Prefix can't be empty",
-            "db_error": "We have some troubles with data base"
+            "db_error": "We have some troubles with data base",
+            "server_error": "This command can be used only on server"
         },
         "Subscribe": {
             "date_error": "Wrong date",
@@ -116,7 +117,8 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "success": "Новый префикс: ",
             "access_warn": "Эта команда доступна только администраторам :confused:",
             "empty_warn": "Префикс не может быть пустым",
-            "db_error": "Произошла ошибка при записи в базу данных! Попробуйте снова"
+            "db_error": "Произошла ошибка при записи в базу данных! Попробуйте снова",
+            "server_error": "Эта команда может быть использована только на сервере"
         },
         "Subscribe": {
             "date_error": "Неверная дата рождения",

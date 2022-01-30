@@ -1,11 +1,11 @@
 import { DoGreetings } from "./../commands/DoGreetings/DoGreetings";
+import { SetPrefix } from "./../commands/SetPrefix/SetPrefix";
 
 import { Unsubscribe } from "./../commands/notifications/Unsubscribe";
 import { Subscribe } from "./../commands/notifications/Subscribe";
 import { DeleteEmoji } from "./../commands/emojis/DeleteEmoji";
 import { ImgToAscII } from "./../commands/special/ImgToAscII";
 import { SetLanguage } from "./../commands/user/SetLanguage";
-import { SetPrefix } from "./../commands/admin/SetPrefix";
 import { SetEmoji } from "./../commands/emojis/SetEmoji";
 import { DoEmojis } from "./../commands/emojis/DoEmojis";
 import { Clear } from "./../commands/interaction/Clear";
