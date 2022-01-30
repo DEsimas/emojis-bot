@@ -2,7 +2,7 @@ import { DAO } from "./../../database/DAO";
 import { Command } from "./../Command";
 
 export class DoEmojis extends Command {
-    public override async execute(): Promise<void> {
+    public async execute(): Promise<void> {
         if(!await this.isAdmin()) {
             this.sendError(this.localization.access_warn);
             return;

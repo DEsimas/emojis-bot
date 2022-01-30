@@ -1,9 +1,9 @@
 import { DAO } from "./../../database/DAO";
-import { Log } from "./../../Log";
 import { Command } from "./../Command";
+import { Log } from "./../../components/Log";
 
 export class Subscribe extends Command {
-    public override async execute(): Promise<void> {
+    public async execute(): Promise<void> {
         if(!await this.validate()) return;
 
         const notification = {
@@ -13,6 +13,7 @@ export class Subscribe extends Command {
 
         DAO.Notifications.insertOne(notification).then(() => {
                 this.sendSuccess(this.localization.send_success);
+                Log.info("Subscribe.ts", "New notification added", { notification: notification });
             }).catch(error => {
                 this.sendError(this.localization.send_error);
                 Log.error("Subscribe.ts", "Can't save notification", { error: error, notification: notification });

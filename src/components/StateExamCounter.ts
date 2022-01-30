@@ -1,6 +1,6 @@
 import { Client, MessageEmbed } from "discord.js";
 import { schedule, ScheduledTask } from "node-cron";
-import { Log } from "../Log";
+import { Log } from "./../components/Log";
 
 export class StateExamCounter {
     private readonly client: Client;

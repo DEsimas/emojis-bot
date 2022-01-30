@@ -31,7 +31,14 @@ export class CommandHandler extends Handler {
             commandsArray.forEach(cmd => {
                 commands[cmd].alias.forEach(alias => {
                     if (this.server.prefix + alias === command)
-                        new commands[cmd].out(this.client, this.message, this.user, this.server, args, cmd).execute();
+                        new commands[cmd].out({
+                            client: this.client,
+                            message: this.message,
+                            user: this.user,
+                            server: this.server,
+                            args: args,
+                            command: cmd
+                    }).execute();
                 });
             });
         };

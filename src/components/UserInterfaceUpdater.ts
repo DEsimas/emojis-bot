@@ -1,5 +1,5 @@
 import { DAO } from "./../database/DAO";
-import { Log } from "./../Log";
+import { Log } from "./../components/Log";
 
 import { Client } from "discord.js";
 import { schedule, ScheduledTask } from "node-cron";

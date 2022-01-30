@@ -1,4 +1,5 @@
 import asciifyImage = require("asciify-image");
+import { Log } from "../../components/Log";
 import { Command } from "./../Command";
 
 export class ImgToAscII extends Command {
@@ -10,7 +11,7 @@ export class ImgToAscII extends Command {
         color: false
     }
 
-    public override async execute(): Promise<void> {
+    public async execute(): Promise<void> {
         if(this.args.length === 0) {
             this.sendError(this.localization.no_files)
             return;
@@ -28,7 +29,7 @@ export class ImgToAscII extends Command {
 
             if(typeof asciified === "string") {    
                 let buf = Buffer.from(asciified);
-                this.message.channel.send({ files: [{ attachment: buf, name: "ascII.txt" }] }).catch(error => console.log(error));
+                this.message.channel.send({ files: [{ attachment: buf, name: "ascII.txt" }] }).catch(error => Log.error("ImgToAscII.ts", "Error while sending asciified file", { text: asciified, buffer: buf, error: error }));
             }
 
         })

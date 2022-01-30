@@ -1,8 +1,8 @@
-import { Log } from "./../../Log";
 import { Command } from "./../Command";
+import { Log } from "./../../components/Log";
 
 export class Clear extends Command {
-    public override async execute(): Promise<void> {
+    public async execute(): Promise<void> {
         let limit = this.getLimit();
 
         this.message.channel.messages.fetch({ limit: 100 }).then(messages => {
@@ -19,7 +19,7 @@ export class Clear extends Command {
     }
 
     private getLimit(): number {
-        if ((isNaN(Number(this.args[1]))) || Number(this.args[1]) <= 0) return 100;
+        if ((isNaN(Number(this.args[1]))) || Number(this.args[1]) <= 0 || Number(this.args[1]) >= 100) return 100;
         return Number(this.args[1]);
     }
 }

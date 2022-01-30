@@ -1,6 +1,6 @@
 {
 	"name": "emojis-bot",
-	"version": "6.10.4",
+	"version": "6.11.0",
 	"description": "bot for discord with random functions",
 	"keywords": [
 		"typescript",
@@ -24,25 +24,24 @@
 		"url": "https://github.com/DEsimas/emojis-bot"
 	},
 	"scripts": {
-        "start:dev": "npm run build && npm run start",
+		"start:dev": "npm run build && npm run start",
 		"start": "node ./dist/main.js",
-        "build": "tsc"
-    },
+		"build": "tsc"
+	},
 	"engines": {
 		"node": "16.9.0",
 		"npm": "8.3.0"
 	},
 	"dependencies": {
-        "asciify-image": "^0.1.1",
-		"discord.js": "^13.1.0",
-		"dotenv": "^10.0.0",
-		"mongoose": "^6.1.2",
-		"node-cron": "^3.0.0",
-		"node-fetch": "^3.0.0"
+		"asciify-image": "^0.1.8",
+		"discord.js": "^13.6.0",
+		"dotenv": "^14.3.2",
+		"mongoose": "^6.1.8",
+		"node-cron": "^3.0.0"
 	},
 	"devDependencies": {
-        "@types/node-cron": "^3.0.0",
-        "typescript": "^4.5.4"
+		"@types/node-cron": "^3.0.1",
+		"typescript": "^4.5.5"
 	},
 	"private": false
 }

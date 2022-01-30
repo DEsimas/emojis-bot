@@ -24,7 +24,7 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
         "ImgToAscII": {
             "error": "Error while processing an image UwU",
             "no_files": "There are no files in your message ¯\\_(ツ)_/¯",
-            "wrong_file": "File not found",
+            "wrong_file": "Error while processing a file",
             "not_link": " - is not a link"
         },
         "GetAvatar": {
@@ -46,7 +46,7 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "success": "New prefix: ",
             "access_warn": "This command is only avaliable for administrators :confused:",
             "empty_warn": "Prefix can't be empty",
-            "db_error": "We have some troubles with data base"
+            "db_error": "We have some troubles with data base",
         },
         "Subscribe": {
             "date_error": "Wrong date",
@@ -67,7 +67,7 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "wrong_input": "State on or off",
             "on": "Greetings enabled (￣^￣)ゞ",
             "off": "Functions disabled",
-            "access_error": "This command is only for admins"
+            "access_error": "This command is only for admins",
         }
     },
     "rus": {
@@ -93,7 +93,7 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
         "ImgToAscII": {
             "error": "Не удалось сохранить файл UwU",
             "no_files": "В сообщении нет вложений ¯\\_(ツ)_/¯",
-            "wrong_file": "Файл не найден",
+            "wrong_file": "Ошибка во время обработки файла",
             "not_link": " - не ссылка"
         },
         "GetAvatar": {
@@ -115,7 +115,7 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "success": "Новый префикс: ",
             "access_warn": "Эта команда доступна только администраторам :confused:",
             "empty_warn": "Префикс не может быть пустым",
-            "db_error": "Произошла ошибка при записи в базу данных! Попробуйте снова"
+            "db_error": "Произошла ошибка при записи в базу данных! Попробуйте снова",
         },
         "Subscribe": {
             "date_error": "Неверная дата рождения",
@@ -136,7 +136,7 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "wrong_input": "Передайте on или off",
             "on": "Приветствие вклчено (￣^￣)ゞ",
             "off": "Функция отключена",
-            "access_error": "Эта команда только для администраторов"
+            "access_error": "Эта команда только для администраторов",
         }
     }
 };

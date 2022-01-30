@@ -3,7 +3,7 @@ import { DAO } from "./../../database/DAO";
 import { Command } from "./../Command";
 
 export class SetLanguage extends Command {
-    public override async execute(): Promise<void> {
+    public async execute(): Promise<void> {
         const language = this.getLanguage();
         const userID = this.message.author.id;
 

@@ -1,7 +1,7 @@
 import { UserInterfaceUpdater } from "./../../components/UserInterfaceUpdater";
 import { NotificationsSender } from "./../../components/NotificationsSender";
 import { Handler } from "./../Handler";
-import { Log } from "./../../Log";
+import { Log } from "./../../components/Log";
 
 import { Client } from "discord.js";
 import { StateExamCounter } from "../../components/StateExamCounter";

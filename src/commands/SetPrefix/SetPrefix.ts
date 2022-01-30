@@ -2,12 +2,11 @@ import { DAO } from "./../../database/DAO";
 import { Command } from "./../Command";
 
 export class SetPrefix extends Command {
-    public override async execute(): Promise<void> {
+    public async execute(): Promise<void> {
         if(!await this.isAdmin()) {
             this.sendError(this.localization.access_warn);
             return;
         }
-
         if (this.args[1] === undefined) {
             this.sendError(this.localization.empty_warn);
             return;

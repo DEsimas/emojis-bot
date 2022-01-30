@@ -1,10 +1,20 @@
-import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
-import { CommandName, Language } from "../config/Types";
 import { commandsLocalization } from "./../config/Localization";
+import { CommandName, Language } from "../config/Types";
 import { Server } from "./../database/Servers";
 import { User } from "./../database/Users";
 
-export class Command {
+import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
+
+export interface CommandOptions {
+    client: Client;
+    message: Message;
+    user: User;
+    server: Server;
+    args: string[];
+    command: CommandName;
+};
+
+export abstract class Command {
     protected readonly client: Client;
     protected readonly message: Message;
     protected readonly user: User;
@@ -18,19 +28,17 @@ export class Command {
         discord: "#202225"
     };
 
-    constructor(client: Client, message: Message, user: User, server: Server, args: string[], command: CommandName) {
-        this.client = client;
-        this.message = message;
-        this.user = user;
-        this.server = server;
-        this.args = args;
-        this.language = user.language;
-        this.localization = commandsLocalization[this.language][command];
+    constructor(options: CommandOptions) {
+        this.client = options.client;
+        this.message = options.message;
+        this.user = options.user;
+        this.server = options.server;
+        this.args = options.args;
+        this.language = options.user.language;
+        this.localization = commandsLocalization[this.language][options.command];
     }
 
-    public async execute(): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
+    public abstract execute(): Promise<void>;
 
     protected validateURL(str: string): boolean {
         var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol

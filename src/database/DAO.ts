@@ -3,7 +3,8 @@ import { Avatars } from './Avatars';
 import { Servers } from './Servers';
 import { Users } from './Users';
 import { Logs } from './Logs';
-import { Log } from '../Log';
+
+import { Log } from './../components/Log';
 
 import { connect } from 'mongoose';
 
