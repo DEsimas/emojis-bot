@@ -1,9 +1,9 @@
+import { DeleteEmoji } from "./../commands/DeleteEmoji/DeleteEmoji";
 import { DoGreetings } from "./../commands/DoGreetings/DoGreetings";
 import { SetPrefix } from "./../commands/SetPrefix/SetPrefix";
 
 import { Unsubscribe } from "./../commands/notifications/Unsubscribe";
 import { Subscribe } from "./../commands/notifications/Subscribe";
-import { DeleteEmoji } from "./../commands/emojis/DeleteEmoji";
 import { ImgToAscII } from "./../commands/special/ImgToAscII";
 import { SetLanguage } from "./../commands/user/SetLanguage";
 import { SetEmoji } from "./../commands/emojis/SetEmoji";
@@ -37,7 +37,7 @@ export const commands: Record<CommandName, Command> = {
         out: SetEmoji
     },
     DeleteEmoji: {
-        alias: ["delemoji", "del"],
+        alias: ["deleteemoji", "delemoji", "del"],
         out: DeleteEmoji
     },
     SetLanguage: {
