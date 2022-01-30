@@ -1,6 +1,7 @@
 import { DeleteEmoji } from "./../commands/DeleteEmoji/DeleteEmoji";
 import { DoGreetings } from "./../commands/DoGreetings/DoGreetings";
 import { Unsubscribe } from "./../commands/Unsubscribe/Unsubscribe";
+import { SetLanguage } from "./../commands/SetLanguage/SetLanguage";
 import { ImgToAscII } from "./../commands/ImgToAscII/ImgToAscII";
 import { SetPrefix } from "./../commands/SetPrefix/SetPrefix";
 import { GetAvatar } from "./../commands/GetAvatar/GetAvatar";
@@ -11,11 +12,10 @@ import { Clear } from "./../commands/Clear/Clear";
 import { Help } from "./../commands/Help/Help";
 import { Poll } from "./../commands/Poll/Poll";
 
-import { SetLanguage } from "./../commands/user/SetLanguage";
-
 import { CommandName, Command, Categories } from "./Types";
 
 export const commandsArray = ["SetLanguage", "SetEmoji", "DeleteEmoji", "DoGreetings", "DoEmojis", "SetPrefix", "GetAvatar", "ImgToAscII", "Subscribe", "Unsubscribe", "Clear", "Help", "Poll"] as const;
+
 export const categories = ["admin", "emojis", "interaction", "notifications", "special", "user"] as const;
 
 export const commandsObject: Record<Categories, Array<CommandName>> = {
