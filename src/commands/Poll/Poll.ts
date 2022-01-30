@@ -1,13 +1,14 @@
-import { MessageEmbed, ReactionCollector } from "discord.js";
 import { Command } from "./../Command";
+
+import { MessageEmbed, ReactionCollector } from "discord.js";
 
 export class Poll extends Command{
     private readonly check = "✅";
     private readonly cross = "❌";
 
-    public override async execute(): Promise<void> {
+    public async execute(): Promise<void> {
         const time = this.getTime();
-        if(time && time > 21600000) {
+        if(time && time > 1000 * 60 * 60 * 6 /*6 hours*/) {
             this.sendError(this.localization.bad_time_error);
             return;
         }

@@ -6,12 +6,12 @@ import { DoEmojis } from "./../commands/DoEmojis/DoEmojis";
 import { SetEmoji } from "./../commands/SetEmoji/SetEmoji";
 import { Clear } from "./../commands/Clear/Clear";
 import { Help } from "./../commands/Help/Help";
+import { Poll } from "./../commands/Poll/Poll";
 
 import { Unsubscribe } from "./../commands/notifications/Unsubscribe";
 import { Subscribe } from "./../commands/notifications/Subscribe";
 import { ImgToAscII } from "./../commands/special/ImgToAscII";
 import { SetLanguage } from "./../commands/user/SetLanguage";
-import { Poll } from "./../commands/interaction/Poll";
 
 import { CommandName, Command, Categories } from "./Types";
 
