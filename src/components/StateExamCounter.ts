@@ -1,4 +1,6 @@
+import { stateExamCounter } from "./../config/Localization"
 import { Log } from "./../components/Log";
+import { DAO } from "./../database/DAO";
 
 import { schedule, ScheduledTask } from "node-cron";
 import { Client, MessageEmbed } from "discord.js";
@@ -15,15 +17,6 @@ export class StateExamCounter {
         chemistry: new Date("05.27.2022")
     };
 
-    // TODO: move to localization object
-    private readonly subjects: Record<string, string> = {
-        "math": "Математика профиль",
-        "russian": "Русский язык",
-        "physics": "Физика",
-        "informatics": "Информатика",
-        "chemistry": "Химия"
-    }
-
     constructor(client: Client) {
         this.client = client;
         this.users = JSON.parse(process.env.EGE || "{}");
@@ -36,10 +29,11 @@ export class StateExamCounter {
     private async sendNotifications(): Promise<void> {
         Log.info("StateExamCounter.ts", "Regular state exam counter call", { users: this.users });
         Object.keys(this.users).forEach(async key => {
+            const language = (await DAO.Users.fetchByUserId(key)).language;
             const channel = await this.client.users.fetch(key);
-            const embed = new MessageEmbed().setTitle("До егэ осталось:");
+            const embed = new MessageEmbed().setTitle(stateExamCounter[language].header);
             this.users[key].forEach(lesson => {
-                embed.addField(this.subjects[lesson], `${this.getDifference(new Date(), this.dates[lesson]).d} дней`, true);
+                embed.addField(stateExamCounter[language][lesson], `${this.getDifference(new Date(), this.dates[lesson]).d} ${stateExamCounter[language].unit}`, true);
             });
             channel.send({embeds: [embed]});
         });

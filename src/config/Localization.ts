@@ -247,3 +247,24 @@ export const notifications: Record<Language, Record<string, string>> = {
         "min": "минут"
     }
 }
+
+export const stateExamCounter: Record<Language, Record<string, string>> = {
+    "eng": {
+        "header": "Until the exam left:",
+        "unit": "days",
+        "math": "Profile mathematics",
+        "russian": "Russian language",
+        "physics": "Physics",
+        "informatics": "Informatics",
+        "chemistry": "Chemistry"
+    },
+    "rus": {
+        "header": "До егэ осталось:",
+        "unit": "дней",
+        "math": "Математика профиль",
+        "russian": "Русский язык",
+        "physics": "Физика",
+        "informatics": "Информатика",
+        "chemistry": "Химия"
+    }
+}
