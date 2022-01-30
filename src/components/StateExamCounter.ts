@@ -33,47 +33,16 @@ export class StateExamCounter {
             const channel = await this.client.users.fetch(key);
             const embed = new MessageEmbed().setTitle(stateExamCounter[language].header);
             this.users[key].forEach(lesson => {
-                embed.addField(stateExamCounter[language][lesson], `${this.getDifference(new Date(), this.dates[lesson]).d} ${stateExamCounter[language].unit}`, true);
+                const diff = this.getDifferenceInDays(new Date(), this.dates[lesson]);
+                if(diff) embed.addField(stateExamCounter[language][lesson], `${diff} ${stateExamCounter[language].unit}`, true);
             });
             channel.send({embeds: [embed]});
         });
     }
 
-    // TODO: make specific function
-    private getDifference(begin: Date, end: Date): {s: number, m: number, h: number, d: number, years: number, months: number, days: number} {
-        const future = new Date(begin);
-
-        let res = {
-            s: 0,
-            m: 0,
-            h: 0,
-            d: 0,
-            years: 0,
-            months: 0,
-            days: 0
-        }
-
-        while ((future.getFullYear() !== end.getFullYear()) || (future.getMonth() !== end.getMonth()) || (future.getDate() !== end.getDate())) {
-            future.setDate(future.getDate() + 1);
-            res.days++;
-            res.d++;
-
-            if (future.getDate() === begin.getDate()) {
-                res.months++;
-                res.days = 0;
-            }
-            if (future.getMonth() === begin.getMonth() && res.days === 0) {
-                res.years++;
-                res.months = 0;
-            }
-        }
-
-        const diff = Math.abs(begin.getTime() - end.getTime())
-        res.d = Math.floor( diff / (1000 * 60 * 60 * 24));
-        res.h = Math.floor( diff / (1000 * 60 * 60));
-        res.m = Math.floor( diff / (1000 * 60));
-        res.s = Math.floor( diff / 1000 );
-
-        return res;
+    private getDifferenceInDays(begin: Date, end: Date): number | null {
+        if(begin >= end) return null;
+        const diff = end.getTime() - begin.getTime();
+        return Math.floor( diff / (1000 * 60 * 60 * 24)); 
     }
 }
