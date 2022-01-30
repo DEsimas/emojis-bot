@@ -4,7 +4,7 @@ import { commandsLocalization } from "./../config/Localization";
 import { Server } from "./../database/Servers";
 import { User } from "./../database/Users";
 
-export abstract class Command {
+export class Command {
     protected readonly client: Client;
     protected readonly message: Message;
     protected readonly user: User;
@@ -12,7 +12,6 @@ export abstract class Command {
     protected readonly args: string[];
     protected readonly localization: Record<string, string>;
     protected readonly language: Language;
-
     protected readonly embedColors: Record<"error" | "success" | "discord", ColorResolvable> = {
         error: "#ff0000",
         success: "#00ff00",
@@ -29,7 +28,9 @@ export abstract class Command {
         this.localization = commandsLocalization[this.language][command];
     }
 
-    public abstract execute(): Promise<void>;
+    public async execute(): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
 
     protected validateURL(str: string): boolean {
         var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
@@ -48,19 +49,18 @@ export abstract class Command {
         return isAdmin;
     };
 
-    protected async sendError(message: string): Promise<Message> {
-        return this.sendMessage(message, this.embedColors.error);
+    protected sendError(message: string): void {
+        this.sendMessage(message, this.embedColors.error);
     }
 
-    protected async sendSuccess(message: string): Promise<Message> {
-        return this.sendMessage(message, this.embedColors.success);
+    protected sendSuccess(message: string): void {
+        this.sendMessage(message, this.embedColors.success);
     }
 
-    protected async sendMessage(message: string, color: ColorResolvable | undefined): Promise<Message> {
-        if(!color) color = this.embedColors.discord;
+    private sendMessage(message: string, color: ColorResolvable): void {
         const embed = new MessageEmbed()
             .setColor(color)
             .setTitle(message);
-        return this.message.channel.send({ embeds: [embed] });
+        this.message.channel.send({ embeds: [embed] });
     }
 };
