@@ -24,7 +24,7 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
         "ImgToAscII": {
             "error": "Error while processing an image UwU",
             "no_files": "There are no files in your message ¯\\_(ツ)_/¯",
-            "wrong_file": "File not found",
+            "wrong_file": "Error while processing a file",
             "not_link": " - is not a link"
         },
         "GetAvatar": {
@@ -93,7 +93,7 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
         "ImgToAscII": {
             "error": "Не удалось сохранить файл UwU",
             "no_files": "В сообщении нет вложений ¯\\_(ツ)_/¯",
-            "wrong_file": "Файл не найден",
+            "wrong_file": "Ошибка во время обработки файла",
             "not_link": " - не ссылка"
         },
         "GetAvatar": {
