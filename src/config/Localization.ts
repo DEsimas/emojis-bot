@@ -178,7 +178,7 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "emojis": "Everything related to the emojis functional",
             "interaction": "Interaction with bot",
             "notifications": "Setting up daily notifications",
-            "special": "Spacial commands ( ͡° ͜ʖ ͡°)",
+            "special": "Special commands ( ͡° ͜ʖ ͡°)",
             "user": "Customizing bot"
         }
     },
