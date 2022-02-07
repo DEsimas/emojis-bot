@@ -36,7 +36,8 @@ export class StateExamCounter {
                 const diff = this.getDifferenceInDays(new Date(), this.dates[lesson]);
                 if(diff) embed.addField(stateExamCounter[language][lesson], `${diff} ${stateExamCounter[language].unit}`, true);
             });
-            channel.send({embeds: [embed]});
+            const msg = await channel.send({embeds: [embed]});
+            Log.info("StateExamCounter.ts", "Sent exam message to the user", { userID: key, message: msg });
         });
     }
 
