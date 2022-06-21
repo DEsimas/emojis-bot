@@ -27,6 +27,7 @@
 		"url": "https://github.com/DEsimas/emojis-bot"
 	},
 	"scripts": {
+		"publish": "npm run build && npm pack && npm publish",
 		"pack:dev": "npm run build && npm pack && npm link",
 		"start:dev": "npm run build && npm run start",
 		"start": "node ./dist/main.js",
