@@ -18,12 +18,16 @@
 		"name": "Serafim Sukharev",
 		"email": "simasuh@gmail.com"
 	},
+	"files": [
+		"dist/**/*"
+	],
 	"main": "./dist/main.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/DEsimas/emojis-bot"
 	},
 	"scripts": {
+		"pack:dev": "npm run build && npm pack && npm link",
 		"start:dev": "npm run build && npm run start",
 		"start": "node ./dist/main.js",
 		"build": "tsc"
