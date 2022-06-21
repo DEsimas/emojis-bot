@@ -1,6 +1,6 @@
 {
 	"name": "emojis-bot",
-	"version": "6.11.6",
+	"version": "6.12.0",
 	"description": "bot for discord with random functions",
 	"keywords": [
 		"typescript",
