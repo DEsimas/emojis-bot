@@ -10,6 +10,8 @@ import { Client, Intents } from 'discord.js';
 import { GuildMemberRemove } from './handlers/events/GuildMemberRemove';
 
 export class Bot {
+    private readonly token: string;
+    private readonly mongo_uri: string;
     private readonly client: Client;
     private readonly intents: number[];
 
@@ -22,7 +24,10 @@ export class Bot {
         guildMemberRemove: "guildMemberRemove"
     }
 
-    constructor() {
+    constructor(data: {token: string, mongo_uri: string}) {
+        this.token = data.token;
+        this.mongo_uri = data.mongo_uri;
+
         this.intents = [
             Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
             Intents.FLAGS.GUILD_MESSAGES,
@@ -35,11 +40,16 @@ export class Bot {
         this.client = new Client({ intents: this.intents});
     }
 
-    public connectDB(uri?: string): Promise<void> {
+    public start(): void {
+        this.connectDB(this.mongo_uri);
+        this.login(this.token);
+    }
+
+    private connectDB(uri?: string): Promise<void> {
         return DAO.connect(uri || process.env.MONGO || "");
     }
 
-    public login(token?: string): void {
+    private login(token?: string): void {
         this.client.login(token || process.env.TOKEN).then(token => {
             Log.info("Bot.ts", `logged in`, { token: token });
         }).catch(error => {
