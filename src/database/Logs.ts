@@ -1,4 +1,4 @@
-import { model, Model, Schema, UpdateQuery } from "mongoose";
+import { Connection, Model, Schema } from "mongoose";
 import { collections } from "./../config/Database";
 
 export interface Log {
@@ -12,8 +12,8 @@ export interface Log {
 export class Logs {
     private readonly LogsModel: Model<Log>;
 
-    constructor() {
-        this.LogsModel = model<Log>(collections.logs, this.getLogSchema());
+    constructor(connection: Connection) {
+        this.LogsModel = connection.model<Log>(collections.logs, this.getLogSchema());
     }
 
     private getLogSchema(): Schema<Log> {
