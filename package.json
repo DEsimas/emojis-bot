@@ -38,7 +38,6 @@
 		"npm": "8.3.0"
 	},
 	"dependencies": {
-		"asciify-image": "^0.1.8",
 		"discord.js": "^13.6.0",
 		"dotenv": "^14.3.2",
 		"mongoose": "^6.4.0",
