@@ -1,5 +1,5 @@
 import { ColorResolvable } from "discord.js";
-import { model, Model, Schema, UpdateQuery } from "mongoose";
+import { Connection, Model, Schema, UpdateQuery } from "mongoose";
 import { collections } from "./../config/Database";
 
 export interface Avatar {
@@ -13,8 +13,8 @@ export interface Avatar {
 export class Avatars {
     private readonly AvatarsModel: Model<Avatar>;
 
-    constructor() {
-        this.AvatarsModel = model<Avatar>(collections.avatars, this.getAvatarSchema());
+    constructor(connection: Connection) {
+        this.AvatarsModel = connection.model<Avatar>(collections.avatars, this.getAvatarSchema());
     }
 
     private getAvatarSchema(): Schema<Avatar> {
