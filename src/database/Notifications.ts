@@ -1,4 +1,4 @@
-import { model, Model, Schema } from "mongoose";
+import { Connection, Model, Schema } from "mongoose";
 import { collections } from "./../config/Database";
 
 export interface Notification {
@@ -9,8 +9,8 @@ export interface Notification {
 export class Notifications {
     private readonly NotificationModel: Model<Notification>;
 
-    constructor() {
-        this.NotificationModel = model<Notification>(collections.notifications, this.getNotificationSchema());
+    constructor(connection: Connection) {
+        this.NotificationModel = connection.model<Notification>(collections.notifications, this.getNotificationSchema());
     }
 
     private getNotificationSchema(): Schema<Notification> {
