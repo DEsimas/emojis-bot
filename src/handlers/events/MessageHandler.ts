@@ -3,7 +3,7 @@ import { Log } from "./../../components/Log";
 import { DAO } from "./../../database/DAO";
 import { Handler } from "./../Handler";
 
-import { Client, Message } from "discord.js";
+import { Client, Message, MessageEmbed } from "discord.js";
 
 export class MessageHandler extends Handler {
     private readonly client: Client;
@@ -40,7 +40,19 @@ export class MessageHandler extends Handler {
             }
         }
 
+        this.sendPrefixHelp(server.prefix);
+
         const commandHandler = new CommandHandler(this.client, this.message, user, server);
         commandHandler.handle();
+    }
+
+    private sendPrefixHelp(correctPrefix: string): void {
+        const msg = this.message.content.toLocaleLowerCase()
+        if(msg.search("prefix") != -1) {
+            const prefix = msg.split("prefix")[0];
+            if(prefix != correctPrefix && prefix.length == 1) {
+                this.message.channel.send({embeds: [new MessageEmbed({title: `Prefix for this server is ${correctPrefix}`})]});
+            }
+        }
     }
 };
