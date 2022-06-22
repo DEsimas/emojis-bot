@@ -1,4 +1,4 @@
-import { model, Model, Schema, UpdateQuery } from "mongoose";
+import { Connection, Model, Schema, UpdateQuery } from "mongoose";
 import { Language } from "../config/Types";
 import { collections, user as defUser } from "./../config/Database";
 
@@ -11,8 +11,8 @@ export interface User {
 export class Users {
     private readonly UsersModel: Model<User>;
 
-    constructor() {
-        this.UsersModel = model<User>(collections.users, this.getUserSchema());
+    constructor(connection: Connection) {
+        this.UsersModel = connection.model<User>(collections.users, this.getUserSchema());
     }
 
     private getUserSchema(): Schema<User> {
