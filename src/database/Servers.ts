@@ -1,4 +1,4 @@
-import { model, Model, Schema, UpdateQuery } from "mongoose";
+import { Connection, Model, Schema, UpdateQuery } from "mongoose";
 import { collections, server as defServer } from "./../config/Database";
 
 export interface Server {
@@ -11,8 +11,8 @@ export interface Server {
 export class Servers {
     private readonly ServersModel: Model<Server>;
 
-    constructor() {
-        this.ServersModel = model<Server>(collections.servers, this.getServerSchema());
+    constructor(connection: Connection) {
+        this.ServersModel = connection.model<Server>(collections.servers, this.getServerSchema());
     }
 
     private getServerSchema(): Schema<Server> {
