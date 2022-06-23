@@ -16,12 +16,15 @@ export class MessageHandler extends Handler {
     }
 
     public async handle(): Promise<void> {
-        if (!this.message.guild?.id) return; // stops handling if message not from a server
-
         const user = await DAO.Users.fetchByUserId(this.message.author.id);
-        const server = await DAO.Servers.fetchByServerId(this.message.guild.id);
-
+        let server;
+        if(this.message.guild)
+            server = await DAO.Servers.fetchByServerId(this.message.guild.id);
+        else
+            server = await DAO.Servers.fetchByServerId("DM"+this.message.author.id);
+    
         if (server.doEmojis) {
+            console.log(this.message.author.id, " ", this.client.user?.id);
             if (this.message.author.id !== this.client.user?.id && user.emojiID) {
                 try {
                     await this.message.react(user.emojiID);
