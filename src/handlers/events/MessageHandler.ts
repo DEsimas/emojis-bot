@@ -3,7 +3,7 @@ import { Log } from "./../../components/Log";
 import { DAO } from "./../../database/DAO";
 import { Handler } from "./../Handler";
 
-import { Client, Message, MessageEmbed } from "discord.js";
+import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
 
 export class MessageHandler extends Handler {
     private readonly client: Client;
@@ -21,10 +21,9 @@ export class MessageHandler extends Handler {
         if(this.message.guild)
             server = await DAO.Servers.fetchByServerId(this.message.guild.id);
         else
-            server = await DAO.Servers.fetchByServerId("DM"+this.message.author.id);
-    
+            server = await DAO.Servers.fetchByServerId("DM"+this.message.channelId);
+
         if (server.doEmojis) {
-            console.log(this.message.author.id, " ", this.client.user?.id);
             if (this.message.author.id !== this.client.user?.id && user.emojiID) {
                 try {
                     await this.message.react(user.emojiID);
@@ -43,18 +42,21 @@ export class MessageHandler extends Handler {
             }
         }
 
-        this.sendPrefixHelp(server.prefix);
+        this.sendPrefixHelp((await DAO.Avatars.getActive())?.color, server.prefix);
 
         const commandHandler = new CommandHandler(this.client, this.message, user, server);
         commandHandler.handle();
     }
 
-    private sendPrefixHelp(correctPrefix: string): void {
+    private sendPrefixHelp(msgColor: ColorResolvable | undefined, correctPrefix: string): void {
         const msg = this.message.content.toLocaleLowerCase()
         if(msg.search("prefix") != -1) {
             const prefix = msg.split("prefix")[0];
             if(prefix != correctPrefix && prefix.length == 1) {
-                this.message.channel.send({embeds: [new MessageEmbed({title: `Prefix for this server is ${correctPrefix}`})]});
+                const embed = new MessageEmbed();
+                embed.setTitle(`Prefix for this server is ${correctPrefix}`);
+                embed.setColor(msgColor ?? "#202225");
+                this.message.channel.send({embeds: [embed]});
             }
         }
     }

@@ -7,7 +7,7 @@ import { schedule, ScheduledTask } from "node-cron";
 export class UserInterfaceUpdater {
     private readonly client: Client;
 
-    private readonly status = "on ${servers} servers with ${users} users";
+    private readonly status = "with ${users} users";
 
     constructor(client: Client) {
         this.client =  client;
