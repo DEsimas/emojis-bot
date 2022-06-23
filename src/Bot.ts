@@ -6,7 +6,7 @@ import { ReadyHandler } from './handlers/events/ReadyHandler';
 import { DAO } from './database/DAO';
 import { Log } from './components/Log';
 
-import { Client, Intents } from 'discord.js';
+import { Client, Intents, PartialTypes } from 'discord.js';
 import { GuildMemberRemove } from './handlers/events/GuildMemberRemove';
 
 export class Bot {
@@ -14,6 +14,7 @@ export class Bot {
     private readonly mongo_uri: string;
     private readonly client: Client;
     private readonly intents: number[];
+    private readonly partials: PartialTypes[];
 
     private readonly events = {
         ready: "ready",
@@ -37,7 +38,11 @@ export class Bot {
             Intents.FLAGS.GUILD_MEMBERS
         ];
 
-        this.client = new Client({ intents: this.intents});
+        this.partials = [
+            "CHANNEL"
+        ];
+
+        this.client = new Client({ partials: this.partials, intents: this.intents});
     }
 
     public start(): void {
