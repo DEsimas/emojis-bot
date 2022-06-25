@@ -1,6 +1,6 @@
 {
 	"name": "emojis-bot",
-	"version": "6.12.3",
+	"version": "6.12.4",
 	"description": "bot for discord with random functions",
 	"keywords": [
 		"typescript",
@@ -38,11 +38,11 @@
 		"npm": "8.3.0"
 	},
 	"dependencies": {
-		"asciify-image": "^0.1.8",
 		"discord.js": "^13.8.0",
 		"dotenv": "^16.0.1",
 		"mongoose": "^6.4.0",
-		"node-cron": "^3.0.0"
+		"node-cron": "^3.0.0",
+		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
 		"@types/node-cron": "^3.0.1",

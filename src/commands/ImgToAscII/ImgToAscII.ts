@@ -1,5 +1,3 @@
-import asciifyImage = require("asciify-image");
-import { Log } from "../../components/Log";
 import { Command } from "./../Command";
 
 export class ImgToAscII extends Command {
@@ -12,7 +10,8 @@ export class ImgToAscII extends Command {
     }
 
     public async execute(): Promise<void> {
-        if(this.args.length === 0) {
+        return this.sendError("This command is temporarily unavailable");
+        /*if(this.args.length === 0) {
             this.sendError(this.localization.no_files)
             return;
         }
@@ -32,10 +31,10 @@ export class ImgToAscII extends Command {
                 this.message.channel.send({ files: [{ attachment: buf, name: "ascII.txt" }] }).catch(error => Log.error("ImgToAscII.ts", "Error while sending asciified file", { text: asciified, buffer: buf, error: error }));
             }
 
-        })
+        })*/
     }
 
-    private parseParams(): string[] {
+   /* private parseParams(): string[] {
         const files: string[] = [];
 
         this.args.forEach((el, index) => {
@@ -48,5 +47,5 @@ export class ImgToAscII extends Command {
         this.message.attachments.forEach(el => files.push(el.url));
         
         return files;
-    }
+    }*/
 }
