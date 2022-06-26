@@ -4,6 +4,8 @@ import { DAO } from "./../../database/DAO";
 import { Handler } from "./../Handler";
 
 import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
+import { Language } from "../../config/Types";
+import { prefixHint } from "../../config/Localization";
 
 export class MessageHandler extends Handler {
     private readonly client: Client;
@@ -42,19 +44,19 @@ export class MessageHandler extends Handler {
             }
         }
 
-        this.sendPrefixHelp((await DAO.Avatars.getActive())?.color, server.prefix);
+        this.sendPrefixHelp((await DAO.Avatars.getActive())?.color, server.prefix, user.language);
 
         const commandHandler = new CommandHandler(this.client, this.message, user, server);
         commandHandler.handle();
     }
 
-    private sendPrefixHelp(msgColor: ColorResolvable | undefined, correctPrefix: string): void {
+    private sendPrefixHelp(msgColor: ColorResolvable | undefined, correctPrefix: string, lang: Language): void {
         const msg = this.message.content.toLocaleLowerCase()
         if(msg.search("prefix") != -1) {
             const prefix = msg.split("prefix")[0];
             if(prefix != correctPrefix && prefix.length == 1) {
                 const embed = new MessageEmbed();
-                embed.setTitle(`Prefix for this server is ${correctPrefix}`);
+                embed.setTitle( prefixHint[lang] + correctPrefix);
                 embed.setColor(msgColor ?? "#202225");
                 this.message.channel.send({embeds: [embed]});
             }

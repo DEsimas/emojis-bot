@@ -268,3 +268,8 @@ export const stateExamCounter: Record<Language, Record<string, string>> = {
         "chemistry": "Химия"
     }
 }
+
+export const prefixHint: Record<Language, string> = {
+    "eng": "Prefix for this server is ",
+    "rus": "Префикс: "
+}
