@@ -45,7 +45,7 @@ export class UserInterfaceUpdater {
 
     private setNickname(nickname: string): void {
         this.client.guilds.cache.forEach(el => {
-            el.me?.setNickname(nickname);
+            el.members.me?.setNickname(nickname);
         });
         Log.info("UserInterfaceUpdater.ts", "Nickname updated", {nickname: nickname});
     }

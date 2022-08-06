@@ -16,11 +16,11 @@ export class GuildCreateHandler extends Handler {
 
     public async handle(): Promise<void> {
         DAO.Servers.insertNew(this.guild.id);
-        this.guild.me?.setNickname(await this.getNickname());
+        this.guild.members.me?.setNickname(await this.getNickname());
     }
 
     private async getNickname(): Promise<string> {
         const support_guild = await this.client.guilds.fetch(this.support_server);
-        return support_guild.me?.nickname || "emojis-bot";
+        return support_guild.members.me?.nickname || "emojis-bot";
     }
 };
