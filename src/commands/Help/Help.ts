@@ -4,7 +4,7 @@ import { Categories } from "./../../config/Types";
 import { DAO } from "./../../database/DAO";
 import { Command } from "./../Command";
 
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 
 export class Help extends Command {
     public async execute(): Promise<void> {
@@ -20,9 +20,9 @@ export class Help extends Command {
         return null;
     }
 
-    private async getEmbed(title: string, author: string): Promise<MessageEmbed> {
+    private async getEmbed(title: string, author: string): Promise<EmbedBuilder> {
         const avatar = await DAO.Avatars.getActive();
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setAuthor({ name: author })
             .setTitle(title)
             .setColor(avatar?.color || this.embedColors.discord);

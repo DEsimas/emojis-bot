@@ -1,4 +1,4 @@
-import { Client, MessageEmbed } from "discord.js";
+import { Client, EmbedBuilder } from "discord.js";
 import { DAO } from "./../database/DAO";
 import { Log } from "./../components/Log";
 
@@ -26,7 +26,7 @@ export class NotificationsSender {
             const localization = notifications[(await DAO.Users.fetchByUserId(user.userID)).language];
             
             const channel = await this.client.users.fetch(user.userID);
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(this.embed_color)
                 .addField(localization.header, `${diff.years} ${localization.y} ${diff.months} ${localization.m} ${diff.days} ${localization.d}`)
                 .addField(`${localization.d}:`, diff.d.toString(), true)

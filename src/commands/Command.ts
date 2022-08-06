@@ -3,7 +3,7 @@ import { CommandName, Language } from "../config/Types";
 import { Server } from "./../database/Servers";
 import { User } from "./../database/Users";
 
-import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
+import { Client, ColorResolvable, Message, EmbedBuilder } from "discord.js";
 
 export interface CommandOptions {
     client: Client;
@@ -67,7 +67,7 @@ export abstract class Command {
     }
 
     private sendMessage(message: string, color: ColorResolvable): void {
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor(color)
             .setTitle(message);
         this.message.channel.send({ embeds: [embed] });

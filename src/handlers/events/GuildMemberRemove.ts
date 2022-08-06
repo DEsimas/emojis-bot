@@ -1,4 +1,4 @@
-import { GuildMember, MessageEmbed } from "discord.js";
+import { GuildMember, EmbedBuilder } from "discord.js";
 import { guildMembers } from "../../config/Localization";
 import { DAO } from "../../database/DAO";
 import { Handler } from "../Handler";
@@ -14,7 +14,7 @@ export class GuildMemberRemove extends Handler {
     public async handle(): Promise<void> {
         if(!(await DAO.Servers.fetchByServerId(this.member.guild.id)).doGreetings) return;
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor(this.embedColors.error)
             .setThumbnail(this.member.user.avatarURL() || this.defaultAvatar)
             .setTitle(guildMembers.bye + this.member.user.username)

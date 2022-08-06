@@ -3,7 +3,7 @@ import { Log } from "./../components/Log";
 import { DAO } from "./../database/DAO";
 
 import { schedule, ScheduledTask } from "node-cron";
-import { Client, MessageEmbed } from "discord.js";
+import { Client, EmbedBuilder } from "discord.js";
 
 export class StateExamCounter {
     private readonly client: Client;
@@ -31,7 +31,7 @@ export class StateExamCounter {
         Object.keys(this.users).forEach(async key => {
             const language = (await DAO.Users.fetchByUserId(key)).language;
             const channel = await this.client.users.fetch(key);
-            const embed = new MessageEmbed().setTitle(stateExamCounter[language].header);
+            const embed = new EmbedBuilder().setTitle(stateExamCounter[language].header);
             this.users[key].forEach(lesson => {
                 const diff = this.getDifferenceInDays(new Date(), this.dates[lesson]);
                 if(diff) embed.addField(stateExamCounter[language][lesson], `${diff} ${stateExamCounter[language].unit}`, true);

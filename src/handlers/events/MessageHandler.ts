@@ -3,7 +3,7 @@ import { Log } from "./../../components/Log";
 import { DAO } from "./../../database/DAO";
 import { Handler } from "./../Handler";
 
-import { Client, ColorResolvable, Message, MessageEmbed } from "discord.js";
+import { Client, ColorResolvable, Message, EmbedBuilder } from "discord.js";
 import { Language } from "../../config/Types";
 import { prefixHint } from "../../config/Localization";
 
@@ -55,7 +55,7 @@ export class MessageHandler extends Handler {
         if(msg.search("prefix") != -1) {
             const prefix = msg.split("prefix")[0];
             if(prefix != correctPrefix && prefix.length == 1) {
-                const embed = new MessageEmbed();
+                const embed = new EmbedBuilder();
                 embed.setTitle( prefixHint[lang] + correctPrefix);
                 embed.setColor(msgColor ?? "#202225");
                 this.message.channel.send({embeds: [embed]});

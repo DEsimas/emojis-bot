@@ -1,6 +1,6 @@
 import { Command } from "./../Command";
 
-import { MessageEmbed, ReactionCollector } from "discord.js";
+import { EmbedBuilder, ReactionCollector } from "discord.js";
 
 export class Poll extends Command{
     private readonly check = "✅";
@@ -13,7 +13,7 @@ export class Poll extends Command{
             return;
         }
 
-        const msg = await this.message.channel.send({embeds: [new MessageEmbed().setColor(this.embedColors.success).setTitle(this.getMessage() || this.localization.default_message)]});
+        const msg = await this.message.channel.send({embeds: [new EmbedBuilder().setColor(this.embedColors.success).setTitle(this.getMessage() || this.localization.default_message)]});
         msg.react(this.check);
         msg.react(this.cross);
 
@@ -33,7 +33,7 @@ export class Poll extends Command{
                     }
                 });
 
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor(this.embedColors.success)
                     .setTitle(`${this.check}: ${yctr}\n${this.cross}: ${nctr}`);
                 msg.reply({embeds: [embed]});

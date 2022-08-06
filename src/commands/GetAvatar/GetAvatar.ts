@@ -1,7 +1,7 @@
 import { DAO } from "./../../database/DAO";
 import { Command } from "./../Command";
 
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 
 export class GetAvatar extends Command {
     public async execute(): Promise<void> {
@@ -21,7 +21,7 @@ export class GetAvatar extends Command {
             }
 
             const embedColor = (await DAO.Avatars.getActive())?.color;
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(embedColor || this.embedColors.discord)
                 .setImage(avatarURL);
 

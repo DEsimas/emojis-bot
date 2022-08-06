@@ -1,7 +1,7 @@
 import { DAO } from "./../../database/DAO";
 import { Command } from "./../Command";
 
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 
 export class SetEmoji extends Command {
     private readonly emojiLink = "https://cdn.discordapp.com/emojis/";
@@ -12,13 +12,13 @@ export class SetEmoji extends Command {
         DAO.Users.updateByUserId(this.user.userID, { emojiID: this.args[1] })
             .then(async () => {
                 if(this.args[1][0] === '<') {                           // If emoji passed as emoji
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                         .setTitle(this.localization.updated)
                         .setColor(this.embedColors.success)
                         .setImage(this.emojiLink);
                     this.message.channel.send({ embeds: [ embed ] });
                 } else if(!isNaN(Number(this.args[1]))) {               // If emoji passed as id
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                         .setTitle(this.localization.updated)
                         .setColor(this.embedColors.success)
                     const message = await this.message.channel.send({ embeds: [ embed ] });
