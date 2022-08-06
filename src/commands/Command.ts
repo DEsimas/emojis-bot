@@ -54,7 +54,7 @@ export abstract class Command {
         if(this.server.serverID[0] == "D" && this.server.serverID[1] == "M") return true; //if message from DMs
         const guildMember = await this.message.guild?.members.fetch(this.message.author.id)
         if(!guildMember) return false;
-        const isAdmin = guildMember.permissions.has("ADMINISTRATOR");
+        const isAdmin = guildMember.permissions.has("Administrator");
         return isAdmin;
     };
 
