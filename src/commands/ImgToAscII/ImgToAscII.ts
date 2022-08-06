@@ -1,17 +1,17 @@
+import { Log } from "../../components/Log";
 import { Command } from "./../Command";
 
 export class ImgToAscII extends Command {
-    private readonly widthParam = "width:";
+    private readonly sizeParam = "size:";
+    private readonly charsParam = "chars:";
 
-    private options: { fit: "box" | "width" | "height", width: number, color: boolean } = { 
-        fit: "box",
-        width: 79,
-        color: false
+    private options: { chars: string, size: number } = { 
+        chars: "##@%=+*:-. ",
+        size: 100,
     }
 
     public async execute(): Promise<void> {
-        return this.sendError("This command is temporarily unavailable");
-        /*if(this.args.length === 0) {
+        if(this.args.length === 0) {
             this.sendError(this.localization.no_files)
             return;
         }
@@ -24,28 +24,32 @@ export class ImgToAscII extends Command {
                 return;
             }
 
-            const asciified = await asciifyImage(el, this.options).catch(() => this.sendError(this.localization.wrong_file));
+            const asciified = "uwu";
 
             if(typeof asciified === "string") {    
                 let buf = Buffer.from(asciified);
                 this.message.channel.send({ files: [{ attachment: buf, name: "ascII.txt" }] }).catch(error => Log.error("ImgToAscII.ts", "Error while sending asciified file", { text: asciified, buffer: buf, error: error }));
             }
-
-        })*/
+        })
     }
 
-   /* private parseParams(): string[] {
+    private parseParams(): string[] {
         const files: string[] = [];
 
         this.args.forEach((el, index) => {
-            if(el.includes(this.widthParam)) {
-                const width = Number(el.slice(this.widthParam.length));
-                if(!isNaN(width))
-                    this.options.width = width;
-            } else if(index !== 0) files.push(el);
+            if(el.includes(this.sizeParam)) {
+                const size = Number(el.slice(this.sizeParam.length));
+                if(!isNaN(size))
+                    this.options.size = size;
+            } else if(el.includes(this.charsParam)) {
+                const chars = el.slice(this.charsParam.length);
+                this.options.chars = chars.replace("[space]", " ");
+            } else if(index !== 0) {
+                files.push(el);
+            }
         });
         this.message.attachments.forEach(el => files.push(el.url));
         
         return files;
-    }*/
+    }
 }
