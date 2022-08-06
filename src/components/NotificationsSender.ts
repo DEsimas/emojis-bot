@@ -28,10 +28,27 @@ export class NotificationsSender {
             const channel = await this.client.users.fetch(user.userID);
             const embed = new EmbedBuilder()
                 .setColor(this.embed_color)
-                .addField(localization.header, `${diff.years} ${localization.y} ${diff.months} ${localization.m} ${diff.days} ${localization.d}`)
-                .addField(`${localization.d}:`, diff.d.toString(), true)
-                .addField(`${localization.h}:`, diff.h.toString(), true)
-                .addField(`${localization.min}:`, diff.m.toString(), true);
+                .addFields([
+                    {
+                        name: localization.header,
+                        value: `${diff.years} ${localization.y} ${diff.months} ${localization.m} ${diff.days} ${localization.d}`
+                    },
+                    {
+                        name: `${localization.d}:`,
+                        value: diff.d.toString(),
+                        inline: true
+                    },
+                    {
+                        name: `${localization.h}:`,
+                        value: diff.h.toString(),
+                        inline: true
+                    },
+                    {
+                        name: `${localization.min}:`,
+                        value: diff.m.toString(),
+                        inline: true
+                    }
+                ]);
 
             channel.send({ embeds: [embed] });
         });

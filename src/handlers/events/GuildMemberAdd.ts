@@ -18,7 +18,7 @@ export class GuildMemberAdd extends Handler {
             .setColor(this.embedColors.success)
             .setThumbnail(this.member.user.avatarURL() || this.defaultAvatar)
             .setTitle(this.member.user.username + guildMembers.welcome)
-            .setFooter(this.member.guild.name)
+            .setFooter({text: this.member.guild.name})
             .setTimestamp();
         
         this.member.guild.systemChannel?.send({ embeds: [embed] });

@@ -4,7 +4,7 @@ import { Categories } from "./../../config/Types";
 import { DAO } from "./../../database/DAO";
 import { Command } from "./../Command";
 
-import { EmbedBuilder } from "discord.js";
+import { APIEmbedField, EmbedBuilder } from "discord.js";
 
 export class Help extends Command {
     public async execute(): Promise<void> {
@@ -34,9 +34,16 @@ export class Help extends Command {
 
         const embed = await this.getEmbed(this.localization.categories_header, this.localization.categories_guide);
 
+        const fields : Array<APIEmbedField> = [];
+
         categories.forEach(category => {
-            embed.addField(category, dsc[category]);
+            fields.push({
+                name: category,
+                value: dsc[category]
+            });
         });
+
+        embed.addFields(fields);
 
         this.message.channel.send({ embeds: [embed] });
     }
@@ -44,9 +51,16 @@ export class Help extends Command {
     private async sendCommands(category: Categories): Promise<void> {
         const embed = await this.getEmbed(this.localization.commands_header, category);
 
+        const fields: Array<APIEmbedField> = [];
+
         commandsObject[category].forEach(command => {
-            embed.addField(`${command} - ${help[this.language].about[command]}`, help[this.language].description[command]);
+            fields.push({
+                name: `${command} - ${help[this.language].about[command]}`,
+                value: help[this.language].description[command]
+            });
         });
+
+        embed.addFields(fields);
 
         this.message.channel.send({ embeds: [embed] });
     }
