@@ -1,6 +1,5 @@
 import { UserInterfaceUpdater } from "./../../components/UserInterfaceUpdater";
 import { NotificationsSender } from "./../../components/NotificationsSender";
-import { StateExamCounter } from "./../../components/StateExamCounter";
 
 import { Log } from "./../../components/Log";
 import { Handler } from "./../Handler";
@@ -28,8 +27,5 @@ export class ReadyHandler extends Handler {
 
         const updater = new UserInterfaceUpdater(this.client);
         updater.getTask(this.cron.UI).start();
-
-        const counter = new StateExamCounter(this.client)
-        counter.getTask(this.cron.stateExamCounter).start();
     }
 };
