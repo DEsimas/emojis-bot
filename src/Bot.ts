@@ -6,7 +6,7 @@ import { ReadyHandler } from './handlers/events/ReadyHandler';
 import { DAO } from './database/DAO';
 import { Log } from './components/Log';
 
-import { Client, Intents, PartialTypes } from 'discord.js';
+import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { GuildMemberRemove } from './handlers/events/GuildMemberRemove';
 
 export class Bot {
@@ -14,7 +14,7 @@ export class Bot {
     private readonly mongo_uri: string;
     private readonly client: Client;
     private readonly intents: number[];
-    private readonly partials: PartialTypes[];
+    private readonly partials: Partials[];
 
     private readonly events = {
         ready: "ready",
@@ -30,16 +30,18 @@ export class Bot {
         this.mongo_uri = data.mongo_uri;
 
         this.intents = [
-            Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
-            Intents.FLAGS.GUILD_MESSAGES,
-            Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-            Intents.FLAGS.GUILDS,
-            Intents.FLAGS.DIRECT_MESSAGES,
-            Intents.FLAGS.GUILD_MEMBERS
+            GatewayIntentBits.DirectMessageReactions,
+            GatewayIntentBits.DirectMessages,
+            GatewayIntentBits.GuildEmojisAndStickers,
+            GatewayIntentBits.GuildMembers,
+            GatewayIntentBits.GuildMessageReactions,
+            GatewayIntentBits.GuildMessages,
+            GatewayIntentBits.Guilds,
+            GatewayIntentBits.MessageContent
         ];
 
         this.partials = [
-            "CHANNEL"
+            Partials.Channel
         ];
 
         this.client = new Client({ partials: this.partials, intents: this.intents});
