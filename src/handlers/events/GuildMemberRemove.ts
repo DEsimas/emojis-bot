@@ -18,7 +18,7 @@ export class GuildMemberRemove extends Handler {
             .setColor(this.embedColors.error)
             .setThumbnail(this.member.user.avatarURL() || this.defaultAvatar)
             .setTitle(guildMembers.bye + this.member.user.username)
-            .setFooter(this.member.guild.name)
+            .setFooter({text: this.member.guild.name})
             .setTimestamp();
         
         this.member.guild.systemChannel?.send({ embeds: [embed] });
