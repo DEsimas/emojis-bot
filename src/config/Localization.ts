@@ -21,12 +21,6 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "categories_header": "Categories:",
             "categories_guide": "Provide a category name to see specific commands"
         },
-        "ImgToAscII": {
-            "error": "Error while processing an image UwU",
-            "no_files": "There are no files in your message ¯\\_(ツ)_/¯",
-            "wrong_file": "Error while processing a file",
-            "not_link": " - is not a link"
-        },
         "GetAvatar": {
             "error": "Произощла ошибка, повторите позже"
         },
@@ -90,12 +84,6 @@ export const commandsLocalization: Record<Language, CommandLocalization> = {
             "categories_header": "Категории:",
             "categories_guide": "Укажите название категории для получения помощи по конкретным командам"
         },
-        "ImgToAscII": {
-            "error": "Не удалось сохранить файл UwU",
-            "no_files": "В сообщении нет вложений ¯\\_(ツ)_/¯",
-            "wrong_file": "Ошибка во время обработки файла",
-            "not_link": " - не ссылка"
-        },
         "GetAvatar": {
             "error": "Failed to load avatar"
         },
@@ -150,7 +138,6 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "DoEmojis": "Enable and disable bot reactions on the server (admins only)",
             "DoGreetings": "Enable greetings in system channel",
             "SetPrefix": "Set prefix, I suppose",
-            "ImgToAscII": "Convert an image to the text file",
             "GetAvatar": "Watch someones avatar clearly",
             "Subscribe": "Counts how long lived",
             "Unsubscribe": "Unsubscribe from daily notifications",
@@ -165,7 +152,6 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "DoEmojis": "on - switch on, off - switch off",
             "DoGreetings": "state \"on\" or \"off\"",
             "SetPrefix": "p.s. only for admins",
-            "ImgToAscII": "Convert image to ascII text",
             "GetAvatar": "Ping user, like GetAvatar @maus999",
             "Subscribe": "Use date in american format",
             "Unsubscribe": "why? ¯\\_(ツ)_/¯",
@@ -178,7 +164,6 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "emojis": "Everything related to the emojis functional",
             "interaction": "Interaction with bot",
             "notifications": "Setting up daily notifications",
-            "special": "Special commands ( ͡° ͜ʖ ͡°)",
             "user": "Customizing bot"
         }
     },
@@ -190,7 +175,6 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "DoEmojis": "Включить и выключить реакции от бота на сервере",
             "DoGreetings": "Включить/выфключить приветствие новых пользователей",
             "SetPrefix": "Изменить префикс на сервере",
-            "ImgToAscII": "Конвертировать картинку в текстовый файл",
             "GetAvatar": "Позволяет рассмотреть чью-то аватарку",
             "Subscribe": "Считает сколько вы прожили",
             "Unsubscribe": "Отписаться от ежедневной рассылки",
@@ -205,7 +189,6 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "DoEmojis": "on - вкл. off - выкл.",
             "DoGreetings": "on - вкл. off - выкл.",
             "SetPrefix": "Такое могут только админы",
-            "ImgToAscII": "Конвертировать картинку в текстовый файл",
             "GetAvatar": "Укажите пользователя в следующем формате: getavatar @maus999",
             "Subscribe": "Дату рождения следует вводить в американском формате",
             "Unsubscribe": "Зачем? ¯\\_(ツ)_/¯",
@@ -218,7 +201,6 @@ export const help: Record<Language, { about: Record<CommandName, string>, descri
             "emojis": "Всё, что связано с реакциями под сообщениями",
             "interaction": "Взаимодействие с ботом",
             "notifications": "Функционал, связанный с ежедневными уведомлениями",
-            "special": "Специальные ( ͡° ͜ʖ ͡°)",
             "user": "Настройки бота для каждого пользователя"
         }
     }
