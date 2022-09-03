@@ -1,13 +1,35 @@
 # Emojis bot
 
-## Description
+Discord bot for reacting messages with customizable emojis.
 
-Bot for hanging out in discord. It contans various commands, but it's main purpose is to react users messages.
+# Features
 
-## Using
-This bot can be added on your server using this [link](https://discord.com/api/oauth2/authorize?client_id=883020186339397693&permissions=0&scope=bot)
+<ul>
+    <li>Customizable reactions</li>
+    <li>Bot changes it's avatar and nickname every 5 minutes</li>
+    <li>Greets new server members</li>
+    <li>Supports two languages russian and english</li>
+    <li>Switchable prefix</li>
+    <li>Can monitor your lifetime in DM</li>
+    <li>All commands are executable in DM</li>
+</ul>
 
-## Hosting
+# Preview
+
+# Tecnologies
+
+Node.js with typescript
+
+discord.js v14 library for interacting with discord api
+
+Mongo DB for storing users data
+
+Cron for scheduling tasks
+
+# Usage
+
+## Clone repository
+
 clone repository
 ```
 git clone https://github.com/DEsimas/emojis-bot
@@ -27,7 +49,7 @@ start bot
 npm run start
 ```
 
-### OR
+## Import library
 
 install bot to your project
 ```
@@ -44,7 +66,8 @@ const bot = new Bot({token: <token goes here>, mongo_uri: <mongodb uri goes here
 bot.start();
 ```
 
-## .env structure
+# .env
+
 <table>
     <tr>
         <th>TOKEN</th>
@@ -59,10 +82,3 @@ bot.start();
         <th>state "BOT" to launch as idependent application, something else for using bot as package</th>
     <tr>
 </table>
-
-## Known issues:
- <ul>
-  <li>Commands don't work in DM</li>
-  <li>Avatars don't change</li>
-  <li>There are vulnerabilities related to asciify-image library</li>
-</ul> 
