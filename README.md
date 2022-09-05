@@ -16,6 +16,9 @@ Discord bot for reacting messages with customizable emojis.
 
 # Preview
 
+<img src="./repository/assets/preview.png" alt="preview">
+
+
 # Tecnologies
 
 Node.js with typescript
